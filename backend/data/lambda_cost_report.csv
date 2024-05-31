@@ -1,0 +1,7 @@
+functionName,runtime,allDurationInSeconds,provisionedMemoryMB,MemoryCost,InvocationCost,totalCost,avgCostPerInvocation,maxMemoryUsedMB,overProvisionedMB,optimalMemory,optimalTotalCost,potentialSavings,avgDurationPerInvocation
+data-exports-sam-app-GroupEventExportAggregator-dfpHvOqGHWRo,python3.8,3.881,1953.125,0.0001234,0.0000002,0.0001236,0.0001236,144.9585,1808.1665,159.4543,0.00001007,0.0001135,3.881
+portal-sam-GroupActualVsPredicted-EzSFCoKnPqcp,python3.8,183.021,1953.125,0.005818,0.0000484,0.005866,0.00002424,201.2253,1751.8997,221.3478,0.0006594,0.005207,0.7563
+telemetry-daily-Insights-W-EfficiencyScoreFunction-7s1uoiVbOCyG,python3.8,21.116,244.1406,0.00008391,0.0000002,0.00008411,0.00008411,136.3754,107.7652,150.013,0.00005156,0.00003255,21.116
+wwGetTimezones,nodejs20.x,195.235,122.0703,0.0003879,0.0000046,0.0003925,0.00001707,114.4409,7.6294,0,0.0004,0,8.4885
+serverless-ml-GroupForecastFunction-hmXiCccBJGiP,,35274.046,976.5625,0.5607,0.001337,0.562,0.00008406,508.3084,468.2541,559.1393,0.321,0.241,5.2758
+wattwatchers_get_devices,nodejs16.x,162000,122.0703,0.3219,0.000036,0.3219,0.001788,122.0703,0,0,0.3541,0,900

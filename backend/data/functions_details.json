@@ -1,0 +1,1697 @@
+{
+  "ResponseMetadata": {
+    "RequestId": "e01bdcb9-63d7-4ab0-ba06-a65d939909e3",
+    "HTTPStatusCode": 200,
+    "HTTPHeaders": {
+      "date": "Sun, 19 May 2024 23:58:48 GMT",
+      "content-type": "application/json",
+      "content-length": "85829",
+      "connection": "keep-alive",
+      "x-amzn-requestid": "e01bdcb9-63d7-4ab0-ba06-a65d939909e3"
+    },
+    "RetryAttempts": 0
+  },
+  "NextMarker": "lslTXFcbLQKkb0vP9Kgh5q+Ep5/ovIP9e6zBbRSP73+k3eiDRMkct7D8EmptWfHSXssPdS7Bo66iQPTMpVOHZn68DOSf8Fsu57LH3ECsAfagp7tm9bMedfbMQxe9TkAq7wwzC1HIpLhvrh2jhwTuY7bhXyruF0xsQCaIu1ttijgDFACSslcabxXl3/jDI4rfFnIsUVdzTLBgPF1hzwrE1f3lcdkBvUp+QgY+Pn3w5QsmlHnLiwnJIAOcBHKinzYzJN/rQ4EzeMWvHDu/k6MKgh39qjosEZiS5IA8Xpi+C/DjPz0m7PuldwPJPopqMfLeiKGIYu3Bw7lSNrLd+q3+wEr7ZakqOQf0BVo3FMRhMHmLKe91BzElADarbloBGCl8zhrVexfYqIlprPUTS9mD2X9MJjX5PLzYQb4D4GI3oqdvo/CugNRZeb5WWlPICauXQeFMNNU5U9URpyEbh7r4aCIpdJb3LPFPw/ZvQz9CHghV2fDiudxAr92hiuIB452uYcMzCTdbiwluo0RPQMXY2QANewpgGgFGGr4pVjd6VgLUO6qPe2EMAuNDBjUTxm8zPMF5F8P6w1JxqEXDVcI9kUcCvdYCjcPZ2bTLw6xszn0=",
+  "Functions": [
+    {
+      "FunctionName": "putApricityInfoDev",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:putApricityInfoDev",
+      "Runtime": "nodejs14.x",
+      "Role": "arn:aws:iam::990090217414:role/ApricityDevRole",
+      "Handler": "index.handler",
+      "CodeSize": 938,
+      "Description": "",
+      "Timeout": 3,
+      "MemorySize": 128,
+      "LastModified": "2022-09-21T21:51:17.000+0000",
+      "CodeSha256": "hJ9f0iV3GUlIIPyZn3POuIIi4uM7deFi9yb2gdwQzAM=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "3acbf83b-cf9c-4215-a551-1abba1782a67",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "amplify-testamplify-dev-230904-OAuthCustomResource-1K7J95UJI0SZ2",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:amplify-testamplify-dev-230904-OAuthCustomResource-1K7J95UJI0SZ2",
+      "Runtime": "nodejs10.x",
+      "Role": "arn:aws:iam::990090217414:role/upClientLambdaRole34b7c08b230904-dev",
+      "Handler": "index.handler",
+      "CodeSize": 2675,
+      "Description": "",
+      "Timeout": 300,
+      "MemorySize": 128,
+      "LastModified": "2020-09-21T09:33:51.779+0000",
+      "CodeSha256": "Kbb1ffasBIBP0u4umhcvebQHCfuhs1y2RsqrVrXiC5A=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "e2b79c1a-bddd-48a0-803a-bfd50723c0b8",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "portal-sam-GroupActualVsPredicted-EzSFCoKnPqcp",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:portal-sam-GroupActualVsPredicted-EzSFCoKnPqcp",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/portal-sam-LambdaRole-EMQC0AGTGKG",
+      "Handler": "get_actual_vs_predicted.lambda_handler",
+      "CodeSize": 8136,
+      "Description": "",
+      "Timeout": 120,
+      "MemorySize": 2048,
+      "LastModified": "2024-05-14T23:01:01.000+0000",
+      "CodeSha256": "LqsJUmkxbkhDQedduRDnDHZhWDSnn+buEoS3fnHO+yQ=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "ErrorWebhook": "https://hooks.slack.com/services/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",
+          "TRICKLESTARINFOTABLE": "tricklestar_info",
+          "PoolID": "us-west-2_di2CrJX4H",
+          "STATUSTABLE": "statuses",
+          "WarningWebhook": "https://hooks.slack.com/services/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:",
+          "REGION": "us-west-2",
+          "TRICKLESTARTELEMETRYTABLE": "tricklestar_telemetry",
+          "GROUPTABLE": "groups",
+          "ClientID": "7gecg4cscdf81duhqtra5sguto",
+          "TITLE": "Shifted API",
+          "WWTABLE": "wattwatchers_telemetry",
+          "NotificationWebhook": "https://hooks.slack.com/services/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",
+          "DATEEXCLUDETABLE": "exclusion_telemetry",
+          "APRICITYTABLE": "apricity_data",
+          "SENSETABLE": "sense_telemetry"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "298b692c-2354-4cc3-88ab-733286207d10",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shifted-api-shared-layer:175",
+          "CodeSize": 828717
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "data-exports-sam-app-GroupEventExportAggregator-dfpHvOqGHWRo",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:data-exports-sam-app-GroupEventExportAggregator-dfpHvOqGHWRo",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/data-exports-sam-app-LambdaRole-MY2ts7cYLZb1",
+      "Handler": "aggregate_group_event_data_export.lambda_handler",
+      "CodeSize": 6249,
+      "Description": "",
+      "Timeout": 900,
+      "MemorySize": 2048,
+      "LastModified": "2024-05-10T19:29:59.000+0000",
+      "CodeSha256": "fuhH/KDyPRa5jo3tW8Y3PsaK8RQXoLUb5Lruh/lnLJI=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "3cc93b4e-53ed-459c-9030-ed85ca90d20d",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:dispatch-shared-layer:215",
+          "CodeSize": 824538
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "portal-sam-DynamicGroupExtendGridServiceEvent-tYEPiuh7cHBM",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:portal-sam-DynamicGroupExtendGridServiceEvent-tYEPiuh7cHBM",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/portal-sam-LambdaRole-EMQC0AGTGKG",
+      "Handler": "extend_grid_service_event.lambda_handler",
+      "CodeSize": 11154,
+      "Description": "",
+      "Timeout": 120,
+      "MemorySize": 256,
+      "LastModified": "2024-05-14T23:01:01.000+0000",
+      "CodeSha256": "IJc2WttxJF8G/Ad4hft/EXYY9rFJCm8eDL5Hw2HAoNE=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "ErrorWebhook": "https://hooks.slack.com/services/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",
+          "TRICKLESTARINFOTABLE": "tricklestar_info",
+          "PoolID": "us-west-2_di2CrJX4H",
+          "STATUSTABLE": "statuses",
+          "WarningWebhook": "https://hooks.slack.com/services/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:",
+          "REGION": "us-west-2",
+          "TRICKLESTARTELEMETRYTABLE": "tricklestar_telemetry",
+          "GROUPTABLE": "groups",
+          "ClientID": "7gecg4cscdf81duhqtra5sguto",
+          "TITLE": "Shifted API",
+          "WWTABLE": "wattwatchers_telemetry",
+          "NotificationWebhook": "https://hooks.slack.com/services/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",
+          "DATEEXCLUDETABLE": "exclusion_telemetry",
+          "APRICITYTABLE": "apricity_data",
+          "SENSETABLE": "sense_telemetry"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "14a9bc4c-c850-490b-8efd-cdeb2b7e98d4",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shifted-api-shared-layer:175",
+          "CodeSize": 828717
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "coldWaterDetectEvents",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:coldWaterDetectEvents",
+      "Runtime": "nodejs16.x",
+      "Role": "arn:aws:iam::990090217414:role/service-role/coldWaterDetectEvents-role-7zip4yu1",
+      "Handler": "index.handler",
+      "CodeSize": 1372,
+      "Description": "",
+      "Timeout": 63,
+      "MemorySize": 512,
+      "LastModified": "2023-08-04T23:06:55.000+0000",
+      "CodeSha256": "vQgI9qZVjMUptS7MsSsS9yTicBt7RTC08AH4hxZoR1s=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "81b4513e-efaa-4c73-a628-f841a93016e4",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "serverless-ml-GroupForecastFunction-hmXiCccBJGiP",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:serverless-ml-GroupForecastFunction-hmXiCccBJGiP",
+      "Role": "arn:aws:iam::990090217414:role/serverless-ml-ServerlessMLLambdaRole-1LSINOGX3JFFG",
+      "CodeSize": 0,
+      "Description": "",
+      "Timeout": 900,
+      "MemorySize": 1024,
+      "LastModified": "2024-04-30T01:19:26.000+0000",
+      "CodeSha256": "088c4e21aa6c135defa7f3c1d84accf631acb82a9199e6ad9ff28cd6ae0a0d27",
+      "Version": "$LATEST",
+      "Environment": {
+        "Variables": {
+          "PROCESSED_BUCKET": "shifted-energy-forecast"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "6112c4b3-67d8-47bc-8b4c-4c8e513c39ae",
+      "PackageType": "Image",
+      "ImageConfigResponse": {
+        "ImageConfig": {
+          "Command": [
+            "group_forecast.lambda_handler"
+          ]
+        }
+      }
+    },
+    {
+      "FunctionName": "telemetry-daily-Insights-W-EfficiencyScoreFunction-7s1uoiVbOCyG",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:telemetry-daily-Insights-W-EfficiencyScoreFunction-7s1uoiVbOCyG",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/telemetry-daily-DataMonitoringLambdaRole-J0Q6YS3RCYW",
+      "Handler": "efficiency_score/efficiency_score.lambda_handler",
+      "CodeSize": 38085,
+      "Description": "",
+      "Timeout": 900,
+      "MemorySize": 256,
+      "LastModified": "2024-03-27T22:03:32.000+0000",
+      "CodeSha256": "jXi/cIQHYVy1CV3CQzwAli6zJjTzKAU9KtqHfVADe6o=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "535fa703-8c7c-4e0a-917e-17b27c0d2d37",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:monitoring-shared-layer:83",
+          "CodeSize": 813278
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "wwGetTimezones",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:wwGetTimezones",
+      "Runtime": "nodejs20.x",
+      "Role": "arn:aws:iam::990090217414:role/wattwatchers",
+      "Handler": "index.handler",
+      "CodeSize": 840,
+      "Description": "",
+      "Timeout": 63,
+      "MemorySize": 128,
+      "LastModified": "2024-04-25T22:52:21.000+0000",
+      "CodeSha256": "OVtf/fs528jeyHvF8FtpHGb58ZOU7F0b12peFnb3Lwg=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "f85e6574-e871-4100-b208-aa94777bad22",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "wattwatchers_get_devices",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:wattwatchers_get_devices",
+      "Runtime": "nodejs16.x",
+      "Role": "arn:aws:iam::990090217414:role/wattwatchers",
+      "Handler": "index.handler",
+      "CodeSize": 1268,
+      "Description": "",
+      "Timeout": 900,
+      "MemorySize": 128,
+      "LastModified": "2022-11-03T07:41:04.000+0000",
+      "CodeSha256": "/W0W+lKzoYmeOC1acNaxIiETtz57vZIyk3jdR1I/Nts=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "d504ef09-08e2-4e34-991f-6db3d5250b45",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "shifted-telemetry-ingestion-Trickl-TricklestarInfo-pLo0G1Js9jsy",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:shifted-telemetry-ingestion-Trickl-TricklestarInfo-pLo0G1Js9jsy",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/shifted-telemetry-ingestion-Tricklestar-LambdaRole-P2TW95T8NW77",
+      "Handler": "tricklestar_info.lambda_handler",
+      "CodeSize": 1905,
+      "Description": "",
+      "Timeout": 120,
+      "MemorySize": 128,
+      "LastModified": "2024-03-21T19:12:17.000+0000",
+      "CodeSha256": "k1VVtqG7KQnGW6fWqkTnhYS/ZPO0pj1IFkdthBoo/uM=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "c4bd2dd1-4197-4e6f-8530-f1f5cebe652f",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shifted-ingestion-shared-layer:79",
+          "CodeSize": 809801
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:9",
+          "CodeSize": 62796864
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "wattwatchers_get_telemetry",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:wattwatchers_get_telemetry",
+      "Runtime": "nodejs16.x",
+      "Role": "arn:aws:iam::990090217414:role/wattwatchers",
+      "Handler": "index.handler",
+      "CodeSize": 4483,
+      "Description": "",
+      "Timeout": 900,
+      "MemorySize": 200,
+      "LastModified": "2024-04-23T01:14:12.000+0000",
+      "CodeSha256": "YIyCDzIGcze/SvY30At0RktlZJ7RozcMBApvzO1mdlg=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "1859f706-ed4e-4b43-b8c0-79cf27c34334",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "shifted-telemetry-ingesti-StartAquantaTelemetryFun-INct7nKtZrBN",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:shifted-telemetry-ingesti-StartAquantaTelemetryFun-INct7nKtZrBN",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/shifted-telemetry-ingestion-AquantaStack-LambdaRole-x1ktNltSflPW",
+      "Handler": "start_aquanta_telemetry_sf.lambda_handler",
+      "CodeSize": 2950,
+      "Description": "",
+      "Timeout": 120,
+      "MemorySize": 128,
+      "LastModified": "2024-03-21T19:12:16.000+0000",
+      "CodeSha256": "M+a5nvRfXsrMfdkdDjPoPIA8pp1nMITtQjuWv/Kjwus=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "b0bdb67f-3f8d-4c27-817f-8e080be3be3c",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shifted-ingestion-shared-layer:79",
+          "CodeSize": 809801
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:9",
+          "CodeSize": 62796864
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "serverless-ml-ElectricVeh-TrainElectricVehicleMode-yfArMbKBx1lX",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:serverless-ml-ElectricVeh-TrainElectricVehicleMode-yfArMbKBx1lX",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/serverless-ml-ElectricVehicleFor-ForecastLambdaRole-ZKqDuO3vvQlC",
+      "Handler": "build_device_model.lambda_handler",
+      "CodeSize": 65266036,
+      "Description": "",
+      "Timeout": 900,
+      "MemorySize": 1024,
+      "LastModified": "2024-04-30T01:19:34.000+0000",
+      "CodeSha256": "DKSRrr9s8k2jCPipFUQAVjuBKSvSiHgnZQkxhLj1gjA=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "REGION": "us-west-2"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "f375ed60-751c-4669-aaa5-90f7da234f20",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "portal-sam-GetMetaGroupInfo-WgTEayNTYg7j",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:portal-sam-GetMetaGroupInfo-WgTEayNTYg7j",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/portal-sam-LambdaRole-EMQC0AGTGKG",
+      "Handler": "get_group_list.lambda_handler",
+      "CodeSize": 2040,
+      "Description": "",
+      "Timeout": 120,
+      "MemorySize": 256,
+      "LastModified": "2024-05-14T23:01:01.000+0000",
+      "CodeSha256": "FEYhbnRa/Bq6kAHbf0Gxn5pLsEm0b45oKtBH9j35aME=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "ErrorWebhook": "https://hooks.slack.com/services/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",
+          "TRICKLESTARINFOTABLE": "tricklestar_info",
+          "PoolID": "us-west-2_di2CrJX4H",
+          "STATUSTABLE": "statuses",
+          "WarningWebhook": "https://hooks.slack.com/services/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:",
+          "REGION": "us-west-2",
+          "TRICKLESTARTELEMETRYTABLE": "tricklestar_telemetry",
+          "GROUPTABLE": "groups",
+          "ClientID": "7gecg4cscdf81duhqtra5sguto",
+          "TITLE": "Shifted API",
+          "WWTABLE": "wattwatchers_telemetry",
+          "NotificationWebhook": "https://hooks.slack.com/services/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",
+          "DATEEXCLUDETABLE": "exclusion_telemetry",
+          "APRICITYTABLE": "apricity_data",
+          "SENSETABLE": "sense_telemetry"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "46fe4777-7ec8-4083-a3c7-736f27c6a89d",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shifted-api-shared-layer:175",
+          "CodeSize": 828717
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "apricity-app-PredictionDynamoDBStreamFunction-0qdrEGfnViyx",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:apricity-app-PredictionDynamoDBStreamFunction-0qdrEGfnViyx",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/apricity-app-DataIntegrationLambdaRole-1240ESEO1TZJQ",
+      "Handler": "predictions_streams.lambda_handler",
+      "CodeSize": 1769870,
+      "Description": "",
+      "Timeout": 120,
+      "MemorySize": 128,
+      "LastModified": "2024-05-08T18:31:14.000+0000",
+      "CodeSha256": "vNzRKX5/Xr9usBjzzdcVl2Kh2VnDZdi82aY0KJUnRIk=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "GROUPTABLE": "groups",
+          "STATUSTABLE": "statuses",
+          "TITLE": "Data Integration",
+          "ENV": "Prod",
+          "WWTABLE": "wattwatchers_telemetry",
+          "DATEEXCLUDETABLE": "exclusion_telemetry",
+          "APRICITYTABLE": "apricity_data",
+          "REGION": "us-west-2",
+          "SENSETABLE": "sense_telemetry"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "f1758831-933e-4598-ac69-de1822ca200c",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python-code-layer:238",
+          "CodeSize": 826900
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "telemetry-daily-Insights-WKXXGSD-StartStepFunction-F8G9VNFjBnn8",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:telemetry-daily-Insights-WKXXGSD-StartStepFunction-F8G9VNFjBnn8",
+      "Runtime": "python3.7",
+      "Role": "arn:aws:iam::990090217414:role/telemetry-daily-Insights-WKX-StartStepFunctionRole-8GTC9C3GVVQB",
+      "Handler": "start_step_function.lambda_handler",
+      "CodeSize": 934,
+      "Description": "",
+      "Timeout": 300,
+      "MemorySize": 128,
+      "LastModified": "2024-01-02T23:15:31.155+0000",
+      "CodeSha256": "TJ7zws6q9MS+AS5DkSbhWztJqMqUokmTour+pRc8hIc=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "SF_NAME": "FileMislabeledAssetsStepFunction",
+          "GROUPTABLE": "groups",
+          "ItemsPath": "groups_list",
+          "REGION": "us-west-2"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "b5318368-77d8-4b1d-8dda-20ec9c3baf7d",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python-code-layer:184",
+          "CodeSize": 3103732
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python-dependencies-layer:20",
+          "CodeSize": 23155846
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "wwDeviceDelta",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:wwDeviceDelta",
+      "Runtime": "nodejs14.x",
+      "Role": "arn:aws:iam::990090217414:role/wattwatchers",
+      "Handler": "index.handler",
+      "CodeSize": 1760,
+      "Description": "",
+      "Timeout": 63,
+      "MemorySize": 128,
+      "LastModified": "2023-02-25T01:44:18.000+0000",
+      "CodeSha256": "FB2MN5RNq5bnORLTnrTQTt+AfvM+EpVPH26kghq4ej0=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "25d266a8-c835-4426-8483-d0e0a2df6678",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "telemetry-daily-Insights-WKXXGSD-WWWebhookFunction-dKzr2goBqnLm",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:telemetry-daily-Insights-WKXXGSD-WWWebhookFunction-dKzr2goBqnLm",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/telemetry-daily-DataMonitoringLambdaRole-J0Q6YS3RCYW",
+      "Handler": "ww_webhook.lambda_handler",
+      "CodeSize": 38085,
+      "Description": "",
+      "Timeout": 900,
+      "MemorySize": 128,
+      "LastModified": "2024-03-27T22:03:32.000+0000",
+      "CodeSha256": "jXi/cIQHYVy1CV3CQzwAli6zJjTzKAU9KtqHfVADe6o=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "e72c4c9d-d685-49ce-a903-ef85db1f595d",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:monitoring-shared-layer:83",
+          "CodeSize": 813278
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "telemetry-daily-InsightStreamFunction-4PcyCebTyDBg",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:telemetry-daily-InsightStreamFunction-4PcyCebTyDBg",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/telemetry-daily-DataMonitoringLambdaRole-J0Q6YS3RCYW",
+      "Handler": "insight_stream.lambda_handler",
+      "CodeSize": 4906,
+      "Description": "",
+      "Timeout": 120,
+      "MemorySize": 256,
+      "LastModified": "2024-03-27T22:03:15.000+0000",
+      "CodeSha256": "H5vjzseRhwflwFpXXuYvVk4c8xOkLXw9UNu5ywJJUL4=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "GROUPTABLE": "groups",
+          "STATUSTABLE": "statuses",
+          "TITLE": "Device Monitoring",
+          "WWTABLE": "wattwatchers_telemetry",
+          "DATEEXCLUDETABLE": "exclusion_telemetry",
+          "APRICITYTABLE": "apricity_data",
+          "REGION": "us-west-2",
+          "SENSETABLE": "sense_telemetry"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "d8bd4661-0b81-4dc7-853b-78bff88326a0",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:monitoring-shared-layer:83",
+          "CodeSize": 813278
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "data-exports-sam-app-DeviceData5MinExportAggregato-i0TYQNEtio9S",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:data-exports-sam-app-DeviceData5MinExportAggregato-i0TYQNEtio9S",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/data-exports-sam-app-LambdaRole-MY2ts7cYLZb1",
+      "Handler": "aggregate_device_data_5_min_export.lambda_handler",
+      "CodeSize": 6249,
+      "Description": "",
+      "Timeout": 900,
+      "MemorySize": 8192,
+      "LastModified": "2024-05-10T19:29:59.000+0000",
+      "CodeSha256": "fuhH/KDyPRa5jo3tW8Y3PsaK8RQXoLUb5Lruh/lnLJI=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "02c3514d-a8e5-4397-b55c-125fbb2d617a",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:dispatch-shared-layer:215",
+          "CodeSize": 824538
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "api_gateway_authorizer",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:api_gateway_authorizer",
+      "Runtime": "python3.7",
+      "Role": "arn:aws:iam::990090217414:role/exports-lambda-auth",
+      "Handler": "lambda_auth.lambda_handler",
+      "CodeSize": 3710,
+      "Description": "",
+      "Timeout": 3,
+      "MemorySize": 128,
+      "LastModified": "2023-03-25T07:25:04.000+0000",
+      "CodeSha256": "hDYRI6S3mFdeUCU08rElMrpp1Kv6zxtYprVDMUnwN8o=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "4fa76f1f-cda3-4699-b601-28358fd16f7d",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "portal-sam-OATIBuildServiceCapacityForecast-4c28He4U0E17",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:portal-sam-OATIBuildServiceCapacityForecast-4c28He4U0E17",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/portal-sam-LambdaRole-EMQC0AGTGKG",
+      "Handler": "get_build_service_capacity_forecast.lambda_handler",
+      "CodeSize": 6288,
+      "Description": "",
+      "Timeout": 120,
+      "MemorySize": 2048,
+      "LastModified": "2024-05-14T23:01:01.000+0000",
+      "CodeSha256": "LSfbMRNNaUAkTTqZb9BjvnPFid3oVMvnhlEFOYMsLmY=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "ErrorWebhook": "https://hooks.slack.com/services/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",
+          "TRICKLESTARINFOTABLE": "tricklestar_info",
+          "PoolID": "us-west-2_di2CrJX4H",
+          "STATUSTABLE": "statuses",
+          "WarningWebhook": "https://hooks.slack.com/services/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:",
+          "REGION": "us-west-2",
+          "TRICKLESTARTELEMETRYTABLE": "tricklestar_telemetry",
+          "GROUPTABLE": "groups",
+          "ClientID": "7gecg4cscdf81duhqtra5sguto",
+          "TITLE": "Shifted API",
+          "WWTABLE": "wattwatchers_telemetry",
+          "NotificationWebhook": "https://hooks.slack.com/services/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",
+          "DATEEXCLUDETABLE": "exclusion_telemetry",
+          "APRICITYTABLE": "apricity_data",
+          "SENSETABLE": "sense_telemetry"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "6865d2c8-51d5-421e-8081-65e36a174a61",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shifted-api-shared-layer:175",
+          "CodeSize": 828717
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "getLastApricityStat",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:getLastApricityStat",
+      "Runtime": "nodejs14.x",
+      "Role": "arn:aws:iam::990090217414:role/apricity",
+      "Handler": "index.handler",
+      "CodeSize": 880,
+      "Description": "",
+      "Timeout": 3,
+      "MemorySize": 128,
+      "LastModified": "2021-10-14T18:26:49.416+0000",
+      "CodeSha256": "3V7VYy2jIjUnuzrnLe3RtqJgwlMy3lgldXY0XT8PgEs=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "1953e3c4-8e23-4e1d-9a6e-5deb657e8167",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "ml-ecs-EC2Lambda-6PPV13SG9QFN-StopInstanceFunction-pzo5A1o4kt6n",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:ml-ecs-EC2Lambda-6PPV13SG9QFN-StopInstanceFunction-pzo5A1o4kt6n",
+      "Runtime": "python3.7",
+      "Role": "arn:aws:iam::990090217414:role/ml-ecs-EC2Lambda-6PPV13SG-StopInstanceFunctionRole-1BSMFHXRTO0QH",
+      "Handler": "stop_instance.lambda_handler",
+      "CodeSize": 1032,
+      "Description": "",
+      "Timeout": 600,
+      "MemorySize": 128,
+      "LastModified": "2022-09-27T16:53:12.000+0000",
+      "CodeSha256": "eUxMVhKDXa/gL+QMEhnXwb9/40apiIMDnzqt9z2PFSE=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "cc4fc2a3-eb0e-40b2-b757-3013608245b1",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:420165488524:layer:AWSLambda-Python37-SciPy1x:113",
+          "CodeSize": 39741366
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "telemetry-daily-Insights-WKXXGSD-StartStepFunction-SCGTK4PPkjeC",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:telemetry-daily-Insights-WKXXGSD-StartStepFunction-SCGTK4PPkjeC",
+      "Runtime": "python3.7",
+      "Role": "arn:aws:iam::990090217414:role/telemetry-daily-Insights-WKX-StartStepFunctionRole-G0W2ODAL3EJN",
+      "Handler": "start_step_function.lambda_handler",
+      "CodeSize": 934,
+      "Description": "",
+      "Timeout": 300,
+      "MemorySize": 128,
+      "LastModified": "2024-01-02T23:15:32.077+0000",
+      "CodeSha256": "TJ7zws6q9MS+AS5DkSbhWztJqMqUokmTour+pRc8hIc=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "SF_NAME": "FileEfficiencyScoreStepFunction",
+          "GROUPTABLE": "groups",
+          "ItemsPath": "groups_list",
+          "REGION": "us-west-2"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "204f7f3d-f99d-4d21-8f80-09ec6f7aca24",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python-code-layer:184",
+          "CodeSize": 3103732
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python-dependencies-layer:20",
+          "CodeSize": 23155846
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "checkOutOfBoundsApricityWatchdog",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:checkOutOfBoundsApricityWatchdog",
+      "Runtime": "nodejs14.x",
+      "Role": "arn:aws:iam::990090217414:role/watchdog",
+      "Handler": "index.handler",
+      "CodeSize": 2133,
+      "Description": "",
+      "Timeout": 63,
+      "MemorySize": 128,
+      "LastModified": "2021-03-09T23:10:39.957+0000",
+      "CodeSha256": "LxUMvp2SMgrFi0vhv9x7FB5jKNKxwBuh76+p7LtlGZY=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "b732cd23-b300-43e3-b4ee-ffe7bde663ce",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "sendKlugitOn",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:sendKlugitOn",
+      "Runtime": "nodejs16.x",
+      "Role": "arn:aws:iam::990090217414:role/klugit",
+      "Handler": "index.handler",
+      "CodeSize": 954,
+      "Description": "",
+      "Timeout": 3,
+      "MemorySize": 128,
+      "LastModified": "2022-09-21T22:03:22.000+0000",
+      "CodeSha256": "NLWyPCSc2zsP9UYAwScvk17sNbbQhcnb022SaXTcmHA=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "98afe08d-7f0b-47c9-89f5-b1044578f295",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:node_modules:2",
+          "CodeSize": 3077097
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "readStatsNoUpdates",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:readStatsNoUpdates",
+      "Runtime": "nodejs14.x",
+      "Role": "arn:aws:iam::990090217414:role/ReadStats",
+      "Handler": "index.handler",
+      "CodeSize": 1017,
+      "Description": "",
+      "Timeout": 123,
+      "MemorySize": 128,
+      "LastModified": "2022-06-20T19:21:11.000+0000",
+      "CodeSha256": "sq9dUGXK7Ga23Yv5D4pHy+NwveckBSWElkZCJFDewvo=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "70a69f86-8299-4124-a0f0-af790b3db198",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "createDataExport",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:createDataExport",
+      "Runtime": "nodejs14.x",
+      "Role": "arn:aws:iam::990090217414:role/service-role/createDataExport-role-rwd376tx",
+      "Handler": "index.handler",
+      "CodeSize": 3972,
+      "Description": "",
+      "Timeout": 150,
+      "MemorySize": 128,
+      "LastModified": "2022-02-17T18:41:42.445+0000",
+      "CodeSha256": "LyMF1urkX9tmrEtFjmWwMhzhvcIy8SQic0pmrzKgPtc=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "5b101bae-3bc6-46d2-b29b-10d23039c4d5",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:dataExportDependencies:2",
+          "CodeSize": 1390750
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "telemetry-daily-ApricityDynamoDBStreamFunction-pZC6SK283H1F",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:telemetry-daily-ApricityDynamoDBStreamFunction-pZC6SK283H1F",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/telemetry-daily-DataMonitoringLambdaRole-J0Q6YS3RCYW",
+      "Handler": "apricity_stream.lambda_handler",
+      "CodeSize": 4906,
+      "Description": "",
+      "Timeout": 120,
+      "MemorySize": 256,
+      "LastModified": "2024-03-27T22:03:15.000+0000",
+      "CodeSha256": "H5vjzseRhwflwFpXXuYvVk4c8xOkLXw9UNu5ywJJUL4=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "GROUPTABLE": "groups",
+          "STATUSTABLE": "statuses",
+          "TITLE": "Device Monitoring",
+          "WWTABLE": "wattwatchers_telemetry",
+          "DATEEXCLUDETABLE": "exclusion_telemetry",
+          "APRICITYTABLE": "apricity_data",
+          "REGION": "us-west-2",
+          "SENSETABLE": "sense_telemetry"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "f78f3587-a5c0-4878-abab-c0781fdbc25f",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:monitoring-shared-layer:83",
+          "CodeSize": 813278
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "onFalse",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:onFalse",
+      "Runtime": "nodejs16.x",
+      "Role": "arn:aws:iam::990090217414:role/ReadStats",
+      "Handler": "index.handler",
+      "CodeSize": 831,
+      "Description": "",
+      "Timeout": 123,
+      "MemorySize": 128,
+      "LastModified": "2023-01-02T22:56:44.000+0000",
+      "CodeSha256": "DWvaYhBRVrm3Xp1b9q869QV54E0wQy4cqAH6PyKhopw=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "70d553e6-6906-4724-8173-62998cfe6edd",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "shifted-api-v2-ExtendGroupGridServiceEvent-Tt1vDI7Mrmue",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:shifted-api-v2-ExtendGroupGridServiceEvent-Tt1vDI7Mrmue",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/shifted-api-v2-LambdaRole-liUnfUuUBXBT",
+      "Handler": "extend_grid_service_event.lambda_handler",
+      "CodeSize": 13008,
+      "Description": "",
+      "Timeout": 120,
+      "MemorySize": 256,
+      "LastModified": "2024-05-14T23:02:47.000+0000",
+      "CodeSha256": "MtHKZaSaDVwTMoSX17ABiRko7fZq3nYsEHxaKGbvGYg=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "ErrorWebhook": "https://hooks.slack.com/services/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",
+          "PoolID": "us-west-2_di2CrJX4H",
+          "WarningWebhook": "https://hooks.slack.com/services/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:",
+          "ClientID": "7gecg4cscdf81duhqtra5sguto",
+          "TITLE": "Shifted API V2",
+          "NotificationWebhook": "https://hooks.slack.com/services/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",
+          "REGION": "us-west-2"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "b6aa387b-ad4d-4efb-b477-86969cfe6a6b",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shifted-api-shared-layer:176",
+          "CodeSize": 828717
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "serverless-ml-ClassificationServ-StartStepFunction-9o8sgx0jD6le",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:serverless-ml-ClassificationServ-StartStepFunction-9o8sgx0jD6le",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/serverless-ml-Classification-StartStepFunctionRole-1A68UENGGHW0Q",
+      "Handler": "start_step_function.lambda_handler",
+      "CodeSize": 1417,
+      "Description": "",
+      "Timeout": 300,
+      "MemorySize": 128,
+      "LastModified": "2024-04-17T11:46:44.685+0000",
+      "CodeSha256": "npKSPJrUUN9eDH9l3C+S0bvMhd6+OfWuwgYmS7jU3Y8=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "SF_NAME": "ServerlessDeviceClassification",
+          "GROUPTABLE": "groups",
+          "ItemsPath": "devices_list",
+          "REGION": "us-west-2"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "5b5dc0d0-9db6-4ea9-84f0-bdd366cad2c5",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python-code-layer:235",
+          "CodeSize": 805325
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:9",
+          "CodeSize": 62796864
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "shifted-dispatch-DispatchDeviceEcoModeSchedule-KmUABtHjDyje",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:shifted-dispatch-DispatchDeviceEcoModeSchedule-KmUABtHjDyje",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/shifted-dispatch-LambdaRole-1KQQWF9TKPHVW",
+      "Handler": "dispatch_device_ecomode_schedule.lambda_handler",
+      "CodeSize": 22647,
+      "Description": "",
+      "Timeout": 900,
+      "MemorySize": 128,
+      "LastModified": "2024-05-15T19:36:33.000+0000",
+      "CodeSha256": "IC3VafSi/mlaTqOGKOa51g6MkTU3GyAQ7QrVG9rgLpE=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "TITLE": "Shifted Dispatch",
+          "REGION": "us-west-2"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "614015fa-1ae8-433d-b388-70e4530da6b7",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:dispatch-shared-layer:217",
+          "CodeSize": 1278446
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "highFFRTriggers",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:highFFRTriggers",
+      "Runtime": "nodejs16.x",
+      "Role": "arn:aws:iam::990090217414:role/apricity",
+      "Handler": "index.handler",
+      "CodeSize": 1439,
+      "Description": "",
+      "Timeout": 195,
+      "MemorySize": 128,
+      "LastModified": "2023-02-23T18:44:30.000+0000",
+      "CodeSha256": "twhJ0Wk4Oeq2lrCVHghs+eZz86d0gYNe196vT1X/NJU=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "1f993628-db83-4362-a866-da4d9ffc7534",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "getDataExport",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:getDataExport",
+      "Runtime": "nodejs14.x",
+      "Role": "arn:aws:iam::990090217414:role/service-role/getDataExport-role-lsg9tb29",
+      "Handler": "index.handler",
+      "CodeSize": 315,
+      "Description": "",
+      "Timeout": 3,
+      "MemorySize": 128,
+      "LastModified": "2021-07-19T22:42:07.848+0000",
+      "CodeSha256": "gil5WjN5vtK60yumONorL33Odt3rS4c/pazkpSjZjaQ=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "6c8196fb-afa7-4784-a8c5-e1a2268535ce",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "checkNegativeEnergy",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:checkNegativeEnergy",
+      "Runtime": "nodejs14.x",
+      "Role": "arn:aws:iam::990090217414:role/apricity",
+      "Handler": "index.handler",
+      "CodeSize": 1914,
+      "Description": "",
+      "Timeout": 63,
+      "MemorySize": 128,
+      "LastModified": "2021-07-27T17:22:07.660+0000",
+      "CodeSha256": "5xi9y1b8awOqD8xC6m73izn8qzf2w3Nl83m30bLeH+w=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "36ba1dcb-8de2-4201-a264-b67342337648",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "shifted-api-v2-RefreshTokenFunction-dpikTsvBCb5Z",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:shifted-api-v2-RefreshTokenFunction-dpikTsvBCb5Z",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/shifted-api-v2-LambdaRole-liUnfUuUBXBT",
+      "Handler": "refresh.lambda_handler",
+      "CodeSize": 4512,
+      "Description": "",
+      "Timeout": 120,
+      "MemorySize": 256,
+      "LastModified": "2024-05-14T23:02:47.000+0000",
+      "CodeSha256": "qgRBg3s739WDjrYv4WYyc8hNVgl8nx3b225FQT1hl4o=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "ErrorWebhook": "https://hooks.slack.com/services/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",
+          "PoolID": "us-west-2_di2CrJX4H",
+          "WarningWebhook": "https://hooks.slack.com/services/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:",
+          "ClientID": "7gecg4cscdf81duhqtra5sguto",
+          "TITLE": "Shifted API V2",
+          "NotificationWebhook": "https://hooks.slack.com/services/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",
+          "REGION": "us-west-2"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "fbb4535d-3deb-4036-8373-b612a1c654b7",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shifted-api-shared-layer:176",
+          "CodeSize": 828717
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "shifted-dispatch-CheckForDispatchEcoModeEvent-6EDt97vSXCFQ",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:shifted-dispatch-CheckForDispatchEcoModeEvent-6EDt97vSXCFQ",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/shifted-dispatch-LambdaRole-1KQQWF9TKPHVW",
+      "Handler": "check_group_eco_mode_dispatch.lambda_handler",
+      "CodeSize": 12332,
+      "Description": "",
+      "Timeout": 900,
+      "MemorySize": 128,
+      "LastModified": "2024-05-15T19:36:36.000+0000",
+      "CodeSha256": "cfLezDKe+azQ4p/WlqjqRr04CP6K1DK3ZqQ4HB51W2U=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "TITLE": "Shifted Dispatch",
+          "REGION": "us-west-2"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "5a19ddee-984f-4258-b112-aa66800128c6",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:dispatch-shared-layer:217",
+          "CodeSize": 1278446
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "getRelayData",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:getRelayData",
+      "Runtime": "nodejs16.x",
+      "Role": "arn:aws:iam::990090217414:role/ReadStats",
+      "Handler": "index.handler",
+      "CodeSize": 815,
+      "Description": "",
+      "Timeout": 29,
+      "MemorySize": 128,
+      "LastModified": "2022-09-21T22:00:44.000+0000",
+      "CodeSha256": "twUJiVkKt2qFHy4nq0AVS5Ct/tcjDd0+I5YurENwclM=",
+      "Version": "$LATEST",
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "b6d7b233-07b9-407d-97f3-4839dfe2c935",
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "shifted-api-v2-GetGroupDeviceInsights-LuZWEpAGKEPy",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:shifted-api-v2-GetGroupDeviceInsights-LuZWEpAGKEPy",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/shifted-api-v2-LambdaRole-liUnfUuUBXBT",
+      "Handler": "insights.lambda_handler",
+      "CodeSize": 9295,
+      "Description": "",
+      "Timeout": 120,
+      "MemorySize": 256,
+      "LastModified": "2024-05-14T23:03:03.000+0000",
+      "CodeSha256": "Ypul/53M0LaURF4kvV8obdlz/MhUIunAUMQ69j2kpVk=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "ErrorWebhook": "https://hooks.slack.com/services/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",
+          "PoolID": "us-west-2_di2CrJX4H",
+          "WarningWebhook": "https://hooks.slack.com/services/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:",
+          "ClientID": "7gecg4cscdf81duhqtra5sguto",
+          "TITLE": "Shifted API V2",
+          "NotificationWebhook": "https://hooks.slack.com/services/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",
+          "REGION": "us-west-2"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "42519fb5-18e5-4ba1-9092-95d9363ab7d1",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shifted-api-shared-layer:176",
+          "CodeSize": 828717
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "data-exports-sam-app-GroupDataExport-oLTGtQFecEGt",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:data-exports-sam-app-GroupDataExport-oLTGtQFecEGt",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/data-exports-sam-app-LambdaRole-MY2ts7cYLZb1",
+      "Handler": "group_data_export.lambda_handler",
+      "CodeSize": 4662,
+      "Description": "",
+      "Timeout": 900,
+      "MemorySize": 2048,
+      "LastModified": "2024-05-10T19:29:59.000+0000",
+      "CodeSha256": "CL6WrzGED/5mjqETZx+B1nH/xzL1LaLAoQMfBUvRnWc=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "990e1162-90d6-404a-a08c-56d96987c7df",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:dispatch-shared-layer:215",
+          "CodeSize": 824538
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "shifted-dispatch-CheckForDeviceTOUDispatch-HKRtUoMwUI07",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:shifted-dispatch-CheckForDeviceTOUDispatch-HKRtUoMwUI07",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/shifted-dispatch-LambdaRole-1KQQWF9TKPHVW",
+      "Handler": "check_device_tou_dispatch.lambda_handler",
+      "CodeSize": 12332,
+      "Description": "",
+      "Timeout": 900,
+      "MemorySize": 128,
+      "LastModified": "2024-05-15T19:36:34.000+0000",
+      "CodeSha256": "cfLezDKe+azQ4p/WlqjqRr04CP6K1DK3ZqQ4HB51W2U=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "TITLE": "Shifted Dispatch",
+          "REGION": "us-west-2"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "deeef928-1eaa-4f83-8b0c-fbacf116531a",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:dispatch-shared-layer:217",
+          "CodeSize": 1278446
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "portal-sam-GetDeviceRawTelemetry-20mZJWZYVSUU",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:portal-sam-GetDeviceRawTelemetry-20mZJWZYVSUU",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/portal-sam-LambdaRole-EMQC0AGTGKG",
+      "Handler": "get_raw_telemetry.lambda_handler",
+      "CodeSize": 5207,
+      "Description": "",
+      "Timeout": 120,
+      "MemorySize": 256,
+      "LastModified": "2024-05-14T23:01:01.000+0000",
+      "CodeSha256": "bHEETYSuS086WcNIgWHzZVlziY7bD9LwLBnrHfcvLNQ=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "ErrorWebhook": "https://hooks.slack.com/services/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",
+          "TRICKLESTARINFOTABLE": "tricklestar_info",
+          "PoolID": "us-west-2_di2CrJX4H",
+          "STATUSTABLE": "statuses",
+          "WarningWebhook": "https://hooks.slack.com/services/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:",
+          "REGION": "us-west-2",
+          "TRICKLESTARTELEMETRYTABLE": "tricklestar_telemetry",
+          "GROUPTABLE": "groups",
+          "ClientID": "7gecg4cscdf81duhqtra5sguto",
+          "TITLE": "Shifted API",
+          "WWTABLE": "wattwatchers_telemetry",
+          "NotificationWebhook": "https://hooks.slack.com/services/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",
+          "DATEEXCLUDETABLE": "exclusion_telemetry",
+          "APRICITYTABLE": "apricity_data",
+          "SENSETABLE": "sense_telemetry"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "137be59b-105a-4b1f-852a-d138626f3e2d",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shifted-api-shared-layer:175",
+          "CodeSize": 828717
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "serverless-ml-LikeWeather-DeviceLikeWeatherForecas-Pd45XZXUnLA8",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:serverless-ml-LikeWeather-DeviceLikeWeatherForecas-Pd45XZXUnLA8",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/serverless-ml-LikeWeatherForeca-ForecastLambdaRole-M9DGOZFQEUWJ",
+      "Handler": "device_like_weather_forecast.lambda_handler",
+      "CodeSize": 5005,
+      "Description": "",
+      "Timeout": 900,
+      "MemorySize": 1024,
+      "LastModified": "2024-04-18T19:21:14.000+0000",
+      "CodeSha256": "h+whRg4C2Ad2jHUT9NjgOl3nJGuy3QFnB/aU1mwQ5MM=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "TITLE": "LikeWeatherForecast",
+          "REGION": "us-west-2"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "004585ab-9660-4cd5-a344-d26f6f9b7859",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:ml-shared-layer:7",
+          "CodeSize": 811913
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:9",
+          "CodeSize": 62796864
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "data-exports-sam-app-GenerateGroupClientReports-WcXPPCLbTlUp",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:data-exports-sam-app-GenerateGroupClientReports-WcXPPCLbTlUp",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/data-exports-sam-app-LambdaRole-MY2ts7cYLZb1",
+      "Handler": "generate_group_client_reports.lambda_handler",
+      "CodeSize": 29647,
+      "Description": "",
+      "Timeout": 900,
+      "MemorySize": 2048,
+      "LastModified": "2024-05-10T19:29:59.000+0000",
+      "CodeSha256": "5b5zAWLwnYRo/1e0MwoFObM/zTWAFYXhgniO0HMfaH0=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "40ba5883-b6be-42fa-9b21-a041e3f7d60b",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:jinja2:1",
+          "CodeSize": 6214004
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:dispatch-shared-layer:215",
+          "CodeSize": 824538
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "apricity-app-StartExportWHDataFunction-7HO1M1AVGCJ",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:apricity-app-StartExportWHDataFunction-7HO1M1AVGCJ",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/apricity-app-DataIntegrationLambdaRole-1240ESEO1TZJQ",
+      "Handler": "start_export_wh_data.lambda_handler",
+      "CodeSize": 10135,
+      "Description": "",
+      "Timeout": 300,
+      "MemorySize": 256,
+      "LastModified": "2024-05-08T18:31:12.000+0000",
+      "CodeSha256": "YAy8IVdXD5ndShUUiInST3ZN71i1tG/lnVRQ7G2KmGc=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "GROUPTABLE": "groups",
+          "STATUSTABLE": "statuses",
+          "TITLE": "Data Integration",
+          "ENV": "Prod",
+          "WWTABLE": "wattwatchers_telemetry",
+          "DATEEXCLUDETABLE": "exclusion_telemetry",
+          "APRICITYTABLE": "apricity_data",
+          "REGION": "us-west-2",
+          "SENSETABLE": "sense_telemetry"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "f5825351-fa6d-4de4-be11-53018bf281d6",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python-code-layer:238",
+          "CodeSize": 826900
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "portal-sam-DynamicGroupCancelEcoModeDay-pXz8n6S84d0g",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:portal-sam-DynamicGroupCancelEcoModeDay-pXz8n6S84d0g",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/portal-sam-LambdaRole-EMQC0AGTGKG",
+      "Handler": "cancel_eco_mode_day.lambda_handler",
+      "CodeSize": 11154,
+      "Description": "",
+      "Timeout": 120,
+      "MemorySize": 256,
+      "LastModified": "2024-05-14T23:01:01.000+0000",
+      "CodeSha256": "IJc2WttxJF8G/Ad4hft/EXYY9rFJCm8eDL5Hw2HAoNE=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "ErrorWebhook": "https://hooks.slack.com/services/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",
+          "TRICKLESTARINFOTABLE": "tricklestar_info",
+          "PoolID": "us-west-2_di2CrJX4H",
+          "STATUSTABLE": "statuses",
+          "WarningWebhook": "https://hooks.slack.com/services/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:",
+          "REGION": "us-west-2",
+          "TRICKLESTARTELEMETRYTABLE": "tricklestar_telemetry",
+          "GROUPTABLE": "groups",
+          "ClientID": "7gecg4cscdf81duhqtra5sguto",
+          "TITLE": "Shifted API",
+          "WWTABLE": "wattwatchers_telemetry",
+          "NotificationWebhook": "https://hooks.slack.com/services/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",
+          "DATEEXCLUDETABLE": "exclusion_telemetry",
+          "APRICITYTABLE": "apricity_data",
+          "SENSETABLE": "sense_telemetry"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "55dd5aed-e287-43fb-8e6f-67501dbc6679",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shifted-api-shared-layer:175",
+          "CodeSize": 828717
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        }
+      ],
+      "PackageType": "Zip"
+    },
+    {
+      "FunctionName": "reports-sam-app-DispatchV2Function-E1gKZKPc9SfD",
+      "FunctionArn": "arn:aws:lambda:us-west-2:990090217414:function:reports-sam-app-DispatchV2Function-E1gKZKPc9SfD",
+      "Runtime": "python3.8",
+      "Role": "arn:aws:iam::990090217414:role/reports-sam-app-ReportsLambdaRole-1SUMSO7HK09Q0",
+      "Handler": "dispatch_device_v2_analysis.lambda_handler",
+      "CodeSize": 14933,
+      "Description": "",
+      "Timeout": 900,
+      "MemorySize": 4096,
+      "LastModified": "2024-05-07T21:20:49.000+0000",
+      "CodeSha256": "xZ1dxpK+0Qkn6BwhUkhLL7n7bsWLdELb09vmbTf07bs=",
+      "Version": "$LATEST",
+      "VpcConfig": {
+        "SubnetIds": [],
+        "SecurityGroupIds": [],
+        "VpcId": ""
+      },
+      "Environment": {
+        "Variables": {
+          "REPORTS_DATA_BUCKET": "reports-data-shifted-energy",
+          "TITLE": "SEI Reports",
+          "ENV": "Prod",
+          "REGION": "us-west-2"
+        }
+      },
+      "TracingConfig": {
+        "Mode": "PassThrough"
+      },
+      "RevisionId": "4c2e960a-ec2b-47ee-965a-8d7955ad45eb",
+      "Layers": [
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:sei-reports-shared-layer:116",
+          "CodeSize": 824538
+        },
+        {
+          "Arn": "arn:aws:lambda:us-west-2:990090217414:layer:shared-python38-dependencies-layer:3",
+          "CodeSize": 53779167
+        }
+      ],
+      "PackageType": "Zip"
+    }
+  ]
+}
