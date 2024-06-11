@@ -19,12 +19,12 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v3
-#      - name: configure aws credentialsa
-#        uses: aws-actions/configure-aws-credentials@v1.7.0
-#        with:
-#          role-to-assume: arn:aws:iam::068008800301:role/GithubActions
-#          role-session-name: GitHub_to_AWS_via_FederatedOIDC
-#          aws-region: ${{ env.AWS_REGION }}
+      - name: configure aws credentialsa
+        uses: aws-actions/configure-aws-credentials@v1.7.0
+        with:
+          role-to-assume: arn:aws:iam::068008800301:role/GithubActions
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Test Python Lambda Functions
         uses: actions/setup-python@v2
@@ -47,7 +47,5 @@ jobs:
 
       - name: Install AWS CDK
         run: npm install -g aws-cdk
-      - name: Build CDK app
-        run: npm run build
       - name: Deploy CDK app
-        run: cdk deploy --all --require-approval never
+        run: pwd && cd infrastructure && cdk deploy --all --require-approval never
