@@ -12,41 +12,43 @@ import {
     CircularProgress,
     TablePagination,
 } from '@mui/material';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const AnalysisTable = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const [continuationToken, setContinuationToken] = useState('');
-    const navigate = useNavigate();
+    // const [continuationToken, setContinuationToken] = useState('');
 
+    // TODO: Add Pagination Logic using continuationToken
     useEffect(() => {
+
+        const fetchData = () => {
+            setLoading(true);
+            axios
+                .get('api/reportSummaries', {
+                    params: {
+                        page,
+                        rowsPerPage,
+                        // continuationToken,
+                    },
+                })
+                .then(response => {
+                    // const {jsonContents, newContinuationToken} = response.data;
+                    const {jsonContents} = response.data;
+                    setData(jsonContents);
+                    // setContinuationToken(newContinuationToken);
+                    setLoading(false);
+                })
+                .catch(error => {
+                    console.error('Error fetching data: ', error);
+                    setLoading(false);
+                });
+        };
         fetchData();
     }, [page, rowsPerPage]);
 
-    const fetchData = () => {
-        setLoading(true);
-        axios
-            .get('https://h4x9eobxve.execute-api.eu-west-1.amazonaws.com/prod/reportSummaries', {
-                params: {
-                    page,
-                    rowsPerPage,
-                    continuationToken,
-                },
-            })
-            .then(response => {
-                const {jsonContents, newContinuationToken} = response.data;
-                setData(jsonContents);
-                setContinuationToken(newContinuationToken);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error('Error fetching data: ', error);
-                setLoading(false);
-            });
-    };
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);

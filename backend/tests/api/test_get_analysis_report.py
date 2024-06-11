@@ -6,7 +6,6 @@ import boto3
 # Assuming your Lambda function code is in a file named `lambda_function.py`
 import moto
 from moto import mock_aws
-from utils.s3_utils import upload_file_to_s3
 
 
 @mock_aws
@@ -30,9 +29,12 @@ class TestGetAnalysisReport(unittest.TestCase):
         """
         Test that the Lambda function successfully retrieves a file from S3.
         """
+        from utils.s3_utils import upload_file_to_s3
+
         sample_report_id = "sample.json"
         sample_content = {"Status": "Finished"}
-        upload_file_to_s3(json.dumps(sample_content), 'report.json', self.bucket_name, sample_report_id)
+        upload_file_to_s3(json.dumps(sample_content), 'summary.json', self.bucket_name, sample_report_id)
+        upload_file_to_s3(json.dumps(sample_content), 'analysis.csv', self.bucket_name, sample_report_id)
         event = {
             "queryStringParameters": {
                 "reportID": sample_report_id
@@ -40,11 +42,8 @@ class TestGetAnalysisReport(unittest.TestCase):
         }
         from api.get_analysis_report import lambda_handler
         response = lambda_handler(event, None)
-        print(response)
-        expected_body = json.dumps({"content": json.dumps(sample_content)})
-
         self.assertEqual(response['statusCode'], 200)
-        self.assertEqual(json.loads(response['body']), json.loads(expected_body))
+        self.assertEqual(json.loads(response['body'])['summary'], sample_content)
 
     def test_file_not_found(self):
         """

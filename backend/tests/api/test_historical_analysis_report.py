@@ -5,7 +5,6 @@ import boto3
 import moto
 from moto import mock_aws
 
-from utils.s3_utils import upload_file_to_s3
 
 
 @mock_aws
@@ -38,6 +37,8 @@ class TestListAnalysisReport(unittest.TestCase):
         """
         Testing that the S3 object summaries will be returned correctly if found
         """
+        from utils.s3_utils import upload_file_to_s3
+
         json_load_1 = {"status": "Completed", "allDurationInSeconds": 249.003, "avgprovisionedMemoryMB": 152.587875,
                        "MemoryCost": 0.000783477,
                        "InvocationCost": 0.0000116, "totalCost": 0.000795077, "avgCostPerInvocation": 0.000146568,
@@ -64,6 +65,8 @@ class TestListAnalysisReport(unittest.TestCase):
         """
         Testing that the pagination is working correctly
         """
+        from utils.s3_utils import upload_file_to_s3
+
         json_load_1 = {"status": "Completed", "allDurationInSeconds": 249.003, "avgprovisionedMemoryMB": 152.587875,
                        "MemoryCost": 0.000783477,
                        "InvocationCost": 0.0000116, "totalCost": 0.000795077, "avgCostPerInvocation": 0.000146568,

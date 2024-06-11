@@ -9,31 +9,7 @@ import {Bucket} from "aws-cdk-lib/aws-s3";
 import {LambdaIntegration, PassthroughBehavior} from "aws-cdk-lib/aws-apigateway";
 
 export class ReportApiStack extends cdk.Stack {
-    // addCorsOptions(apiResource: apigateway.IResource) {
-    //     apiResource.addMethod('OPTIONS', new apigateway.MockIntegration({
-    //         integrationResponses: [{
-    //             statusCode: '200',
-    //             responseParameters: {
-    //                 'method.response.header.Access-Control-Allow-Headers': "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-    //                 'method.response.header.Access-Control-Allow-Origin': "'*'",
-    //                 'method.response.header.Access-Control-Allow-Methods': "'OPTIONS,GET,PUT,POST,DELETE'"
-    //             }
-    //         }],
-    //         passthroughBehavior: apigateway.PassthroughBehavior.NEVER,
-    //         requestTemplates: {
-    //             'application/json': '{"statusCode": 200}'
-    //         }
-    //     }), {
-    //         methodResponses: [{
-    //             statusCode: '200',
-    //             responseParameters: {
-    //                 'method.response.header.Access-Control-Allow-Headers': true,
-    //                 'method.response.header.Access-Control-Allow-Origin': true,
-    //                 'method.response.header.Access-Control-Allow-Methods': true
-    //             }
-    //         }]
-    //     });
-    // }
+    public api: apigateway.RestApi;
 
     constructor(scope: Construct, id: string, props: cdk.StackProps, analysisStepFunction: StateMachine, analysisBucket: Bucket) {
         super(scope, id, props);
@@ -71,28 +47,28 @@ export class ReportApiStack extends cdk.Stack {
         });
 
 
-        const api = new apigateway.RestApi(this, 'analysisAPI', {
+        this.api = new apigateway.RestApi(this, 'analysisAPI', {
             defaultCorsPreflightOptions: {
                 allowOrigins: apigateway.Cors.ALL_ORIGINS,
                 allowMethods: apigateway.Cors.ALL_METHODS, // Allow all methods (GET, POST, etc.)
                 allowHeaders: apigateway.Cors.DEFAULT_HEADERS
             }
         });
-        api.root.addResource('reportSummaries').addMethod('GET', new apigateway.LambdaIntegration(historical_analysis_report))
+        const api_resource_prefix = this.api.root.addResource('api')
+        api_resource_prefix.addResource('reportSummaries').addMethod('GET', new apigateway.LambdaIntegration(historical_analysis_report))
 
-        api.root.addResource('lambdaFunctions').addMethod('GET', new apigateway.LambdaIntegration(list_lambda_functions), {
+        this.api.root.addResource('lambdaFunctions').addMethod('GET', new apigateway.LambdaIntegration(list_lambda_functions), {
             requestParameters: {
                 'method.request.querystring.selectedRuntime': true,
                 'method.request.querystring.selectedPackageType': true,
                 'method.request.querystring.selectedArchitecture': true
             }
         })
-        api.root.addResource('report').addMethod('GET', new apigateway.LambdaIntegration(get_analysis_report), {
+        this.api.root.addResource('report').addMethod('GET', new apigateway.LambdaIntegration(get_analysis_report), {
             requestParameters: {
                 'method.request.querystring.reportID': true,
             }
         })
-        // TODO: Add SF integration with API Gateway
         const apiGatewayRole = new iam.Role(this, 'ApiGatewayStepFunctionsRole', {
             assumedBy: new iam.ServicePrincipal('apigateway.amazonaws.com'),
             managedPolicies: [
@@ -127,7 +103,7 @@ export class ReportApiStack extends cdk.Stack {
                 ]
             }
         });
-        const startExecutionResource = api.root.addResource('startExecution');
+        const startExecutionResource = this.api.root.addResource('startExecution');
         startExecutionResource.addMethod('POST', startExecutionIntegration, {
             methodResponses: [
                 {

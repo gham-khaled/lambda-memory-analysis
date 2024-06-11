@@ -6,7 +6,6 @@ import boto3
 # Assuming your Lambda function code is in a file named `lambda_function.py`
 import moto
 from moto import mock_aws
-from utils.s3_utils import upload_file_to_s3
 
 
 # Moto does not mock Architecture/Package Options parameters when lambda creation --> Cannot create addition tests
@@ -18,7 +17,7 @@ class TestGetAnalysisReport(unittest.TestCase):
     def setUp(self):
         self.mock_aws = moto.mock_aws()
         self.mock_aws.start()
-        iam_client = boto3.client('iam', region_name='us-west-2')
+        iam_client = boto3.client('iam')
 
         # Create a mock role
         role_response = iam_client.create_role(
@@ -100,7 +99,7 @@ class TestGetAnalysisReport(unittest.TestCase):
         """
         Test that the Lambda function successfully retrieves all functions
         """
-        event = {
+        parameters = {
             "selectedRuntime": [
                 'nodejs20.x',
                 'nodejs18.x',
@@ -125,7 +124,7 @@ class TestGetAnalysisReport(unittest.TestCase):
             "selectedArchitecture": ['x86_64', 'arm64']
         }
         from api.list_lambda_functions import lambda_handler
-        response = lambda_handler(event, None)
+        response = lambda_handler({'queryStringParameters': parameters}, None)
         response_functions = json.loads(response['body'])
         self.assertEqual(response['statusCode'], 200)
         self.assertEqual(len(response_functions), 3)
@@ -144,7 +143,7 @@ class TestGetAnalysisReport(unittest.TestCase):
         """
         Test that the Lambda function successfully retrieves all functions
         """
-        event = {
+        parameters = {
             "selectedRuntime": [
                 'python3.9',
                 'python3.8',
@@ -153,7 +152,7 @@ class TestGetAnalysisReport(unittest.TestCase):
             "selectedArchitecture": ['x86_64', 'arm64']
         }
         from api.list_lambda_functions import lambda_handler
-        response = lambda_handler(event, None)
+        response = lambda_handler({'queryStringParameters': parameters}, None)
         response_functions = json.loads(response['body'])
         self.assertEqual(response['statusCode'], 200)
         self.assertEqual(len(response_functions), 2)

@@ -6,7 +6,6 @@ import boto3
 import moto
 from moto import mock_aws
 
-from utils.s3_utils import download_from_s3, upload_file_to_s3
 
 
 
@@ -30,6 +29,8 @@ class TestAnalysisInitializer(unittest.TestCase):
         """
         Testing that the report json has been created with the Running Status
         """
+        from utils.s3_utils import download_from_s3, upload_file_to_s3
+
         report_id = "test_report"
         event = {
             "lambda_functions_name": [{}],

@@ -3,10 +3,6 @@ import axios from 'axios';
 import {
     Button,
     Checkbox,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    Select,
     Typography,
     Box,
     Table,
@@ -15,7 +11,7 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    Paper, ListItemIcon, ListItemText, TextField,
+    Paper, TextField,
 
 } from '@mui/material';
 // import DatePicker from '@mui/lab/DatePicker';
@@ -76,9 +72,6 @@ const LaunchAnalysis = () => {
     const [openError, setOpenError] = useState(false);
 
     const [loading, setLoading] = useState(false);
-    // TODO: Handle the Select Deselect ALL logic (https://codesandbox.io/p/sandbox/wispy-fast-dz088?file=%2Fsrc%2FApp.js%3A103%2C31)
-    // TODO: Add other filters Example: Platform
-    // TODO: Add Start Date End date parameters
 
 
     const handleLaunchAnalysis = async () => {
@@ -97,7 +90,7 @@ const LaunchAnalysis = () => {
             console.log(payload)
             setLoading(true);
             try {
-                const response = await axios.post('https://h4x9eobxve.execute-api.eu-west-1.amazonaws.com/prod/startExecution', payload);
+                const response = await axios.post('api/startExecution', payload);
                 console.log(response)
                 // TODO: Add message that it was successfully launched
                 // TODO: Wait until a response is received and move to the Report ID details page
@@ -119,7 +112,7 @@ const LaunchAnalysis = () => {
     const handleFetchFunctions = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('https://h4x9eobxve.execute-api.eu-west-1.amazonaws.com/prod/lambdaFunctions?selectedRuntime=$[selectedRuntime]', {
+            const response = await axios.get('api/lambdaFunctions?selectedRuntime=$[selectedRuntime]', {
                 params: new URLSearchParams({
                     'selectedRuntime': selectedRuntime,
                     'selectedPackageType': selectedPackageType,

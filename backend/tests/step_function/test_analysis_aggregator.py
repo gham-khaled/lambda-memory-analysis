@@ -8,7 +8,6 @@ import boto3
 import moto
 from moto import mock_aws
 
-from utils.s3_utils import download_from_s3, upload_file_to_s3
 
 
 @mock_aws
@@ -18,7 +17,7 @@ class TestAnalysisAggregator(unittest.TestCase):
     def setUp(self):
         self.mock_aws = moto.mock_aws()
         self.mock_aws.start()
-        s3 = boto3.resource("s3", region_name='eu-west-1')
+        s3 = boto3.resource("s3")
         self.bucket = s3.Bucket(self.bucket_name)
         self.bucket.create(CreateBucketConfiguration={'LocationConstraint': 'eu-west-1'})
         os.environ['BUCKET_NAME'] = self.bucket_name
@@ -41,6 +40,8 @@ class TestAnalysisAggregator(unittest.TestCase):
         """
         Testing that the CSV files are merged correctly
         """
+        from utils.s3_utils import download_from_s3, upload_file_to_s3
+
         report_id = 'test-report'
         start_date = 'X'
         end_date = 'X'
@@ -136,6 +137,8 @@ class TestAnalysisAggregator(unittest.TestCase):
         """
         Testing that the CSV files are merged correctly
         """
+        from utils.s3_utils import download_from_s3, upload_file_to_s3
+
         report_id = 'test-report'
         directory = f'single_analysis/{report_id}'
         start_date = 'X'

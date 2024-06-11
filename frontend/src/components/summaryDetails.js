@@ -11,7 +11,7 @@ const Summary = ({data}) => {
         totalCost,
         avgMaxMemoryUsedMB,
         avgOverProvisionedMB,
-        optimalTotalCost,
+        // optimalTotalCost,
         potentialSavings,
         avgDurationPerInvocation,
         reportID
