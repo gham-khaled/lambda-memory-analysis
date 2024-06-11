@@ -4,10 +4,19 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				primary: '#0070AE',
+				// primary: '#0070AE',
 				secondary: '#D0D0D0',
 				third: '#F1F7FF',
 				fourth: '#748DA8',
+
+				// ========================/
+				lambdaPrimary: '#FF8900',
+				'lambdaPrimary-light': '#F09A51',
+				darkblue: '#08141F',
+				darkblueMedium: '#0C1924',
+				darkblueLight: '#253645',
+				greenLime: '#00A981',
+				// ========================/
 				'primary-dark': '#08141F',
 				'secondary-dark': '#0D1E2C',
 				'third-dark': '#00A981',

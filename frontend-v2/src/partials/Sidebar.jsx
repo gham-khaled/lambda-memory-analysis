@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { BsFillPinAngleFill, BsPersonCircle } from 'react-icons/bs'
 import { TbRulerMeasure } from 'react-icons/tb'
 import { IoIosCube } from 'react-icons/io'
+import lambdaLogo from '../assets/lambda-logo.svg'
+
 import {
 	BiLogOut,
 	BiSolidCategoryAlt,
@@ -11,17 +13,27 @@ import {
 } from 'react-icons/bi'
 import { LiaWindowClose } from 'react-icons/lia'
 import { AiOutlineMenuFold, AiFillShop } from 'react-icons/ai'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Sidebar = () => {
 	const [sidebarOpen, setSidebarOpen] = useState(false)
-	const [activePage, setActivePage] = useState('Dashboard')
+	const [menuClicked, setMenuClicked] = useState(false)
+	const [activePage, setActivePage] = useState('Home')
+
 	return (
 		<>
-			<BiMenu className='absolute ml-8 mt-12 lg:hidden text-third-dark rounded bg-white text-3xl'></BiMenu>
+			<BiMenu
+				className='absolute ml-8 mt-12 lg:hidden text-greenLime rounded bg-white text-3xl cursor-pointer'
+				onClick={() => {
+					setMenuClicked((prev) => !prev)
+				}}
+			></BiMenu>
 			<div
-				className={`bg-[#0C1924]  h-screen hidden lg:block ${
+				className={`bg-darkblueMedium  h-screen hidden lg:block ${
 					sidebarOpen ? 'w-[6vw] px-2 py-10' : 'w-[20vw] p-10 '
-				} transition-all duration-300 ease-in-out`}
+				} ${
+					menuClicked ? 'w-[70vw] absolute z-50 !block ' : ''
+				}transition-all duration-300 ease-in-out`}
 			>
 				<div className='relative h-full'>
 					<div
@@ -32,26 +44,36 @@ const Sidebar = () => {
 						<div>
 							{sidebarOpen ? (
 								<>
-									{/* <img className='w-10 mx-auto' src={Gebeya} alt='Gebeya Logo'></img> */}
+									{/* <img className='w-10 mx-auto' src={lambdaLogo} alt=''></img> */}
 								</>
 							) : (
 								<>
-									{/* <img className='w-32 mb-1' src={LogoLight} alt='Gebeya Logo'></img> */}
+									<img className='w32 mx-auto' src={lambdaLogo} alt=''></img>
 								</>
 							)}
 						</div>
-						<LiaWindowClose className='text-xl hover:text-third-dark text-white block lg:hidden '></LiaWindowClose>
+						<LiaWindowClose
+							className='text-xl hover:text-third-dark text-white block lg:hidden cursor-pointer '
+							onClick={() => {
+								setMenuClicked((prev) => !prev)
+							}}
+						></LiaWindowClose>
 						<AiOutlineMenuFold
+							size={30}
 							className={` ${
 								sidebarOpen ? 'rotate-180' : 'rotate-0'
-							} text-white text-xl hover:text-third-dark hidden lg:block transition-all duration-300 ease-in-out`}
+							} text-white text-xl hover:text-lambdaPrimary-light hidden lg:block transition-all duration-300 ease-in-out cursor-pointer`}
+							onClick={() => {
+								setSidebarOpen((prev) => !prev)
+							}}
 						/>
 					</div>
-					<div className='space-y-6 my-10'>
-						<div
+					<div className='space-y-12 my-12 '>
+						<Link
+							to='/'
 							className={`${
-								activePage === 'Dashboard'
-									? 'bg-[#00A9817D] border-l-4 border-[#00D9A5] px-4 py-2 '
+								activePage === 'Home'
+									? 'bg-lambdaPrimary-light border-l-8 border-lambdaPrimary px-4 py-2 '
 									: ''
 							} ${
 								sidebarOpen ? 'justify-center' : ''
@@ -60,58 +82,65 @@ const Sidebar = () => {
 							<BsFillPinAngleFill
 								className={`${sidebarOpen ? 'text-2xl' : ''} ${
 									activePage === 'Dashboard' ? 'text-white' : ''
-								} text-[#00D9A5]`}
+								} text-white`}
 							></BsFillPinAngleFill>
 
 							<div className={`text-sm text-white ${sidebarOpen ? 'hidden' : ''}`}>
 								Home
 							</div>
-						</div>
-						{/* <div
+						</Link>
+						<div
 							className={` ${
 								sidebarOpen ? 'text-xs' : ''
-							} font-semibold text-[#45505D]`}
+							} font-medium uppercase text-[#45505D]`}
 						>
-							Management
-						</div> */}
-						<a
-							href='/'
+							analytics
+						</div>
+						<Link
+							to='/dashboard'
 							className={`${
-								activePage === 'Categories'
-									? 'bg-[#00A9817D] border-l-4 border-[#00D9A5] px-4 py-2 '
+								activePage === 'Dashboard'
+									? 'bg-lambdaPrimary-light border-l-8 border-lambdaPrimary px-4 py-2 '
 									: ''
 							} ${
 								sidebarOpen ? 'justify-center' : ''
 							} w-full flex gap-4 items-center  cursor-pointer transition-all duration-300 ease-in-out`}
 						>
 							<BiSolidCategoryAlt
-								className={` ${sidebarOpen ? 'text-2xl' : ''} text-[#00D9A5]`}
+								className={` ${sidebarOpen ? 'text-2xl' : ''} text-lambdaPrimary`}
 							></BiSolidCategoryAlt>
 
 							<div className={`text-sm text-white ${sidebarOpen ? 'hidden' : ''}`}>
 								Dashboard
 							</div>
-						</a>
-						<a
-							href='/'
+						</Link>
+						<Link
+							to='/analytics'
 							className={`${
-								activePage === 'Product Attribute'
-									? 'bg-[#00A9817D] border-l-4 border-[#00D9A5] px-4 py-2 '
+								activePage === 'NewAnalysis'
+									? 'bg-lambdaPrimary-light border-l-8 border-lambdaPrimary px-4 py-2 '
 									: ''
 							} ${
 								sidebarOpen ? 'justify-center' : ''
 							} w-full flex gap-4 items-center  cursor-pointer transition-all duration-300 ease-in-out`}
 						>
 							<TbRulerMeasure
-								className={` ${sidebarOpen ? 'text-2xl' : ''} text-[#00D9A5]`}
+								className={` ${sidebarOpen ? 'text-2xl' : ''} text-lambdaPrimary`}
 							></TbRulerMeasure>
 
-							<div className={`text-xs text-white ${sidebarOpen ? 'hidden' : ''}`}>
+							<div className={`text-sm text-white ${sidebarOpen ? 'hidden' : ''}`}>
 								New Analytics
 							</div>
-						</a>
+						</Link>
 					</div>
 				</div>
+				<a
+					href='https://github.com/gham-khaled/lambda-memory-analysis/tree/dashboard-v2'
+					target='_blank'
+					className={`${sidebarOpen ? 'hidden' : 'flex'} text-white font-light bg-darkblueLight px-4 text-xs py-2 -mx-2 rounded-md`}
+				>
+					GitHub: <span className='font-semibold pl-2 uppercase'> Kahled </span>
+				</a>
 			</div>
 		</>
 	)
