@@ -139,7 +139,8 @@ const Sidebar = () => {
 					target='_blank'
 					className={`${sidebarOpen ? 'hidden' : 'flex'} text-white font-light bg-darkblueLight px-4 text-xs py-2 -mx-2 rounded-md`}
 				>
-					GitHub: <span className='font-semibold pl-2 uppercase'> Kahled </span>
+					GitHub:{' '}
+					<span className='font-semibold pl-2 uppercase'>Ghamgui Khaled </span>
 				</a>
 			</div>
 		</>
