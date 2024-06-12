@@ -10,7 +10,7 @@ function Statistics({ title, icon, loadingQuery, query }) {
 				{loadingQuery ? (
 					<div className='h-2 bg-slate-700 rounded mt-2'></div>
 				) : (
-					<div className='font-bold text-white text-xs md:text-md '>{query}</div>
+					<div className='font-light text-white text-xs md:text-md '>{query}</div>
 				)}
 			</div>
 		</div>

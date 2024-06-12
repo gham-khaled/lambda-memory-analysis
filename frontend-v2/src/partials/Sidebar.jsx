@@ -39,8 +39,9 @@ const Sidebar = () => {
 				}transition-all duration-300 ease-in-out`}
 			>
 				<div className='relative h-full'>
+					{/* Banner section */}
 					<div
-						className={`   ${sidebarOpen ? '' : `bg-[#1A2833] -m-10 -mx-7 pt-8 px-4 py-6 mb-4 rounded-b-lg`}`}
+						className={`   ${sidebarOpen ? '' : `bg-[#1A2833] -m-10 -mx-7 pt-10 px-4 py-4 mb-4 rounded-b-lg`}`}
 					>
 						<div
 							className={`${
@@ -76,34 +77,32 @@ const Sidebar = () => {
 						</div>
 					</div>
 
-					<div className='space-y-12 my-16 '>
+					<div className='space-y-8 my-16 -ml-5 '>
 						<Link
 							to='/'
 							className={`${
 								activePage === 'Home'
-									? 'bg-lambdaPrimary-light border-l-8 rounded-tr-sm rounded-br-sm border-lambdaPrimary px-4 py-2 '
-									: 'hover:text-lambdaPrimary '
+									? 'bg-[#00A9817D] border-l-8 rounded-tr-sm rounded-br-sm border-greenLime px-4 py-2 '
+									: ''
 							} ${
 								sidebarOpen ? 'justify-center' : ''
 							} w-full flex gap-4 items-center  cursor-pointer transition-all duration-300 ease-in-out`}
 						>
 							<HiHome
 								size={25}
-								className={`${
-									activePage === 'Dashboard' ? 'text-white' : ''
-								} text-white`}
+								className={`${activePage === 'Home' ? 'text-white' : ''} text-white`}
 							></HiHome>
 
 							<div
-								className={`text-sm text-white ${sidebarOpen ? 'hidden' : 'sidebar'}`}
+								className={`text-sm text-white ${sidebarOpen ? 'hidden' : activePage === 'Home' ? '' : 'sidebar'}`}
 							>
 								Home
 							</div>
 						</Link>
 						<div
 							className={` ${
-								sidebarOpen ? 'text-xs' : ''
-							} font-medium uppercase text-[#45505D]`}
+								sidebarOpen ? 'text-xs ml-5' : ''
+							} font-medium uppercase text-[#45505D]  pt-6`}
 						>
 							analytics
 						</div>
@@ -111,7 +110,7 @@ const Sidebar = () => {
 							to='/dashboard'
 							className={`${
 								activePage === 'Dashboard'
-									? 'bg-lambdaPrimary-light border-l-8 border-lambdaPrimary px-4 py-2 '
+									? 'bg-[#00A9817D] border-l-8 rounded-tr-sm rounded-br-sm border-greenLime px-4 py-2 '
 									: ''
 							} ${
 								sidebarOpen ? 'justify-center' : ''
@@ -123,7 +122,7 @@ const Sidebar = () => {
 							></BiSolidCategoryAlt>
 
 							<div
-								className={`text-sm text-white ${sidebarOpen ? 'hidden' : 'sidebar'}`}
+								className={`text-sm text-white ${sidebarOpen ? 'hidden' : activePage === 'Dashboard' ? '' : 'sidebar'}`}
 							>
 								Dashboard
 							</div>
@@ -132,7 +131,7 @@ const Sidebar = () => {
 							to='/analytics'
 							className={`${
 								activePage === 'NewAnalysis'
-									? 'bg-lambdaPrimary-light border-l-8 border-lambdaPrimary px-4 py-2 '
+									? 'bg-[#00A9817D] border-l-8 rounded-tr-sm rounded-br-sm border-greenLime px-4 py-2 '
 									: ''
 							} ${
 								sidebarOpen ? 'justify-center' : ''
@@ -144,7 +143,7 @@ const Sidebar = () => {
 							></DiGoogleAnalytics>
 
 							<div
-								className={`text-sm text-white ${sidebarOpen ? 'hidden' : 'sidebar'}`}
+								className={`text-sm text-white ${sidebarOpen ? 'hidden' : activePage === 'Analytics' ? '' : 'sidebar'}`}
 							>
 								New Analytics
 							</div>

@@ -10,6 +10,6 @@
     /* @apply bg-lambdaPrimary-light border-l-8 rounded-tr-sm rounded-br-sm border-lambdaPrimary px-4 py-2 ; */
  }
  .sidebar:hover{
-    @apply text-lambdaPrimary  transform transition-all duration-300 ease-in-out;
+    @apply text-third-dark  transform transition-all duration-300 ease-in-out;
  }
 }
