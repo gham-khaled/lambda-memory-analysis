@@ -25,8 +25,9 @@ const Sidebar = () => {
 
 	return (
 		<>
+			{/* Mobile menu */}
 			<BiMenu
-				className='absolute ml-8 mt-12 lg:hidden text-greenLime rounded bg-white text-3xl cursor-pointer'
+				className='absolute z-40 ml-8 mt-12 p-2 lg:hidden text-lambdaPrimary rounded bg-darkblueLight text-4xl cursor-pointer'
 				onClick={() => {
 					setMenuClicked((prev) => !prev)
 				}}
@@ -110,7 +111,7 @@ const Sidebar = () => {
 							to='/dashboard'
 							className={`${
 								activePage === 'Dashboard'
-									? 'bg-[#00A9817D] border-l-8 rounded-tr-sm rounded-br-sm border-greenLime px-4 py-2 '
+									? 'bg-darkblueLight border-l-8 rounded-tr-sm rounded-br-sm border-greenLime px-4 py-2 '
 									: ''
 							} ${
 								sidebarOpen ? 'justify-center' : ''
