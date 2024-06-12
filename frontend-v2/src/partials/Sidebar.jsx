@@ -2,8 +2,11 @@
 import { useState } from 'react'
 import { BsFillPinAngleFill, BsPersonCircle } from 'react-icons/bs'
 import { TbRulerMeasure } from 'react-icons/tb'
+import { HiHome } from 'react-icons/hi2'
+
 import { IoIosCube } from 'react-icons/io'
 import lambdaLogo from '../assets/lambda-logo.svg'
+import { DiGoogleAnalytics } from 'react-icons/di'
 
 import {
 	BiLogOut,
@@ -37,55 +40,63 @@ const Sidebar = () => {
 			>
 				<div className='relative h-full'>
 					<div
-						className={`${
-							sidebarOpen ? 'flex-col' : ''
-						} flex justify-between items-center`}
+						className={`   ${sidebarOpen ? '' : `bg-[#1A2833] -m-10 -mx-7 pt-8 px-4 py-6 mb-4 rounded-b-lg`}`}
 					>
-						<div>
-							{sidebarOpen ? (
-								<>
-									{/* <img className='w-10 mx-auto' src={lambdaLogo} alt=''></img> */}
-								</>
-							) : (
-								<>
-									<img className='w32 mx-auto' src={lambdaLogo} alt=''></img>
-								</>
-							)}
+						<div
+							className={`${
+								sidebarOpen ? 'flex-col' : ''
+							} flex justify-between items-center`}
+						>
+							<div>
+								{sidebarOpen ? (
+									<>
+										{/* <img className='w-10 mx-auto' src={lambdaLogo} alt=''></img> */}
+									</>
+								) : (
+									<>
+										<img className='w32 mx-auto' src={lambdaLogo} alt=''></img>
+									</>
+								)}
+							</div>
+							<LiaWindowClose
+								className='text-xl hover:text-third-dark text-white block lg:hidden cursor-pointer '
+								onClick={() => {
+									setMenuClicked((prev) => !prev)
+								}}
+							></LiaWindowClose>
+							<AiOutlineMenuFold
+								size={30}
+								className={` ${
+									sidebarOpen ? 'rotate-180' : 'rotate-0'
+								} text-white text-xl hover:text-lambdaPrimary-light hidden lg:block transition-all duration-300 ease-in-out cursor-pointer`}
+								onClick={() => {
+									setSidebarOpen((prev) => !prev)
+								}}
+							/>
 						</div>
-						<LiaWindowClose
-							className='text-xl hover:text-third-dark text-white block lg:hidden cursor-pointer '
-							onClick={() => {
-								setMenuClicked((prev) => !prev)
-							}}
-						></LiaWindowClose>
-						<AiOutlineMenuFold
-							size={30}
-							className={` ${
-								sidebarOpen ? 'rotate-180' : 'rotate-0'
-							} text-white text-xl hover:text-lambdaPrimary-light hidden lg:block transition-all duration-300 ease-in-out cursor-pointer`}
-							onClick={() => {
-								setSidebarOpen((prev) => !prev)
-							}}
-						/>
 					</div>
-					<div className='space-y-12 my-12 '>
+
+					<div className='space-y-12 my-16 '>
 						<Link
 							to='/'
 							className={`${
 								activePage === 'Home'
-									? 'bg-lambdaPrimary-light border-l-8 border-lambdaPrimary px-4 py-2 '
-									: ''
+									? 'bg-lambdaPrimary-light border-l-8 rounded-tr-sm rounded-br-sm border-lambdaPrimary px-4 py-2 '
+									: 'hover:text-lambdaPrimary '
 							} ${
 								sidebarOpen ? 'justify-center' : ''
 							} w-full flex gap-4 items-center  cursor-pointer transition-all duration-300 ease-in-out`}
 						>
-							<BsFillPinAngleFill
-								className={`${sidebarOpen ? 'text-2xl' : ''} ${
+							<HiHome
+								size={25}
+								className={`${
 									activePage === 'Dashboard' ? 'text-white' : ''
 								} text-white`}
-							></BsFillPinAngleFill>
+							></HiHome>
 
-							<div className={`text-sm text-white ${sidebarOpen ? 'hidden' : ''}`}>
+							<div
+								className={`text-sm text-white ${sidebarOpen ? 'hidden' : 'sidebar'}`}
+							>
 								Home
 							</div>
 						</Link>
@@ -107,10 +118,13 @@ const Sidebar = () => {
 							} w-full flex gap-4 items-center  cursor-pointer transition-all duration-300 ease-in-out`}
 						>
 							<BiSolidCategoryAlt
-								className={` ${sidebarOpen ? 'text-2xl' : ''} text-lambdaPrimary`}
+								size={25}
+								className={`  text-lambdaPrimary`}
 							></BiSolidCategoryAlt>
 
-							<div className={`text-sm text-white ${sidebarOpen ? 'hidden' : ''}`}>
+							<div
+								className={`text-sm text-white ${sidebarOpen ? 'hidden' : 'sidebar'}`}
+							>
 								Dashboard
 							</div>
 						</Link>
@@ -124,11 +138,14 @@ const Sidebar = () => {
 								sidebarOpen ? 'justify-center' : ''
 							} w-full flex gap-4 items-center  cursor-pointer transition-all duration-300 ease-in-out`}
 						>
-							<TbRulerMeasure
-								className={` ${sidebarOpen ? 'text-2xl' : ''} text-lambdaPrimary`}
-							></TbRulerMeasure>
+							<DiGoogleAnalytics
+								size={25}
+								className={`  text-lambdaPrimary`}
+							></DiGoogleAnalytics>
 
-							<div className={`text-sm text-white ${sidebarOpen ? 'hidden' : ''}`}>
+							<div
+								className={`text-sm text-white ${sidebarOpen ? 'hidden' : 'sidebar'}`}
+							>
 								New Analytics
 							</div>
 						</Link>
