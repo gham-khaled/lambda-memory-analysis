@@ -32,7 +32,7 @@ class TestGetAnalysisReport(unittest.TestCase):
         from utils.s3_utils import upload_file_to_s3
 
         sample_report_id = "sample.json"
-        sample_content = {"Status": "Finished"}
+        sample_content = {"summary": "Test"}
         upload_file_to_s3(json.dumps(sample_content), 'summary.json', self.bucket_name, sample_report_id)
         upload_file_to_s3(json.dumps(sample_content), 'analysis.csv', self.bucket_name, sample_report_id)
         event = {
@@ -58,7 +58,8 @@ class TestGetAnalysisReport(unittest.TestCase):
         response = lambda_handler(event, None)
         print(response)
         self.assertEqual(response['statusCode'], 404)
-        self.assertEqual(json.loads(response['body']), {"error": "Analysis does not exists or have been deleted"})
+        self.assertEqual(json.loads(response['body']),
+                         {"error": "Analysis does not exists or have been deleted", 'status': 'Error'})
 
     def test_missing_filename_parameter(self):
         """

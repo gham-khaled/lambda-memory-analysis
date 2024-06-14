@@ -25,7 +25,6 @@ def lambda_handler(event, context):
     aggregated_data = pd.DataFrame()
     files_content = multi_thread(download_csv_file_wrapper, event, max_workers=10)
     for content in files_content:
-        print(content)
         aggregated_data = pd.concat([aggregated_data, content], ignore_index=False)
     csv_buffer = StringIO()
     aggregated_data.to_csv(csv_buffer)

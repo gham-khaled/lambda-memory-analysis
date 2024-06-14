@@ -36,20 +36,21 @@ def lambda_handler(event, context):
         df = pd.read_csv(StringIO(analysis), sep=',', index_col=0)
         return {
             'statusCode': 200,
-            'body': json.dumps({'analysis': json.loads(df.to_json(orient="records")), 'summary': json.loads(summary)}),
+            'body': json.dumps({'analysis': json.loads(df.to_json(orient="records")), 'summary': json.loads(summary),
+                                'status': 'Completed'}),
             'headers': headers
         }
     except ClientError as e:
         if e.response['Error']['Code'] == 'NoSuchKey':
             return {
                 'statusCode': 404,
-                'body': json.dumps({'error': 'Analysis does not exists or have been deleted'}),
+                'body': json.dumps({'error': 'Analysis does not exists or have been deleted', 'status': 'Error'}),
                 'headers': headers
             }
         else:
             return {
                 'statusCode': 500,
-                'body': json.dumps({'error': str(e)}),
+                'body': json.dumps({'error': str(e), 'status': 'Error'}),
                 'headers': headers
             }
 
