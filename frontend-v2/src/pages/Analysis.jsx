@@ -8,6 +8,7 @@ import 'primereact/resources/themes/vela-green/theme.css'
 import { Calendar } from 'primereact/calendar'
 import { FloatLabel } from 'primereact/floatlabel'
 import MultiSelect from '../components/MultiSelect'
+import { Audio } from 'react-loader-spinner'
 
 import axios from 'axios'
 
@@ -25,49 +26,45 @@ const Analysis = () => {
 	const [endDate, setEndDate] = useState(new Date()) // current date
 
 	const columns = [
-		{ Header: 'Function name', accessor: 'function_name' },
-		{ Header: 'Runtime', accessor: 'runtime' },
-		{ Header: 'All duration(s)', accessor: 'all_duration' },
-		{ Header: 'Provisioned memory', accessor: 'provisioned_memory' },
-		{ Header: 'Memory cost', accessor: 'memory_cost' },
-		{ Header: 'Invocation cost', accessor: 'invocation_cost' },
-		{ Header: 'Total cost', accessor: 'total_cost' },
-		{ Header: 'Avg cost/invocation', accessor: 'avg_cost_per_invocation' },
+		{ Header: 'Function name', accessor: 'FunctionName' },
+		{ Header: 'Runtime', accessor: 'Runtime' },
+		{ Header: 'PackageType', accessor: 'PackageType' },
+		{ Header: 'LastModified', accessor: 'LastModified' },
 	]
 
-	const sampleData = [
-		{
-			function_name: 'FunctionA',
-			runtime: '2ms',
-			all_duration: 2.123456,
-			provisioned_memory: 128,
-			memory_cost: 0.00001,
-			invocation_cost: 0.000001,
-			total_cost: 0.000011,
-			avg_cost_per_invocation: 0.0000055,
-		},
-		{
-			function_name: 'FunctionA',
-			runtime: '2ms',
-			all_duration: 2.123456,
-			provisioned_memory: 128,
-			memory_cost: 0.00001,
-			invocation_cost: 0.000001,
-			total_cost: 0.000011,
-			avg_cost_per_invocation: 0.0000055,
-		},
-		{
-			function_name: 'FunctionA',
-			runtime: '2ms',
-			all_duration: 2.123456,
-			provisioned_memory: 128,
-			memory_cost: 0.00001,
-			invocation_cost: 0.000001,
-			total_cost: 0.000011,
-			avg_cost_per_invocation: 0.0000055,
-		},
-		// More data objects...
-	]
+	// const sampleData = [
+	// 	{
+	// 		function_name: 'FunctionA',
+	// 		runtime: '2ms',
+	// 		all_duration: 2.123456,
+	// 		provisioned_memory: 128,
+	// 		memory_cost: 0.00001,
+	// 		invocation_cost: 0.000001,
+	// 		total_cost: 0.000011,
+	// 		avg_cost_per_invocation: 0.0000055,
+	// 	},
+	// 	{
+	// 		function_name: 'FunctionA',
+	// 		runtime: '2ms',
+	// 		all_duration: 2.123456,
+	// 		provisioned_memory: 128,
+	// 		memory_cost: 0.00001,
+	// 		invocation_cost: 0.000001,
+	// 		total_cost: 0.000011,
+	// 		avg_cost_per_invocation: 0.0000055,
+	// 	},
+	// 	{
+	// 		function_name: 'FunctionA',
+	// 		runtime: '2ms',
+	// 		all_duration: 2.123456,
+	// 		provisioned_memory: 128,
+	// 		memory_cost: 0.00001,
+	// 		invocation_cost: 0.000001,
+	// 		total_cost: 0.000011,
+	// 		avg_cost_per_invocation: 0.0000055,
+	// 	},
+	// 	// More data objects...
+	// ]
 
 	const [selectedRuntime, setSelectedRuntime] = useState(runtime)
 	const [selectedPackageOptions, setSelectedPackageOptions] =
@@ -179,7 +176,11 @@ const Analysis = () => {
 						</button>
 					</div>
 					<div className='pt-12'>
-						<DynamicTable columns={columns} data={sampleData} />
+						<DynamicTable
+							columns={columns}
+							data={lambdaFunctions}
+							loading={loading}
+						/>
 					</div>{' '}
 					{/* end of table holder */}
 				</div>
