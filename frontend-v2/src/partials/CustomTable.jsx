@@ -166,3 +166,6 @@ const CustomTable = ({ title = 'Summary' }) => {
 }
 
 export default CustomTable
+
+https://d1nq06zzlrdopd.cloudfront.net/api/reportSummaries?page=0&rowsPerPage=10
+https://h4x9eobxve.execute-api.eu-west-1.amazonaws.com/api/reportSummaries?page=0&rowsPerPage=10
