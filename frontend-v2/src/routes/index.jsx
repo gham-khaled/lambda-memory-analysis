@@ -9,7 +9,7 @@ const appRoutes = [
 		element: <Home />,
 	},
 	{
-		path: '/dashboard',
+		path: '/dashboard/:reportID',
 		element: <Dashboard />,
 	},
 	{

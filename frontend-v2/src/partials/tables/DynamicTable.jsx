@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
-import { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { RotatingLines } from 'react-loader-spinner'
 import AnalysisContext from '../../contexts/AnalysisContext'
 
@@ -11,13 +11,14 @@ const DynamicTable = ({ columns, data, loading = false }) => {
 	const [itemsPerPage, setItemsPerPage] = useState(5)
 	const [currentPage, setCurrentPage] = useState(1)
 	const [checkedItems, setCheckedItems] = useState({})
+	const [sortColumn, setSortColumn] = useState(null)
+	const [sortDirection, setSortDirection] = useState('ascending')
 	const totalPages = Math.ceil(data.length / itemsPerPage)
 
 	useEffect(() => {
-		// Initialize or reset checkedItems state when data changes
 		const newCheckedItems = {}
 		data.forEach((item, index) => {
-			newCheckedItems[index] = false // Initially, no item is checked
+			newCheckedItems[index] = false
 		})
 		setCheckedItems(newCheckedItems)
 	}, [data])
@@ -41,12 +42,29 @@ const DynamicTable = ({ columns, data, loading = false }) => {
 		setCheckedItems(newCheckedItems)
 	}
 
+	const handleSort = (column) => {
+		const isAsc = sortColumn === column && sortDirection === 'ascending'
+		setSortDirection(isAsc ? 'descending' : 'ascending')
+		setSortColumn(column)
+	}
+
+	const sortedData = React.useMemo(() => {
+		if (!sortColumn) return data
+		return [...data].sort((a, b) => {
+			if (a[sortColumn] < b[sortColumn])
+				return sortDirection === 'ascending' ? -1 : 1
+			if (a[sortColumn] > b[sortColumn])
+				return sortDirection === 'ascending' ? 1 : -1
+			return 0
+		})
+	}, [data, sortColumn, sortDirection])
+
 	const allChecked = Object.values(checkedItems).every(Boolean)
 	const someChecked = Object.values(checkedItems).some(Boolean)
 
 	const startIndex = (currentPage - 1) * itemsPerPage
 	const endIndex = startIndex + itemsPerPage
-	const currentData = data.slice(startIndex, endIndex)
+	const currentData = sortedData.slice(startIndex, endIndex)
 
 	if (loading)
 		return (
@@ -77,12 +95,25 @@ const DynamicTable = ({ columns, data, loading = false }) => {
 										type='checkbox'
 										checked={allChecked}
 										onChange={handleSelectAll}
-										// indeterminate={someChecked && !allChecked}
 									/>
 								</th>
 								{columns.map((column) => (
-									<th key={column.accessor} scope='col' className='px-6 py-3'>
+									<th
+										key={column.accessor}
+										scope='col'
+										className='px-6 py-3 cursor-pointer hover:text-third-dark transition-all duration-300 ease-in-out '
+										onClick={() => handleSort(column.accessor)}
+									>
 										{column.Header}
+										{sortColumn === column.accessor ? (
+											sortDirection === 'ascending' ? (
+												<span className='text-gray-400 pl-2 text-lg'>↑</span>
+											) : (
+												<span className='text-gray-400 pl-2 text-lg'>↓</span>
+											)
+										) : (
+											''
+										)}
 									</th>
 								))}
 							</tr>

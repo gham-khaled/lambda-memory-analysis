@@ -77,9 +77,10 @@ const Analysis = () => {
 	const handleLaunchAnalysis = async () => {
 		const unixStartDate = new Date(startDate.setHours(0, 0, 0, 0)).toISOString()
 		const unixEndDate = new Date(endDate.setHours(23, 59, 59, 999)).toISOString()
-		console.log(unixStartDate, unixEndDate)
+		// console.log(unixStartDate, unixEndDate)
 
 		const reportID = analysisID || Math.floor(Date.now() / 1000) // Use analysisID if provided, otherwise use timestamp
+
 		const payload = {
 			lambda_functions_name: selectedFunctions,
 			report_id: reportID,
@@ -113,7 +114,7 @@ const Analysis = () => {
 			setTimeout(() => {
 				// Redirect to the new page, e.g., Report ID details page
 				// navigate(`/report/${reportID}`)
-				navigate(`/dashboard`)
+				navigate(`/dashboard/${reportID}`)
 			}, 5000)
 			setLoading(false)
 		} catch (error) {

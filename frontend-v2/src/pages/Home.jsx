@@ -22,7 +22,7 @@ const Home = () => {
 
 	const sampleData = [
 		{
-			function_name: 'FunctionA',
+			function_name: 'Function A',
 			runtime: '2ms',
 			all_duration: 2.123456,
 			provisioned_memory: 128,
@@ -32,17 +32,17 @@ const Home = () => {
 			avg_cost_per_invocation: 0.0000055,
 		},
 		{
-			function_name: 'FunctionA',
+			function_name: 'Function B',
 			runtime: '2ms',
 			all_duration: 2.123456,
-			provisioned_memory: 128,
+			provisioned_memory: 121,
 			memory_cost: 0.00001,
 			invocation_cost: 0.000001,
 			total_cost: 0.000011,
-			avg_cost_per_invocation: 0.0000055,
+			avg_cost_per_invocation: 0.0000051,
 		},
 		{
-			function_name: 'FunctionA',
+			function_name: 'Function C',
 			runtime: '2ms',
 			all_duration: 2.123456,
 			provisioned_memory: 128,
