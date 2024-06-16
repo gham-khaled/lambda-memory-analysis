@@ -88,7 +88,7 @@ const Sidebar = () => {
 							<HiHome size={23} className={` ml-3`}></HiHome>
 
 							<div
-								className={`text-sm text-white ${sidebarOpen ? 'hidden' : activePage === 'Home' ? '' : 'hover:text-green-700'}`}
+								className={`text-xs text-white ${sidebarOpen ? 'hidden' : activePage === 'Home' ? '' : 'hover:text-green-700'}`}
 							>
 								Home
 							</div>
@@ -101,6 +101,20 @@ const Sidebar = () => {
 							analytics
 						</div>
 						<NavLink
+							to='/analytics'
+							className={({ isActive }) =>
+								`link ${isActive ? 'bg-[#00A9817D] border-l-8  rounded-tr-sm rounded-br-sm border-greenLime py-2  ' : ''}${sidebarOpen ? '   flex justify-center' : ''} w-full flex gap-4 pl-0 items-center  cursor-pointer transition-all duration-300 ease-in-out `
+							}
+						>
+							<DiGoogleAnalytics size={25} className={` ml-3`}></DiGoogleAnalytics>
+
+							<div
+								className={`text-xs text-white ${sidebarOpen ? 'hidden' : activePage === 'Analytics' ? '' : 'sidebar'}`}
+							>
+								New Analytics
+							</div>
+						</NavLink>
+						{/* <NavLink
 							to='/dashboard'
 							className={({ isActive }) =>
 								`link ${isActive ? 'bg-[#00A9817D] border-l-8  rounded-tr-sm rounded-br-sm border-greenLime py-2  ' : ''}${sidebarOpen ? '   flex justify-center' : ''} w-full flex gap-4 pl-0 items-center  cursor-pointer transition-all duration-300 ease-in-out `
@@ -111,23 +125,9 @@ const Sidebar = () => {
 							<div
 								className={`text-sm text-white ${sidebarOpen ? 'hidden' : activePage === 'Dashboard' ? '' : 'sidebar'}`}
 							>
-								Dashboard
+								Report Detail
 							</div>
-						</NavLink>
-						<NavLink
-							to='/analytics'
-							className={({ isActive }) =>
-								`link ${isActive ? 'bg-[#00A9817D] border-l-8  rounded-tr-sm rounded-br-sm border-greenLime py-2  ' : ''}${sidebarOpen ? '   flex justify-center' : ''} w-full flex gap-4 pl-0 items-center  cursor-pointer transition-all duration-300 ease-in-out `
-							}
-						>
-							<DiGoogleAnalytics size={25} className={` ml-3`}></DiGoogleAnalytics>
-
-							<div
-								className={`text-sm text-white ${sidebarOpen ? 'hidden' : activePage === 'Analytics' ? '' : 'sidebar'}`}
-							>
-								New Analytics
-							</div>
-						</NavLink>
+						</NavLink> */}
 					</div>
 				</div>
 				<a

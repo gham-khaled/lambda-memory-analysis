@@ -1,18 +1,48 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { RotatingLines } from 'react-loader-spinner'
+import AnalysisContext from '../../contexts/AnalysisContext'
 
 const DynamicTable = ({ columns, data, loading = false }) => {
+	const { selectedFunctions, setSelectedFunctions } = useContext(AnalysisContext)
+
 	const [itemsPerPage, setItemsPerPage] = useState(5)
 	const [currentPage, setCurrentPage] = useState(1)
+	const [checkedItems, setCheckedItems] = useState({})
 	const totalPages = Math.ceil(data.length / itemsPerPage)
+
+	useEffect(() => {
+		// Initialize or reset checkedItems state when data changes
+		const newCheckedItems = {}
+		data.forEach((item, index) => {
+			newCheckedItems[index] = false // Initially, no item is checked
+		})
+		setCheckedItems(newCheckedItems)
+	}, [data])
 
 	const handlePageChange = (page) => {
 		if (page > 0 && page <= totalPages) {
 			setCurrentPage(page)
 		}
 	}
+
+	const handleSelectAll = (e) => {
+		const newCheckedItems = { ...checkedItems }
+		Object.keys(newCheckedItems).forEach((key) => {
+			newCheckedItems[key] = e.target.checked
+		})
+		setCheckedItems(newCheckedItems)
+	}
+
+	const handleSelectItem = (index, isChecked) => {
+		const newCheckedItems = { ...checkedItems, [index]: isChecked }
+		setCheckedItems(newCheckedItems)
+	}
+
+	const allChecked = Object.values(checkedItems).every(Boolean)
+	const someChecked = Object.values(checkedItems).some(Boolean)
 
 	const startIndex = (currentPage - 1) * itemsPerPage
 	const endIndex = startIndex + itemsPerPage
@@ -42,6 +72,14 @@ const DynamicTable = ({ columns, data, loading = false }) => {
 					<table className='w-full text-sm text-left rtl:text-right text-white border border-darkblueLight rounded-md'>
 						<thead className='text-xs uppercase text-white bg-darkblueLight'>
 							<tr>
+								<th scope='col' className='px-6 py-3'>
+									<input
+										type='checkbox'
+										checked={allChecked}
+										onChange={handleSelectAll}
+										// indeterminate={someChecked && !allChecked}
+									/>
+								</th>
 								{columns.map((column) => (
 									<th key={column.accessor} scope='col' className='px-6 py-3'>
 										{column.Header}
@@ -55,6 +93,15 @@ const DynamicTable = ({ columns, data, loading = false }) => {
 									key={index}
 									className={`${index % 2 === 0 ? 'bg-darkblueMedium' : 'bg-transparent'} cursor-pointer text-xs hover:bg-gray-50 dark:hover:bg-gray-600`}
 								>
+									<td className='px-6 py-3'>
+										<input
+											type='checkbox'
+											checked={checkedItems[startIndex + index] || false}
+											onChange={(e) =>
+												handleSelectItem(startIndex + index, e.target.checked)
+											}
+										/>
+									</td>
 									{columns.map((column) => (
 										<td key={column.accessor} className='px-6 py-3'>
 											{column.Cell
