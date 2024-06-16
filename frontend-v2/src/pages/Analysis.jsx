@@ -17,6 +17,7 @@ import {
 	packageOptions,
 	architectureOptions,
 } from '../data/optionsData'
+import { InputText } from 'primereact/inputtext'
 
 const Analysis = () => {
 	const [startDate, setStartDate] = useState(
@@ -115,7 +116,7 @@ const Analysis = () => {
 			<div className='bg-darkblue w-full h-screen overflow-y-scroll p-10 pt-0 space-y-6 '>
 				<Header title='New Analysis'></Header>
 				<div className='col-span-12 lg:col-span-12 space-y-4 pt-8'>
-					<div className='grid grid-cols-2 md:grid-cols-6  gap-x-6 gap-y-10'>
+					<div className='grid grid-cols-2 md:grid-cols-6  gap-x-6 gap-y-10 text-xs'>
 						<FloatLabel>
 							<Calendar
 								value={startDate}
@@ -174,6 +175,29 @@ const Analysis = () => {
 						>
 							{loading ? 'Fetching...' : 'Fetch Lambda Fn'}
 						</button>
+					</div>
+					{/* New analysis */}
+					<div className='col-span-12 lg:col-span-12 space-y-4 pt-8'>
+						<div className='grid grid-cols-2 md:grid-cols-6 text-xs  gap-x-6 gap-y-10'>
+							<FloatLabel>
+								<InputText
+									id='analysis_id'
+									value={analysisID}
+									onChange={(e) => setAnalysisID(e.target.value)}
+									className='bg-darkblueLight border-none text-white text-xs  p-2  rounded-md w-full'
+									inputClassName='bg-darkblueLight text-white text-xs border-none px-2 py-3  rounded-md w-full'
+								/>
+								<label htmlFor='username'>Analysis ID (Optional)</label>
+							</FloatLabel>
+
+							<button
+								className='bg-lambdaPrimary text-white text-xs p-2 rounded-md min-w-[100px] max-w-[180px] '
+								onClick={handleFetchFunctions}
+								disabled={loading}
+							>
+								{loading ? 'Fetching...' : 'New Analysis'}
+							</button>
+						</div>
 					</div>
 					<div className='pt-12'>
 						<DynamicTable

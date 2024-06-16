@@ -16,7 +16,7 @@ import {
 } from 'react-icons/bi'
 import { LiaWindowClose } from 'react-icons/lia'
 import { AiOutlineMenuFold, AiFillShop } from 'react-icons/ai'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 const Sidebar = () => {
 	const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -79,27 +79,20 @@ const Sidebar = () => {
 					</div>
 
 					<div className='space-y-8 my-16 -ml-5 '>
-						<Link
+						<NavLink
 							to='/'
-							className={`${
-								activePage === 'Home'
-									? 'bg-[#00A9817D] border-l-8 rounded-tr-sm rounded-br-sm border-greenLime px-4 py-2 '
-									: ''
-							} ${
-								sidebarOpen ? 'justify-center' : ''
-							} w-full flex gap-4 items-center  cursor-pointer transition-all duration-300 ease-in-out`}
+							className={({ isActive }) =>
+								`link ${isActive ? 'bg-[#00A9817D] border-l-8  rounded-tr-sm rounded-br-sm border-greenLime py-2  ' : ''}${sidebarOpen ? '   flex justify-center' : ''} w-full flex gap-4 pl-0 items-center  cursor-pointer transition-all duration-300 ease-in-out `
+							}
 						>
-							<HiHome
-								size={25}
-								className={`${activePage === 'Home' ? 'text-white' : ''} text-white`}
-							></HiHome>
+							<HiHome size={23} className={` ml-3`}></HiHome>
 
 							<div
-								className={`text-sm text-white ${sidebarOpen ? 'hidden' : activePage === 'Home' ? '' : 'sidebar'}`}
+								className={`text-sm text-white ${sidebarOpen ? 'hidden' : activePage === 'Home' ? '' : 'hover:text-green-700'}`}
 							>
 								Home
 							</div>
-						</Link>
+						</NavLink>
 						<div
 							className={` ${
 								sidebarOpen ? 'text-xs ml-5' : ''
@@ -107,48 +100,34 @@ const Sidebar = () => {
 						>
 							analytics
 						</div>
-						<Link
+						<NavLink
 							to='/dashboard'
-							className={`${
-								activePage === 'Dashboard'
-									? 'bg-darkblueLight border-l-8 rounded-tr-sm rounded-br-sm border-greenLime px-4 py-2 '
-									: ''
-							} ${
-								sidebarOpen ? 'justify-center' : ''
-							} w-full flex gap-4 items-center  cursor-pointer transition-all duration-300 ease-in-out`}
+							className={({ isActive }) =>
+								`link ${isActive ? 'bg-[#00A9817D] border-l-8  rounded-tr-sm rounded-br-sm border-greenLime py-2  ' : ''}${sidebarOpen ? '   flex justify-center' : ''} w-full flex gap-4 pl-0 items-center  cursor-pointer transition-all duration-300 ease-in-out `
+							}
 						>
-							<BiSolidCategoryAlt
-								size={25}
-								className={`  text-lambdaPrimary`}
-							></BiSolidCategoryAlt>
+							<BiSolidCategoryAlt size={23} className={` ml-3`}></BiSolidCategoryAlt>
 
 							<div
 								className={`text-sm text-white ${sidebarOpen ? 'hidden' : activePage === 'Dashboard' ? '' : 'sidebar'}`}
 							>
 								Dashboard
 							</div>
-						</Link>
-						<Link
+						</NavLink>
+						<NavLink
 							to='/analytics'
-							className={`${
-								activePage === 'NewAnalysis'
-									? 'bg-[#00A9817D] border-l-8 rounded-tr-sm rounded-br-sm border-greenLime px-4 py-2 '
-									: ''
-							} ${
-								sidebarOpen ? 'justify-center' : ''
-							} w-full flex gap-4 items-center  cursor-pointer transition-all duration-300 ease-in-out`}
+							className={({ isActive }) =>
+								`link ${isActive ? 'bg-[#00A9817D] border-l-8  rounded-tr-sm rounded-br-sm border-greenLime py-2  ' : ''}${sidebarOpen ? '   flex justify-center' : ''} w-full flex gap-4 pl-0 items-center  cursor-pointer transition-all duration-300 ease-in-out `
+							}
 						>
-							<DiGoogleAnalytics
-								size={25}
-								className={`  text-lambdaPrimary`}
-							></DiGoogleAnalytics>
+							<DiGoogleAnalytics size={25} className={` ml-3`}></DiGoogleAnalytics>
 
 							<div
 								className={`text-sm text-white ${sidebarOpen ? 'hidden' : activePage === 'Analytics' ? '' : 'sidebar'}`}
 							>
 								New Analytics
 							</div>
-						</Link>
+						</NavLink>
 					</div>
 				</div>
 				<a
