@@ -6,7 +6,6 @@ s3_client = boto3.client('s3')
 
 bucket_name = os.environ['BUCKET_NAME']
 
-max_keys = 10
 prefix = 'summaries/'
 headers = {
     'Content-Type': 'application/json',
@@ -17,7 +16,10 @@ headers = {
 
 
 def lambda_handler(event, context):
-    continuation_token = event.get('continuationToken', None)
+    parameters = event.get('queryStringParameters', {})
+    print(f"Parameters: {parameters}")
+    continuation_token = parameters.get('continuationToken', None)
+    max_keys = int(parameters.get('rowsPerPage', 10))
 
     list_params = {
         'Bucket': bucket_name,
@@ -47,6 +49,7 @@ def lambda_handler(event, context):
 
         # Fetch the content of each JSON file
         json_contents = []
+        # TODO: Add multithreading for faster retrieval
         for file_key in json_files:
             file_obj = s3_client.get_object(Bucket=bucket_name, Key=file_key)
             file_content = file_obj['Body'].read().decode('utf-8')
