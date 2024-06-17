@@ -1,5 +1,5 @@
 import Analysis from '../pages/Analysis'
-import Dashboard from '../pages/Dashboard'
+import ReportDetails from '../pages/ReportDetails'
 import Home from '../pages/Home'
 import PageNotFound from '../pages/PageNotFound'
 
@@ -9,8 +9,8 @@ const appRoutes = [
 		element: <Home />,
 	},
 	{
-		path: '/dashboard/:reportID',
-		element: <Dashboard />,
+		path: '/report/:reportID',
+		element: <ReportDetails />,
 	},
 	{
 		path: '/analytics',

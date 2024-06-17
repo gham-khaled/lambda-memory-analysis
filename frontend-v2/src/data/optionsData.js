@@ -29,4 +29,65 @@ const packageOptions = ['Zip', 'Image']
 
 const architectureOptions = ['x86_64', 'arm64']
 
-export { runtime, packageOptions, architectureOptions }
+const statistics = [
+	{
+		title: 'Memory Cost',
+		icon: 'BiSolidCategoryAlt',
+		query: '',
+	},
+	{
+		title: 'Invocation Cost',
+		icon: 'IoIosCube',
+		query: '',
+	},
+	{
+		title: 'Total Cost',
+		icon: 'AiOutlineShop',
+		query: '',
+	},
+	{
+		title: 'Potential Savings',
+		icon: 'AiOutlineUser',
+		query: '',
+	},
+	{
+		title: 'Avg.Max Memory Used',
+		icon: 'BiSolidCategoryAlt',
+		query: '',
+	},
+	{
+		title: 'Abg. Provisioned Memory',
+		icon: 'IoIosCube',
+		query: '',
+	},
+	{
+		title: 'Avg Duration / Invocation',
+		icon: 'AiOutlineShop',
+		query: '',
+	},
+]
+
+const errorMsgStyle = {
+	fontSize: '12px',
+	border: '0.4px solid #787474',
+	borderRadius: '5px',
+	background: '#253645',
+	color: '#fff',
+}
+
+const successMsgStyle = {
+	fontSize: '12px',
+	border: '0.4px solid #787474',
+	borderRadius: '5px',
+	background: '#253645',
+	color: '#fff',
+}
+
+export {
+	runtime,
+	packageOptions,
+	architectureOptions,
+	statistics,
+	errorMsgStyle,
+	successMsgStyle,
+}

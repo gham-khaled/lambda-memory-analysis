@@ -24,7 +24,12 @@ import { useNavigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 
 const Analysis = () => {
-	const { selectedFunctions, setSelectedFunctions } = useContext(AnalysisContext)
+	const {
+		selectedFunctions,
+		setSelectedFunctions,
+		// currentReportID,
+		setCurrentReportID,
+	} = useContext(AnalysisContext)
 
 	const [startDate, setStartDate] = useState(
 		new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
@@ -80,6 +85,9 @@ const Analysis = () => {
 		// console.log(unixStartDate, unixEndDate)
 
 		const reportID = analysisID || Math.floor(Date.now() / 1000) // Use analysisID if provided, otherwise use timestamp
+		localStorage.setItem('reportID', reportID.toString())
+
+		setCurrentReportID(reportID)
 
 		const payload = {
 			lambda_functions_name: selectedFunctions,
@@ -97,25 +105,21 @@ const Analysis = () => {
 			console.log(response)
 			// TODO: Add message that it was successfully launched
 			if (response.status === 200 && selectedFunctions.length !== 0) {
-				customToast(
-					'Analysis successfully launched. \n\n Redirecting you detail dashboard... ',
-					'🚀',
-					{
-						fontSize: '12px',
-						border: '0.4px solid #787474',
-						borderRadius: '5px',
-						background: '#253645',
-						color: '#fff',
-					}
-				)
+				customToast('Redirecting you to detail report dashboard... ', '🚀', {
+					fontSize: '12px',
+					border: '0.4px solid #787474',
+					borderRadius: '5px',
+					background: '#253645',
+					color: '#fff',
+				})
 			}
 			// TODO: Wait until a response is received and move to the Report ID details page
 			// Wait for 3 seconds before redirecting
 			setTimeout(() => {
 				// Redirect to the new page, e.g., Report ID details page
 				// navigate(`/report/${reportID}`)
-				navigate(`/dashboard/${reportID}`)
-			}, 5000)
+				navigate(`/report/${reportID}`)
+			}, 3000)
 			setLoading(false)
 		} catch (error) {
 			console.error('Error fetching lambda functions: ', error)
@@ -136,7 +140,7 @@ const Analysis = () => {
 			<Toaster />
 			<Sidebar />
 			<div className='bg-darkblue w-full h-screen overflow-y-scroll p-10 pt-0 space-y-6 '>
-				<Header title='New Analysis'></Header>
+				<Header title='Analysis | New'></Header>
 				<div className='col-span-12 lg:col-span-12 space-y-4 pt-8'>
 					<div className='grid grid-cols-2 md:grid-cols-6  gap-x-6 gap-y-10 text-xs'>
 						<FloatLabel>

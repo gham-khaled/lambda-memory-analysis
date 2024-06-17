@@ -58,7 +58,7 @@ const Home = () => {
 		<div className='flex'>
 			<Sidebar />
 			<div className='bg-darkblue w-full h-screen overflow-y-scroll p-10 pt-0 space-y-6 '>
-				<Header title='Analytics | Home'></Header>
+				<Header title='Analysis | Home'></Header>
 				<div className='pt-8'>
 					<DynamicTable columns={columns} data={sampleData} />
 				</div>{' '}

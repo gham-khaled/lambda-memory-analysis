@@ -34,7 +34,7 @@ const Sidebar = () => {
 			></BiMenu>
 			<div
 				className={`bg-darkblueMedium  h-screen hidden lg:block ${
-					sidebarOpen ? 'w-[6vw] px-2 py-10' : 'w-[20vw] p-10 '
+					sidebarOpen ? 'w-[6vw] px-2 py-10' : 'w-[20vw] py-10 px-5'
 				} ${
 					menuClicked ? 'w-[70vw] absolute z-50 !block ' : ''
 				}transition-all duration-300 ease-in-out`}
@@ -42,7 +42,7 @@ const Sidebar = () => {
 				<div className='relative h-full'>
 					{/* Banner section */}
 					<div
-						className={`   ${sidebarOpen ? '' : `bg-[#1A2833] -m-10 -mx-7 pt-10 px-4 py-4 mb-4 rounded-b-lg`}`}
+						className={`   ${sidebarOpen ? '' : `bg-[#1A2833] -m-10 -mx-5 pt-10 px-4 py-4 mb-4 rounded-b-lg`}`}
 					>
 						<div
 							className={`${
@@ -95,10 +95,10 @@ const Sidebar = () => {
 						</NavLink>
 						<div
 							className={` ${
-								sidebarOpen ? 'text-xs ml-5' : ''
-							} font-medium uppercase text-[#45505D]  pt-6`}
+								sidebarOpen ? 'hidden ' : 'flex'
+							} font-medium uppercase text-[#45505D]  pt-6 pl-5 text-xs`}
 						>
-							analytics
+							<span className='text-xs'>analytics</span>
 						</div>
 						<NavLink
 							to='/analytics'
