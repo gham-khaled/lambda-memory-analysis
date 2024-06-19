@@ -1,77 +1,153 @@
-import { BiSolidCategoryAlt } from 'react-icons/bi'
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import {
+	BiMemoryCard,
+	BiSolidCategoryAlt,
+	BiSolidMemoryCard,
+	BiSolidMessageMinus,
+} from 'react-icons/bi'
 import Statistics from './Statistics'
 import { IoIosCube } from 'react-icons/io'
-import { AiOutlineShop, AiOutlineUser } from 'react-icons/ai'
+import {
+	AiFillCloseCircle,
+	AiFillInfoCircle,
+	AiFillSave,
+	AiOutlineCustomerService,
+	AiOutlineFieldTime,
+	AiOutlineShop,
+	AiOutlineUser,
+	AiTwotoneAlert,
+} from 'react-icons/ai'
+import { Tooltip } from 'react-tooltip'
+import ReactDOMServer from 'react-dom/server'
+import { IoCalculator, IoContractOutline } from 'react-icons/io5'
 
-const StatisticsList = () => {
+const StatisticsList = ({ summary = {} }) => {
+	const {
+		allDurationInSeconds = 0.0,
+		avgProvisionedMemoryMB = 0.0,
+		MemoryCost = 0.0,
+		InvocationCost = 0.0,
+		totalCost = 0.0,
+		avgMaxMemoryUsedMB = 0.0,
+		avgOverProvisionedMB = 0.0,
+		optimalTotalCost = 0.0,
+		potentialSavings = 0.0,
+		avgDurationPerInvocation = 0.0,
+		reportID = '',
+	} = summary
+
 	return (
 		<div className='col-span-12 lg:col-span-12 space-y-4'>
 			<div className='grid grid-cols-2 md:grid-cols-4  gap-x-12 gap-y-6'>
-				<Statistics
-					title={'Memory Cost'}
-					icon={
-						<BiSolidCategoryAlt className='text-[25px] md:text-[32px]  text-white p-1.5 rounded'></BiSolidCategoryAlt>
-					}
-					loadingQuery={false}
-					query='$0.00028182'
-				></Statistics>
-				<Statistics
-					title='Invocation Cost'
-					icon={
-						<IoIosCube className='text-[25px] md:text-[32px]  text-white p-1.5 rounded'></IoIosCube>
-					}
-					loadingQuery={false}
-					query='$0.0000002'
-				></Statistics>
-				<Statistics
-					title='Total Cost'
-					icon={
-						<AiOutlineShop className='text-[25px] md:text-[32px]  text-white p-1.5 rounded'></AiOutlineShop>
-					}
-					loadingQuery={false}
-					query='$0.00028182'
-				></Statistics>
-				<Statistics
-					title='Potential Savings'
-					icon={
-						<AiOutlineUser className='text-[25px] md:text-[32px]  text-white p-1.5 rounded'></AiOutlineUser>
-					}
-					loadingQuery={false}
-					query='$0.00028182'
-				></Statistics>
-
-				<Statistics
-					title={'Avg.Max Memory Used'}
-					icon={
-						<BiSolidCategoryAlt className='text-[25px] md:text-[32px]  text-white p-1.5 rounded'></BiSolidCategoryAlt>
-					}
-					loadingQuery={false}
-					query='85.5 MB'
-				></Statistics>
-				<Statistics
-					title='Abg. Provisioned Memory'
-					icon={
-						<IoIosCube className='text-[25px] md:text-[32px]  text-white p-1.5 rounded'></IoIosCube>
-					}
-					loadingQuery={false}
-					query='128 MB'
-				></Statistics>
-				<Statistics
-					title='Avg Duration / Invocation'
-					icon={
-						<AiOutlineShop className='text-[25px] md:text-[32px]  text-white p-1.5 rounded'></AiOutlineShop>
-					}
-					loadingQuery={false}
-					query='1.00028182S'
-				></Statistics>
-				<Statistics
-					title='Total Duration'
-					icon={
-						<AiOutlineUser className='text-[25px] md:text-[32px]  text-white p-1.5 rounded'></AiOutlineUser>
-					}
-					loadingQuery={false}
-					query='135.0182S'
-				></Statistics>
+				<div
+					className='cursor-pointer hover:scale-105 duration-150  '
+					data-tooltip-place='bottom-end'
+					data-tooltip-id='memoryCost'
+					data-tooltip-html={ReactDOMServer.renderToStaticMarkup(
+						<div className='text-white flex flex-row gap-x-2 items-center ≈'>
+							<AiFillInfoCircle
+								color='skyblue'
+								className='text-[12px] md:text-[32px]  text-white p-1.5 rounded'
+							/>
+							{'$' + MemoryCost}
+						</div>
+					)}
+				>
+					<Tooltip id='memoryCost' />
+					<Statistics
+						title={'Memory Cost'}
+						icon={
+							<BiMemoryCard className='text-[25px] md:text-[32px]  text-white p-1.5 rounded' />
+						}
+						loadingQuery={false}
+						query={'$' + MemoryCost}
+					/>
+				</div>
+				<div
+					className='cursor-pointer hover:scale-105 duration-150  '
+					data-tooltip-place='bottom-end'
+					data-tooltip-id='invocationCost'
+					data-tooltip-html={ReactDOMServer.renderToStaticMarkup(
+						<div className='text-white flex flex-row gap-x-2 items-center ≈'>
+							<AiFillCloseCircle
+								color='red'
+								className='text-[12px] md:text-[32px]  text-white p-1.5 rounded'
+							/>
+							{'$' + InvocationCost}
+						</div>
+					)}
+				>
+					<Tooltip id='invocationCost' />
+					<Statistics
+						title='Invocation Cost'
+						icon={
+							<IoCalculator className='text-[25px] md:text-[32px]  text-white p-1.5 rounded' />
+						}
+						loadingQuery={false}
+						query={'$' + InvocationCost}
+					/>
+				</div>
+				<div className='cursor-pointer hover:scale-105 duration-150  '>
+					<Statistics
+						title='Total Cost'
+						icon={
+							<AiOutlineCustomerService className='text-[25px] md:text-[32px]  text-white p-1.5 rounded' />
+						}
+						loadingQuery={false}
+						query={'$' + totalCost}
+					/>
+				</div>
+				<div className='cursor-pointer hover:scale-105 duration-150  '>
+					<Statistics
+						title='Potential Savings'
+						icon={
+							<AiFillSave className='text-[25px] md:text-[32px]  text-white p-1.5 rounded' />
+						}
+						loadingQuery={false}
+						query={'$' + potentialSavings}
+					/>
+				</div>
+				<div className='cursor-pointer hover:scale-105 duration-150  '>
+					<Statistics
+						title={'Avg.Max Memory Used'}
+						icon={
+							<BiSolidMemoryCard className='text-[25px] md:text-[32px]  text-white p-1.5 rounded' />
+						}
+						loadingQuery={false}
+						query={avgMaxMemoryUsedMB + ' MB'}
+					/>
+				</div>
+				<div className='cursor-pointer hover:scale-105 duration-150  '>
+					<Statistics
+						title='Abg. Provisioned Memory'
+						icon={
+							<IoContractOutline className='text-[25px] md:text-[32px]  text-white p-1.5 rounded' />
+						}
+						loadingQuery={false}
+						query={avgProvisionedMemoryMB + ' MB'}
+					/>
+				</div>
+				<div className='cursor-pointer hover:scale-105 duration-150  '>
+					<Statistics
+						title='Avg Duration / Invocation'
+						icon={
+							<AiOutlineFieldTime className='text-[25px] md:text-[32px]  text-white p-1.5 rounded' />
+						}
+						loadingQuery={false}
+						query={avgDurationPerInvocation + ' Sec'}
+					/>
+				</div>
+				<div className='cursor-pointer hover:scale-105 duration-150  '>
+					<Statistics
+						title='Total Duration'
+						icon={
+							<AiTwotoneAlert className='text-[25px] md:text-[32px]  text-white p-1.5 rounded' />
+						}
+						loadingQuery={false}
+						query={allDurationInSeconds + ' Sec'}
+					/>
+				</div>
 			</div>
 		</div>
 	)

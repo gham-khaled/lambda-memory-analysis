@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 ///* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from 'react'
@@ -16,6 +17,7 @@ import {
 	runtime,
 	packageOptions,
 	architectureOptions,
+	successMsgStyle,
 } from '../data/optionsData'
 import { InputText } from 'primereact/inputtext'
 import AnalysisContext from '../contexts/AnalysisContext'
@@ -27,7 +29,7 @@ const Analysis = () => {
 	const {
 		selectedFunctions,
 		setSelectedFunctions,
-		// currentReportID,
+
 		setCurrentReportID,
 	} = useContext(AnalysisContext)
 
@@ -52,7 +54,11 @@ const Analysis = () => {
 		useState(architectureOptions)
 
 	const [analysisID, setAnalysisID] = useState('')
+	const { analysisDetail, setAnalysisDetail } = useContext(AnalysisContext)
+
 	const [loading, setLoading] = useState(false)
+	const [isFetching, setIsFetching] = useState(false)
+	const [maxAttemptsReached, setMaxAttemptsReached] = useState(false)
 	const [lambdaFunctions, setLambdaFunctions] = useState([])
 	const navigate = useNavigate()
 
@@ -80,13 +86,15 @@ const Analysis = () => {
 	}
 
 	const handleLaunchAnalysis = async () => {
+		customToast('Analysis launched successfully', '✅', successMsgStyle)
+
 		const unixStartDate = new Date(startDate.setHours(0, 0, 0, 0)).toISOString()
 		const unixEndDate = new Date(endDate.setHours(23, 59, 59, 999)).toISOString()
-		// console.log(unixStartDate, unixEndDate)
 
 		const reportID = analysisID || Math.floor(Date.now() / 1000) // Use analysisID if provided, otherwise use timestamp
 		localStorage.setItem('reportID', reportID.toString())
 
+		setMaxAttemptsReached(false)
 		setCurrentReportID(reportID)
 
 		const payload = {
@@ -95,32 +103,13 @@ const Analysis = () => {
 			start_date: unixStartDate,
 			end_date: unixEndDate,
 		}
-		console.log(payload)
-		setLoading(true)
+		setIsFetching(true)
 		try {
-			const response = await axios.post(
+			await axios.post(
 				'https://h4x9eobxve.execute-api.eu-west-1.amazonaws.com/prod/startExecution',
 				payload
 			)
-			console.log(response)
-			// TODO: Add message that it was successfully launched
-			if (response.status === 200 && selectedFunctions.length !== 0) {
-				customToast('Redirecting you to detail report dashboard... ', '🚀', {
-					fontSize: '12px',
-					border: '0.4px solid #787474',
-					borderRadius: '5px',
-					background: '#253645',
-					color: '#fff',
-				})
-			}
-			// TODO: Wait until a response is received and move to the Report ID details page
-			// Wait for 3 seconds before redirecting
-			setTimeout(() => {
-				// Redirect to the new page, e.g., Report ID details page
-				// navigate(`/report/${reportID}`)
-				navigate(`/report/${reportID}`)
-			}, 3000)
-			setLoading(false)
+			getAnalysisDetail(reportID)
 		} catch (error) {
 			console.error('Error fetching lambda functions: ', error)
 			setLoading(false)
@@ -133,6 +122,52 @@ const Analysis = () => {
 		borderRadius: '5px',
 		background: '#253645',
 		color: '#fff',
+	}
+
+	const getAnalysisDetail = async (reportID) => {
+		try {
+			const response = await fetchDataWithRetry(reportID)
+			setAnalysisDetail(response.data)
+
+			navigate(`/report/reportID=${reportID}`) // Navigate on success
+		} catch (error) {
+			console.error('Error fetching report details: ', error)
+			// Display error message here
+		} finally {
+			// setLoading(false)
+			setIsFetching(false)
+		}
+	}
+
+	// Function to delay execution
+	const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+	const fetchDataWithRetry = async (reportID, maxAttempts = 5) => {
+		let attempts = 0
+		// customToast('Waiting for server response...', 'ℹ️', errorMsgStyle)
+		while (attempts < maxAttempts) {
+			try {
+				const response = await axios.get(
+					`https://h4x9eobxve.execute-api.eu-west-1.amazonaws.com/prod/report?reportID=${reportID}`
+				)
+				if (response.status === 200) {
+					return response // Return response if successful
+				}
+				attempts++
+				await delay(3000)
+			} catch (error) {
+				if (attempts === maxAttempts - 1) {
+					customToast('Maximum attempts reached', '❌', errorMsgStyle)
+					setMaxAttemptsReached(true)
+
+					// console.error('Max attempts reached')
+					throw error // Throw error on the last attempt
+				}
+				attempts++
+				await delay(3000)
+			}
+		}
+		throw new Error('Max attempts reached')
 	}
 
 	return (
@@ -193,11 +228,11 @@ const Analysis = () => {
 							<label htmlFor='architecture_option'>Architecture</label>
 						</FloatLabel>
 						<button
-							className={`${!loading ? 'bg-[#00A9817D] ' : 'bg-gray-500'} text-white text-xs p-2 rounded-md text-wrap`}
+							className={`${!loading || (!loading && isFetching) ? 'bg-[#00A9817D] ' : 'bg-gray-500'} text-white text-xs p-2 rounded-md text-wrap`}
 							onClick={handleFetchFunctions}
-							disabled={loading}
+							disabled={loading || isFetching}
 						>
-							{loading ? 'Fetching...' : 'Fetch Lambda Fns'}
+							{loading ? 'Fetching Fns...' : 'Fetch Lambda Fns'}
 						</button>
 					</div>
 					{/* New analysis */}
@@ -215,7 +250,7 @@ const Analysis = () => {
 								</FloatLabel>
 
 								<button
-									className={`${!loading ? 'bg-lambdaPrimary' : 'bg-gray-500'} text-white text-xs py-1 rounded-md min-w-[100px] max-w-[180px] `}
+									className={`${!isFetching ? 'bg-lambdaPrimary' : 'bg-gray-500'} text-white text-xs py-1 rounded-md min-w-[100px] max-w-[180px] `}
 									onClick={() => {
 										if (selectedFunctions.length === 0) {
 											customToast(
@@ -227,14 +262,25 @@ const Analysis = () => {
 											handleLaunchAnalysis()
 										}
 									}}
-									disabled={loading}
+									disabled={isFetching}
 								>
-									{loading ? 'Fetching...' : 'New Analysis'}
+									{isFetching ? 'Fetching...' : 'New Analysis'}
 								</button>
 							</div>
+							{isFetching && (
+								<div className='text-xs text-yellow-600 pt-4'>
+									Please wait while we fetch the analysis details...
+								</div>
+							)}
+							{maxAttemptsReached && (
+								<div className='text-xs text-red-600 pt-4'>
+									Oops! Maximum attempts reached. Please try again later.
+								</div>
+							)}
 						</div>
 					)}
-					<div className='pt-12'>
+					<div className='pt-8'>
+						{/* {!serverResponded && <p className='text-white'>pinging server..</p>} */}
 						<DynamicTable
 							columns={columns}
 							data={lambdaFunctions}

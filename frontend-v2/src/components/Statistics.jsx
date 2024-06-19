@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 
+
 function Statistics({ title, icon, loadingQuery, query }) {
 	return (
 		<div className='bg-[#1A2833] rounded px-3 py-2.5 flex gap-3 items-center '>

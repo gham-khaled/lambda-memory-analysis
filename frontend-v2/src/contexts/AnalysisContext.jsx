@@ -6,6 +6,8 @@ const AnalysisContext = createContext()
 
 export const AnalysisProvider = ({ children }) => {
 	const [selectedFunctions, setSelectedFunctions] = useState([])
+	const [analysis, setAnalysis] = useState([])
+	const [analysisDetail, setAnalysisDetail] = useState([])
 	const [currentReportID, setCurrentReportID] = useState(null)
 
 	return (
@@ -15,6 +17,10 @@ export const AnalysisProvider = ({ children }) => {
 				setSelectedFunctions,
 				currentReportID,
 				setCurrentReportID,
+				analysis,
+				setAnalysis,
+				analysisDetail,
+				setAnalysisDetail,
 			}}
 		>
 			{children}
