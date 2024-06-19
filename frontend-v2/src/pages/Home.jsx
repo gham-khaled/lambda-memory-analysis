@@ -186,10 +186,10 @@ const DynamicTable = ({
 									{columns.map((column) => {
 										if (column.key === 'reportID') {
 											return (
-												<td key={column.key} className='px-6 py-3'>
+												<td key={column.key} className='px-6 py-3 '>
 													<Link
 														to={`/report/reportID=${row[column.key]}`}
-														className='text-blue-600 hover:underline'
+														className='text-lambdaPrimary-light hover:underline'
 													>
 														{row[column.key]}
 													</Link>

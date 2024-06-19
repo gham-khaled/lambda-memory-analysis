@@ -9,7 +9,7 @@ export const AnalysisProvider = ({ children }) => {
 	const [analysis, setAnalysis] = useState([])
 	const [analysisDetail, setAnalysisDetail] = useState([])
 	const [currentReportID, setCurrentReportID] = useState(null)
-	const [rowsPerPage, setRowsPerPage] = useState(5)
+	const [rowsPerPage, setRowsPerPage] = useState(10)
 	const [continuationToken, setContinuationToken] = useState('')
 
 	const [summary, setSummary] = useState({})
