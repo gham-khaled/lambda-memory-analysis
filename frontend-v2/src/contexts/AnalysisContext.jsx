@@ -9,6 +9,11 @@ export const AnalysisProvider = ({ children }) => {
 	const [analysis, setAnalysis] = useState([])
 	const [analysisDetail, setAnalysisDetail] = useState([])
 	const [currentReportID, setCurrentReportID] = useState(null)
+	const [rowsPerPage, setRowsPerPage] = useState(5)
+	const [continuationToken, setContinuationToken] = useState('')
+
+	const [summary, setSummary] = useState({})
+	const [status, setStatus] = useState('processing...')
 
 	return (
 		<AnalysisContext.Provider
@@ -21,6 +26,14 @@ export const AnalysisProvider = ({ children }) => {
 				setAnalysis,
 				analysisDetail,
 				setAnalysisDetail,
+				rowsPerPage,
+				setRowsPerPage,
+				continuationToken,
+				setContinuationToken,
+				summary,
+				setSummary,
+				status,
+				setStatus,
 			}}
 		>
 			{children}

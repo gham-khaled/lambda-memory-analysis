@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom'
 import StatisticsList from '../components/StatisticsList'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import axios from 'axios'
-import { RotatingLines } from 'react-loader-spinner'
+import { RotatingLines, ThreeDots } from 'react-loader-spinner'
 import { Toaster } from 'react-hot-toast'
 import { customToast } from '../utils/utils'
 import { errorMsgStyle, successMsgStyle } from '../data/optionsData'
@@ -20,22 +20,65 @@ import AnalysisContext from '../contexts/AnalysisContext'
 const ReportDetails = () => {
 	const { reportID } = useParams()
 
-	const { analysis, setAnalysis, analysisDetail } = useContext(AnalysisContext)
-
-	const [summary, setSummary] = useState({})
-	const [status, setStatus] = useState('processing...')
+	const {
+		analysis,
+		setAnalysis,
+		analysisDetail,
+		summary,
+		setSummary,
+		status,
+		setStatus,
+		setAnalysisDetail,
+	} = useContext(AnalysisContext)
 
 	const [orderBy, setOrderBy] = useState('functionName')
 	const [order, setOrder] = useState('asc')
+	const [error, setError] = useState(null)
 
 	const [loading, setLoading] = useState(false)
-	const [error, setError] = useState(null)
 
 	useEffect(() => {
 		setSummary(analysisDetail.summary)
 		setStatus(analysisDetail.status)
 		setAnalysis(analysisDetail.analysis)
-	}, [analysisDetail, reportID, status, summary, analysis, setAnalysis])
+	}, [
+		analysisDetail,
+		reportID,
+		status,
+		summary,
+		analysis,
+		setAnalysis,
+		setSummary,
+		setStatus,
+	])
+
+	useEffect(() => {
+		const fetchData = async () => {
+			setLoading(true)
+			try {
+				const response = await axios.get(
+					`https://h4x9eobxve.execute-api.eu-west-1.amazonaws.com/prod/report?${reportID}`
+				)
+				if (response.status === 200) {
+					setAnalysis(response.data.analysis)
+					setAnalysisDetail(response.data)
+					setSummary(response.data.summary)
+					setStatus(response.data.status)
+
+					setLoading(false)
+					return response // Return response if successful
+				}
+			} catch (error) {
+				customToast('Server is not responding', '❌', errorMsgStyle)
+				// setMaxAttemptsReached(true)
+
+				// console.error('Max attempts reached')
+				throw error // Throw error on the last attempt
+			}
+		}
+
+		fetchData()
+	}, [reportID, setAnalysis, setSummary, setStatus])
 
 	// useEffect(() => {
 	// 	customToast('Server responded successfully', '✅', errorMsgStyle)
@@ -66,14 +109,13 @@ const ReportDetails = () => {
 				)}
 				{loading && (
 					<div className='flex justify-center items-center mt-28 h-[40%]'>
-						<RotatingLines
+						<ThreeDots
 							visible={true}
 							height='40'
 							width='40'
-							color='darkblueLight'
-							strokeWidth='5'
-							animationDuration='1'
-							ariaLabel='rotating-lines-loading'
+							color='#4fa94d'
+							radius='9'
+							ariaLabel='three-dots-loading'
 							wrapperStyle={{}}
 							wrapperClass=''
 						/>
@@ -249,14 +291,13 @@ const DynamicTable = ({ data, loading = false }) => {
 			) : (
 				<div className='text-gray-400 text-center flex justify-center items-center h-28 text-md mt-10'>
 					{loading ? (
-						<RotatingLines
+						<ThreeDots
 							visible={true}
 							height='40'
 							width='40'
-							color='darkblueLight'
-							strokeWidth='5'
-							animationDuration='1'
-							ariaLabel='rotating-lines-loading'
+							color='#4fa94d'
+							radius='9'
+							ariaLabel='three-dots-loading'
 							wrapperStyle={{}}
 							wrapperClass=''
 						/>

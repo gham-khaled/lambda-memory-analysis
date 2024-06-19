@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 // import { BiSolidCategoryAlt } from 'react-icons/bi'
 // import Statistics from '../components/Statistics'
@@ -5,54 +6,60 @@ import Sidebar from '../partials/Sidebar'
 // import { IoIosCube } from 'react-icons/io'
 // import { AiOutlineShop, AiOutlineUser } from 'react-icons/ai'
 import Header from '../partials/Header'
-import DynamicTable from '../partials/tables/DynamicTable'
+
+import axios from 'axios'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { summaryColumns } from '../data/optionsData'
+import { RotatingLines, ThreeDots } from 'react-loader-spinner'
+import AnalysisContext from '../contexts/AnalysisContext'
 // import CustomTable from '../partials/CustomTable'
 
 const Home = () => {
-	const columns = [
-		{ Header: 'Function name', accessor: 'function_name' },
-		{ Header: 'Runtime', accessor: 'runtime' },
-		{ Header: 'All duration(s)', accessor: 'all_duration' },
-		{ Header: 'Provisioned memory', accessor: 'provisioned_memory' },
-		{ Header: 'Memory cost', accessor: 'memory_cost' },
-		{ Header: 'Invocation cost', accessor: 'invocation_cost' },
-		{ Header: 'Total cost', accessor: 'total_cost' },
-		{ Header: 'Avg cost/invocation', accessor: 'avg_cost_per_invocation' },
-	]
+	const [data, setData] = useState([])
+	const [loading, setLoading] = useState(true)
 
-	const sampleData = [
-		{
-			function_name: 'Function A',
-			runtime: '2ms',
-			all_duration: 2.123456,
-			provisioned_memory: 128,
-			memory_cost: 0.00001,
-			invocation_cost: 0.000001,
-			total_cost: 0.000011,
-			avg_cost_per_invocation: 0.0000055,
-		},
-		{
-			function_name: 'Function B',
-			runtime: '2ms',
-			all_duration: 2.123456,
-			provisioned_memory: 121,
-			memory_cost: 0.00001,
-			invocation_cost: 0.000001,
-			total_cost: 0.000011,
-			avg_cost_per_invocation: 0.0000051,
-		},
-		{
-			function_name: 'Function C',
-			runtime: '2ms',
-			all_duration: 2.123456,
-			provisioned_memory: 128,
-			memory_cost: 0.00001,
-			invocation_cost: 0.000001,
-			total_cost: 0.000011,
-			avg_cost_per_invocation: 0.0000055,
-		},
-		// More data objects...
-	]
+	const {
+		rowsPerPage,
+		setRowsPerPage,
+		continuationToken,
+		setContinuationToken,
+	} = useContext(AnalysisContext)
+
+	const navigate = useNavigate()
+
+	useEffect(() => {
+		fetchData()
+	}, [rowsPerPage])
+
+	const fetchData = () => {
+		setLoading(true)
+		axios
+			.get(
+				'https://h4x9eobxve.execute-api.eu-west-1.amazonaws.com/prod/api/reportSummaries',
+				{
+					params: {
+						rowsPerPage,
+						continuationToken, // Use the existing continuation token for subsequent requests
+					},
+				}
+			)
+			.then((response) => {
+				const { jsonContents, continuationToken: newContinuationToken } =
+					response.data
+				setData((prevData) => [...prevData, ...jsonContents]) // Append new data to existing data
+				setContinuationToken(newContinuationToken) // Update the continuation token
+				console.log('Data: ', response.data)
+				setLoading(false)
+			})
+			.catch((error) => {
+				console.error('Error fetching data: ', error)
+				setLoading(false)
+			})
+	}
+
+	// Additionally, you might want to introduce a mechanism to trigger fetching new data using the continuation token.
+	// For example, you could add a button or an infinite scroll mechanism that calls `fetchData` when needed.
 
 	return (
 		<div className='flex'>
@@ -60,12 +67,215 @@ const Home = () => {
 			<div className='bg-darkblue w-full h-screen overflow-y-scroll p-10 pt-0 space-y-6 '>
 				<Header title='Analysis | Home'></Header>
 				<div className='pt-8'>
-					<DynamicTable columns={columns} data={sampleData} />
+					<DynamicTable
+						columns={summaryColumns}
+						data={data}
+						loading={loading}
+						fetchData={fetchData}
+						continuationToken={continuationToken}
+					/>
 				</div>{' '}
 				{/* end of table holder */}
 			</div>
 			{/* end of main content holder */}
 		</div>
+	)
+}
+
+const DynamicTable = ({
+	columns = [],
+	data,
+	loading = false,
+	fetchData,
+	continuationToken,
+}) => {
+	const { rowsPerPage, setRowsPerPage } = useContext(AnalysisContext)
+
+	const [currentPage, setCurrentPage] = useState(1)
+	const [itemsPerPage, setItemsPerPage] = useState(rowsPerPage)
+	const [sortConfig, setSortConfig] = useState({
+		key: null,
+		direction: 'ascending',
+	})
+
+	const sortedData = React.useMemo(() => {
+		let sortableItems = [...data]
+		if (sortConfig !== null) {
+			sortableItems.sort((a, b) => {
+				if (a[sortConfig.key] < b[sortConfig.key]) {
+					return sortConfig.direction === 'ascending' ? -1 : 1
+				}
+				if (a[sortConfig.key] > b[sortConfig.key]) {
+					return sortConfig.direction === 'ascending' ? 1 : -1
+				}
+				return 0
+			})
+		}
+		return sortableItems
+	}, [data, sortConfig])
+
+	const requestSort = (key) => {
+		let direction = 'ascending'
+		if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+			direction = 'descending'
+		}
+		setSortConfig({ key, direction })
+	}
+
+	const indexOfLastItem = currentPage * itemsPerPage
+	const indexOfFirstItem = indexOfLastItem - itemsPerPage
+	const currentData = sortedData.slice(indexOfFirstItem, indexOfLastItem)
+
+	const maxPages = Math.ceil(data.length / itemsPerPage)
+
+	const handlePrevious = () =>
+		setCurrentPage((current) => Math.max(current - 1, 1))
+	const handleNext = () => {
+		if (currentPage === maxPages && continuationToken) {
+			// If on the last page and there's a continuation token, fetch more data
+			fetchData(continuationToken) // Ensure fetchData can optionally accept a continuation token
+		} else {
+			// Otherwise, just advance to the next page if not at the last page
+			setCurrentPage((current) => Math.min(current + 1, maxPages))
+		}
+	}
+
+	const handleItemsPerPageChange = (event) => {
+		setItemsPerPage(Number(event.target.value))
+		setCurrentPage(1) // Reset to first page to avoid empty data view
+	}
+	return (
+		<>
+			{loading && (
+				<div className='text-gray-400 text-center flex justify-center items-center h-28 text-md m2-10'>
+					<ThreeDots
+						visible={true}
+						height='40'
+						width='40'
+						color='#4fa94d'
+						radius='9'
+						ariaLabel='three-dots-loading'
+						wrapperStyle={{}}
+						wrapperClass=''
+					/>
+				</div>
+			)}
+			{data.length !== 0 && !loading ? (
+				<div className='relative overflow-x-auto shadow-md sm:rounded-md'>
+					<table className='w-full text-sm text-left rtl:text-right text-white border border-darkblueLight rounded-md scrollbar-thin'>
+						<thead className='text-xs uppercase text-white bg-darkblueLight py-2'>
+							<tr className='px-6 py-3 cursor-pointer '>
+								{columns.map((column) => (
+									<th
+										key={column.key}
+										scope='col'
+										className='px-6 py-3  hover:text-third-dark transition-all duration-300 ease-in-out'
+										onClick={() => requestSort(column.key)}
+									>
+										{column.label}
+									</th>
+								))}
+							</tr>
+						</thead>
+						<tbody>
+							{currentData.map((row, index) => (
+								<tr
+									key={index}
+									className={`${index % 2 === 0 ? 'bg-darkblueMedium' : 'bg-transparent'} cursor-pointer text-xs hover:bg-gray-50 dark:hover:bg-gray-600 ${row.timeoutInvocations ? 'text-red-500' : ''} ${row.provisionedMemoryMB > row.optimalMemory * 2 ? 'text-yellow-500' : ''}`}
+								>
+									{columns.map((column) => {
+										if (column.key === 'reportID') {
+											return (
+												<td key={column.key} className='px-6 py-3'>
+													<Link
+														to={`/report/reportID=${row[column.key]}`}
+														className='text-blue-600 hover:underline'
+													>
+														{row[column.key]}
+													</Link>
+												</td>
+											)
+										} else {
+											return (
+												<td key={column.key} className='px-6 py-3'>
+													{row[column.key]}
+												</td>
+											)
+										}
+									})}
+								</tr>
+							))}
+						</tbody>
+					</table>
+					<nav
+						className='flex flex-col md:flex-row justify-start md:justify-end pt-8 gap-x-16 gap-y-4 md:gap-y-0'
+						aria-label='Table navigation'
+					>
+						<div className='text-xs font-light text-gray-500'>
+							Showing{' '}
+							<span className='font-light text-gray-900 dark:text-white'>
+								{indexOfFirstItem + 1}
+							</span>{' '}
+							to{' '}
+							<span className='font-light text-gray-900 dark:text-white'>
+								{indexOfLastItem > data.length ? data.length : indexOfLastItem}
+							</span>{' '}
+							of{' '}
+							<span className='font-light text-gray-900 dark:text-white'>
+								{data.length}
+							</span>
+						</div>
+						<div className='flex flex-row'>
+							<label
+								htmlFor='itemsPerPage'
+								className='text-xs text-gray-500 flex items-center'
+							>
+								Records / page:
+							</label>
+							<select
+								id='itemsPerPage'
+								value={itemsPerPage}
+								onChange={handleItemsPerPageChange}
+								className='ml-2 px-2 text-white border border-darkblueLight bg-darkblueMedium rounded-md text-xs focus:outline-none focus:ring-0'
+							>
+								<option value='5'>5</option>
+								<option value='10'>10</option>
+								<option value='20'>20</option> {/* New option */}
+								<option value='50'>50</option>
+								<option value='100'>100</option>
+							</select>
+						</div>
+						<div className='flex flex-row'>
+							<div className='flex items-center md:mt-0 text-white space-x-8 cursor-pointer'>
+								<div className='flex flex-row items-center text-white text-xs space-x-2'>
+									<p>{'<<'}</p>
+									<button onClick={handlePrevious} disabled={currentPage === 1}>
+										Previous
+									</button>
+								</div>
+								<div className='flex flex-row items-center text-white text-xs space-x-2 cursor-pointer'>
+									<button
+										onClick={handleNext}
+										disabled={!continuationToken && currentPage === maxPages}
+									>
+										Next
+									</button>
+									<p>{'>>'}</p>
+								</div>
+							</div>
+						</div>
+					</nav>
+				</div>
+			) : data.length !== 0 && loading ? (
+				<div className='text-gray-400 text-center flex justify-center items-center h-28 text-md mt-10'>
+					Loading more data
+				</div>
+			) : (
+				<div className='text-gray-400 text-center flex justify-center items-center h-28 text-md mt-10'>
+					Data is not available
+				</div>
+			)}
+		</>
 	)
 }
 

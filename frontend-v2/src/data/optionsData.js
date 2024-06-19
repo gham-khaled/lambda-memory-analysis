@@ -83,6 +83,63 @@ const successMsgStyle = {
 	color: '#fff',
 }
 
+const summaryColumns = [
+	{ label: 'Report ID', key: 'reportID' },
+	{ label: 'allDurationInSeconds', key: 'allDurationInSeconds' },
+	{ label: 'Memory Cost', key: 'MemoryCost' },
+	{ label: 'Invocation Cost', key: 'InvocationCost' },
+	{ label: 'Total Cost', key: 'totalCost' },
+	{ label: 'Avg Cost Per Invocation', key: 'avgCostPerInvocation' },
+	{ label: 'Avg Max Memory Used MB', key: 'avgMaxMemoryUsedMB' },
+	{ label: 'Avg Over Provisioned MB', key: 'avgOverProvisionedMB' },
+	{ label: 'Avg Provisioned Memory MB', key: 'avgProvisionedMemoryMB' },
+	{
+		label: 'Avg Duration Per Invocation',
+		key: 'avgDurationPerInvocation',
+	},
+	{ label: 'Status', key: 'status' },
+	{ label: 'Start Date', key: 'startDate' },
+	{ label: 'End Date', key: 'endDate' },
+	{ label: 'Timeout Invocations', key: 'timeoutInvocations' },
+	{ label: 'Memory Exceeded Invocation', key: 'memoryExceededInvocation' },
+	{ label: 'Optimal Total Cost', key: 'optimalTotalCost' },
+	{ label: 'Potential Savings', key: 'potentialSavings' },
+]
+
+const sampleData = [
+	{
+		function_name: 'Function A',
+		runtime: '2ms',
+		all_duration: 2.123456,
+		provisioned_memory: 128,
+		memory_cost: 0.00001,
+		invocation_cost: 0.000001,
+		total_cost: 0.000011,
+		avg_cost_per_invocation: 0.0000055,
+	},
+	{
+		function_name: 'Function B',
+		runtime: '2ms',
+		all_duration: 2.123456,
+		provisioned_memory: 121,
+		memory_cost: 0.00001,
+		invocation_cost: 0.000001,
+		total_cost: 0.000011,
+		avg_cost_per_invocation: 0.0000051,
+	},
+	{
+		function_name: 'Function C',
+		runtime: '2ms',
+		all_duration: 2.123456,
+		provisioned_memory: 128,
+		memory_cost: 0.00001,
+		invocation_cost: 0.000001,
+		total_cost: 0.000011,
+		avg_cost_per_invocation: 0.0000055,
+	},
+	// More data objects...
+]
+
 export {
 	runtime,
 	packageOptions,
@@ -90,4 +147,6 @@ export {
 	statistics,
 	errorMsgStyle,
 	successMsgStyle,
+	summaryColumns,
+	sampleData,
 }
