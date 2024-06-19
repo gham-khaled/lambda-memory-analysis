@@ -108,7 +108,7 @@ const ReportDetails = () => {
 					)
 				)}
 				{loading && (
-					<div className='flex justify-center items-center mt-28 h-[40%]'>
+					<div className='flex justify-center items-center mt-10'>
 						<ThreeDots
 							visible={true}
 							height='40'
@@ -219,7 +219,7 @@ const DynamicTable = ({ data, loading = false }) => {
 							{currentData.map((row, index) => (
 								<tr
 									key={index}
-									className={`${index % 2 === 0 ? 'bg-darkblueMedium' : 'bg-transparent'} cursor-pointer text-xs hover:bg-gray-50 dark:hover:bg-gray-600 ${row.timeoutInvocations ? 'text-red-500' : ''} ${row.provisionedMemoryMB > row.optimalMemory * 2 ? 'text-yellow-500' : ''}`}
+									className={`${index % 2 === 0 ? 'bg-darkblueMedium' : 'bg-transparent'} cursor-pointer text-xs hover:bg-gray-50 dark:hover:bg-gray-600 ${row.timeoutInvocations > 0 ? 'text-red-500' : ''} ${row.provisionedMemoryMB > row.optimalMemory * 2 ? 'text-yellow-500' : ''}`}
 								>
 									{columns.map((column) => (
 										<td key={column.key} className='px-6 py-3'>
@@ -289,7 +289,7 @@ const DynamicTable = ({ data, loading = false }) => {
 					</nav>
 				</div>
 			) : (
-				<div className='text-gray-400 text-center flex justify-center items-center h-28 text-md mt-10'>
+				<div className='text-gray-400 text-center flex justify-center items-center  text-md mt-10'>
 					{loading ? (
 						<ThreeDots
 							visible={true}
