@@ -1,46 +1,36 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-// import { BiSolidCategoryAlt } from 'react-icons/bi'
-// import Statistics from '../components/Statistics'
-import Sidebar from '../partials/Sidebar'
-// import { IoIosCube } from 'react-icons/io'
-// import { AiOutlineShop, AiOutlineUser } from 'react-icons/ai'
-import Header from '../partials/Header'
 
-import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { summaryColumns } from '../data/optionsData'
-import { RotatingLines, ThreeDots } from 'react-loader-spinner'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
 import AnalysisContext from '../contexts/AnalysisContext'
-// import CustomTable from '../partials/CustomTable'
+
+import Sidebar from '../partials/Sidebar'
+import Header from '../partials/Header'
+import { summaryColumns } from '../data/optionsData'
+import { ThreeDots } from 'react-loader-spinner'
 
 const Home = () => {
 	const [data, setData] = useState([])
 	const [loading, setLoading] = useState(true)
 
-	const {
-		rowsPerPage,
-		setRowsPerPage,
-		continuationToken,
-		setContinuationToken,
-	} = useContext(AnalysisContext)
-
-	const navigate = useNavigate()
+	const { rowsPerPage, continuationToken, setContinuationToken } =
+		useContext(AnalysisContext)
 
 	useEffect(() => {
 		fetchData()
-	}, [rowsPerPage])
+	}, [])
 
 	const fetchData = () => {
 		setLoading(true)
+		setContinuationToken(null) // Reset the continuation token to avoid multiple requests
 		axios
 			.get(
 				'https://h4x9eobxve.execute-api.eu-west-1.amazonaws.com/prod/api/reportSummaries',
 				{
 					params: {
-						rowsPerPage,
-						continuationToken, // Use the existing continuation token for subsequent requests
+						rowsPerPage: rowsPerPage,
+						// continuationToken: token, // Use the provided token or the existing continuation token for subsequent requests
 					},
 				}
 			)
@@ -49,7 +39,7 @@ const Home = () => {
 					response.data
 				setData((prevData) => [...prevData, ...jsonContents]) // Append new data to existing data
 				setContinuationToken(newContinuationToken) // Update the continuation token
-				console.log('Data: ', response.data)
+				// console.log('Data: ', response.data)
 				setLoading(false)
 			})
 			.catch((error) => {
@@ -57,9 +47,6 @@ const Home = () => {
 				setLoading(false)
 			})
 	}
-
-	// Additionally, you might want to introduce a mechanism to trigger fetching new data using the continuation token.
-	// For example, you could add a button or an infinite scroll mechanism that calls `fetchData` when needed.
 
 	return (
 		<div className='flex'>
@@ -74,10 +61,8 @@ const Home = () => {
 						fetchData={fetchData}
 						continuationToken={continuationToken}
 					/>
-				</div>{' '}
-				{/* end of table holder */}
+				</div>
 			</div>
-			{/* end of main content holder */}
 		</div>
 	)
 }
@@ -132,16 +117,16 @@ const DynamicTable = ({
 		setCurrentPage((current) => Math.max(current - 1, 1))
 	const handleNext = () => {
 		if (currentPage === maxPages && continuationToken) {
-			// If on the last page and there's a continuation token, fetch more data
-			fetchData(continuationToken) // Ensure fetchData can optionally accept a continuation token
+			fetchData() // Fetch more data using the continuation token
 		} else {
-			// Otherwise, just advance to the next page if not at the last page
 			setCurrentPage((current) => Math.min(current + 1, maxPages))
 		}
 	}
 
 	const handleItemsPerPageChange = (event) => {
+		setRowsPerPage(Number(event.target.value))
 		setItemsPerPage(Number(event.target.value))
+		fetchData() // Fetch data with the new items per page
 		setCurrentPage(1) // Reset to first page to avoid empty data view
 	}
 	return (
@@ -181,7 +166,7 @@ const DynamicTable = ({
 							{currentData.map((row, index) => (
 								<tr
 									key={index}
-									className={`${index % 2 === 0 ? 'bg-darkblueMedium' : 'bg-transparent'} cursor-pointer text-xs hover:bg-gray-50 dark:hover:bg-gray-600 ${row.timeoutInvocations ? 'text-red-500' : ''} ${row.provisionedMemoryMB > row.optimalMemory * 2 ? 'text-yellow-500' : ''}`}
+									className={`${index % 2 === 0 ? 'bg-darkblueMedium' : 'bg-transparent'} cursor-pointer text-xs hover:bg-green-900/40  ${row.timeoutInvocations ? 'text-red-500' : ''} ${row.provisionedMemoryMB > row.optimalMemory * 2 ? 'text-yellow-500' : ''}`}
 								>
 									{columns.map((column) => {
 										if (column.key === 'reportID') {
@@ -208,33 +193,33 @@ const DynamicTable = ({
 						</tbody>
 					</table>
 					<nav
-						className='flex flex-col md:flex-row justify-start md:justify-end pt-8 gap-x-16 gap-y-4 md:gap-y-0'
+						className='flex flex-col md:flex-row justify-start md:justify-end pt-8 gap-x-16 gap-y-4 md:gap-y-0 text-green-500'
 						aria-label='Table navigation'
 					>
-						<div className='text-xs font-light text-gray-500'>
+						<div className='text-xs lg:text-sm font-light '>
 							Showing{' '}
-							<span className='font-light text-gray-900 dark:text-white'>
+							<span className='font-light text-gray-900 dark:text-white px-2'>
 								{indexOfFirstItem + 1}
 							</span>{' '}
 							to{' '}
-							<span className='font-light text-gray-900 dark:text-white'>
+							<span className='font-light text-gray-900 dark:text-white px-2'>
 								{indexOfLastItem > data.length ? data.length : indexOfLastItem}
 							</span>{' '}
 							of{' '}
-							<span className='font-light text-gray-900 dark:text-white'>
+							<span className='font-light text-gray-900 dark:text-white px-2'>
 								{data.length}
 							</span>
 						</div>
 						<div className='flex flex-row'>
 							<label
 								htmlFor='itemsPerPage'
-								className='text-xs text-gray-500 flex items-center'
+								className='text-xs lg:text-sm  flex items-center'
 							>
 								Records / page:
 							</label>
 							<select
 								id='itemsPerPage'
-								value={itemsPerPage}
+								value={rowsPerPage}
 								onChange={handleItemsPerPageChange}
 								className='ml-2 px-2 text-white border border-darkblueLight bg-darkblueMedium rounded-md text-xs focus:outline-none focus:ring-0'
 							>
@@ -247,13 +232,13 @@ const DynamicTable = ({
 						</div>
 						<div className='flex flex-row'>
 							<div className='flex items-center md:mt-0 text-white space-x-8 cursor-pointer'>
-								<div className='flex flex-row items-center text-white text-xs space-x-2'>
+								<div className='flex flex-row items-center text-white text-xs lg:text-sm space-x-2'>
 									<p>{'<<'}</p>
 									<button onClick={handlePrevious} disabled={currentPage === 1}>
 										Previous
 									</button>
 								</div>
-								<div className='flex flex-row items-center text-white text-xs space-x-2 cursor-pointer'>
+								<div className='flex flex-row items-center text-white text-xs lg:text-sm space-x-2 cursor-pointer'>
 									<button
 										onClick={handleNext}
 										disabled={!continuationToken && currentPage === maxPages}

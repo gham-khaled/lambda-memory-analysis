@@ -106,6 +106,26 @@ const summaryColumns = [
 	{ label: 'Potential Savings', key: 'potentialSavings' },
 ]
 
+const reportDetailsColumns = [
+	{ key: 'functionName', label: 'Function Name' },
+	{ key: 'architecture', label: 'Architecture' },
+	{ key: 'runtime', label: 'Runtime' },
+	{ key: 'InvocationCost', label: 'Invocation Cost' },
+	{ key: 'MemoryCost', label: 'Memory Cost' },
+	{ key: 'allDurationInSeconds', label: 'Duration (s)' },
+	{ key: 'avgCostPerInvocation', label: 'Avg Cost/Invocation' },
+	{ key: 'avgDurationPerInvocation', label: 'Avg Duration/Invocation' },
+	{ key: 'memoryExceededInvocation', label: 'Memory Exceeded Invocation' },
+	{ key: 'optimalMemory', label: 'Optimal Memory' },
+	{ key: 'optimalTotalCost', label: 'Optimal Total Cost' },
+	{ key: 'overProvisionedMB', label: 'Over Provisioned (MB)' },
+	{ key: 'potentialSavings', label: 'Potential Savings' },
+	{ key: 'provisionedMemoryMB', label: 'Provisioned Memory (MB)' },
+	{ key: 'maxMemoryUsedMB', label: 'Max Memory Used (MB)' },
+	{ key: 'totalCost', label: 'Total Cost' },
+	{ key: 'timeoutInvocations', label: 'Timeout Invocations' },
+]
+
 const sampleData = [
 	{
 		function_name: 'Function A',
@@ -148,5 +168,6 @@ export {
 	errorMsgStyle,
 	successMsgStyle,
 	summaryColumns,
+	reportDetailsColumns,
 	sampleData,
 }

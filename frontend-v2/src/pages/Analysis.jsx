@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-///* eslint-disable no-unused-vars */
+
 import { useContext, useEffect, useState } from 'react'
 import Header from '../partials/Header'
 import Sidebar from '../partials/Sidebar'
@@ -29,20 +28,18 @@ const Analysis = () => {
 	const {
 		selectedFunctions,
 		setSelectedFunctions,
-
+		startDate,
+		setStartDate,
+		endDate,
+		setEndDate,
 		setCurrentReportID,
 	} = useContext(AnalysisContext)
-
-	const [startDate, setStartDate] = useState(
-		new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-	) // 5 days ago from the current date
-
-	const [endDate, setEndDate] = useState(new Date()) // current date
 
 	const columns = [
 		{ Header: 'Function name', accessor: 'FunctionName' },
 		{ Header: 'Runtime', accessor: 'Runtime' },
 		{ Header: 'PackageType', accessor: 'PackageType' },
+		{ Header: 'Architecture', accessor: 'Architectures' },
 		{ Header: 'LastModified', accessor: 'LastModified' },
 	]
 
@@ -54,12 +51,13 @@ const Analysis = () => {
 		useState(architectureOptions)
 
 	const [analysisID, setAnalysisID] = useState('')
-	const { analysisDetail, setAnalysisDetail } = useContext(AnalysisContext)
+	const { setAnalysisDetail } = useContext(AnalysisContext)
 
 	const [loading, setLoading] = useState(false)
 	const [isFetching, setIsFetching] = useState(false)
 	const [maxAttemptsReached, setMaxAttemptsReached] = useState(false)
 	const [lambdaFunctions, setLambdaFunctions] = useState([])
+
 	const navigate = useNavigate()
 
 	const handleFetchFunctions = async () => {
@@ -76,14 +74,52 @@ const Analysis = () => {
 				}
 			)
 			const functions = response.data
+
 			setLambdaFunctions(functions)
 			setSelectedFunctions(functions.map((func) => func.FunctionName))
+			handleFilters(functions)
+
 			setLoading(false)
 		} catch (error) {
 			console.error('Error fetching lambda functions: ', error)
 			setLoading(false)
 		}
 	}
+
+	// Client side filter functions based on fetched data
+	const handleFilters = (functions) => {
+		const fetchedRuntime = functions.map((func) =>
+			func.Runtime.trim().toLowerCase()
+		)
+		const fetchedPackageTypes = functions.map((func) =>
+			func.PackageType.trim().toLowerCase()
+		)
+		const fetchedArchitectureOptions = functions.map((func) =>
+			func.Architectures[0].trim().toLowerCase()
+		)
+
+		const filteredRuntime = runtime.filter((rt) =>
+			fetchedRuntime.includes(rt.trim().toLowerCase())
+		)
+
+		const filteredPackageTypes = packageOptions.filter((packageOption) =>
+			fetchedPackageTypes.includes(packageOption.trim().toLowerCase())
+		)
+
+		const filteredArchitectureOptions = architectureOptions.filter(
+			(architectureOption) =>
+				fetchedArchitectureOptions.includes(architectureOption.trim().toLowerCase())
+		)
+
+		setSelectedRuntime(filteredRuntime)
+		setSelectedPackageOptions(filteredPackageTypes)
+		setSelectedArchitectureOptions(filteredArchitectureOptions)
+	}
+
+	useEffect(() => {
+		// Fetch lambda functions on component mount
+		handleFetchFunctions()
+	}, [])
 
 	const handleLaunchAnalysis = async () => {
 		customToast('Analysis launched successfully', '✅', successMsgStyle)
@@ -144,7 +180,7 @@ const Analysis = () => {
 
 	const fetchDataWithRetry = async (reportID, maxAttempts = 5) => {
 		let attempts = 0
-		// customToast('Waiting for server response...', 'ℹ️', errorMsgStyle)
+
 		while (attempts < maxAttempts) {
 			try {
 				const response = await axios.get(
@@ -179,63 +215,47 @@ const Analysis = () => {
 				<div className='col-span-12 lg:col-span-12 space-y-4 pt-8'>
 					<div className='grid grid-cols-2 md:grid-cols-6  gap-x-6 gap-y-10 text-xs'>
 						<FloatLabel>
-							<Calendar
-								value={startDate}
-								onChange={(e) => setStartDate(e.value)}
-								showIcon
-								showButtonBar
-								className='bg-darkblueLight border-none text-white text-xs   rounded-md w-full'
-								inputClassName='bg-darkblueLight text-white text-xs border-none px-2 py-2 rounded-md  '
-							/>
-							<label htmlFor='start_date'>Start Date</label>
-						</FloatLabel>
-						<FloatLabel>
-							<Calendar
-								value={endDate}
-								onChange={(e) => setEndDate(e.value)}
-								showIcon
-								showButtonBar
-								className='bg-darkblueLight border-none text-white text-xs   rounded-md w-full'
-								inputClassName='bg-darkblueLight text-white text-xs border-none px-2 py-2  rounded-md'
-							/>
-							<label htmlFor='end_date'>End Date</label>
-						</FloatLabel>
-						<FloatLabel>
 							<MultiSelect
-								options={runtime}
+								options={selectedRuntime}
 								selectedValues={selectedRuntime}
 								setSelectedValues={setSelectedRuntime}
 								placeholder='Runtime'
+								maxSelectedLabels={1}
+								selectedItemsLabel={runtime[0] + ' ...'}
 							/>
 							<label htmlFor='runtime'>Runtime</label>
 						</FloatLabel>
 						<FloatLabel>
 							<MultiSelect
-								options={packageOptions}
+								options={selectedPackageOptions}
 								selectedValues={selectedPackageOptions}
 								setSelectedValues={setSelectedPackageOptions}
 								placeholder='Package'
+								maxSelectedLabels={1}
+								selectedItemsLabel={packageOptions[0] + ' ...'}
 							/>
 							<label htmlFor='package_option'>Package</label>
 						</FloatLabel>
 						<FloatLabel>
 							<MultiSelect
-								options={architectureOptions}
+								options={selectedArchitectureOptions}
 								selectedValues={selectedArchitectureOptions}
 								setSelectedValues={setSelectedArchitectureOptions}
 								placeholder='Architecture'
+								maxSelectedLabels={1}
+								selectedItemsLabel={architectureOptions[0] + ' ...'}
 							/>
 							<label htmlFor='architecture_option'>Architecture</label>
 						</FloatLabel>
 						<button
-							className={`${!loading || (!loading && isFetching) ? 'bg-[#00A9817D] ' : 'bg-gray-500'} text-white text-xs p-2 rounded-md text-wrap`}
+							className={`${!loading || (!loading && isFetching) ? 'bg-[#00A9817D] opacity-90 ' : 'bg-gray-500'} text-white text-xs p-2 rounded-md text-wrap`}
 							onClick={handleFetchFunctions}
 							disabled={loading || isFetching}
 						>
 							{loading ? 'Fetching Fns...' : 'Fetch Lambda Fns'}
 						</button>
 					</div>
-					{/* New analysis */}
+
 					{lambdaFunctions.length !== 0 && (
 						<div className='col-span-12 lg:col-span-12 space-y-4 pt-8'>
 							<div className='grid grid-cols-2 md:grid-cols-6 text-[10px]  gap-x-6 gap-y-10'>
@@ -247,6 +267,32 @@ const Analysis = () => {
 										className='bg-darkblueLight border-none text-white text-xs  py-2 px-6  rounded-md w-full'
 									/>
 									<label htmlFor='analysis_id'>Analysis ID (Optional)</label>
+								</FloatLabel>
+								<FloatLabel>
+									<Calendar
+										value={startDate}
+										onChange={(e) => setStartDate(e.value)}
+										showIcon
+										showButtonBar
+										className='bg-darkblueLight border-none text-white text-xs   rounded-md w-full'
+										inputClassName='bg-darkblueLight text-white text-xs border-none px-2 py-2 rounded-md  '
+									/>
+									<label htmlFor='start_date'>Start Date</label>
+								</FloatLabel>
+								<FloatLabel>
+									<Calendar
+										value={endDate}
+										onChange={(e) => {
+											if (e.value > startDate) {
+												setEndDate(e.value)
+											}
+										}}
+										showIcon
+										showButtonBar
+										className='bg-darkblueLight border-none text-white text-xs   rounded-md w-full'
+										inputClassName='bg-darkblueLight text-white text-xs border-none px-2 py-2  rounded-md'
+									/>
+									<label htmlFor='end_date'>End Date</label>
 								</FloatLabel>
 
 								<button
@@ -280,7 +326,6 @@ const Analysis = () => {
 						</div>
 					)}
 					<div className='pt-8'>
-						{/* {!serverResponded && <p className='text-white'>pinging server..</p>} */}
 						<DynamicTable
 							columns={columns}
 							data={lambdaFunctions}
@@ -295,10 +340,7 @@ const Analysis = () => {
 
 const DynamicTable = ({ columns, data, loading = false }) => {
 	const { setSelectedFunctions } = useContext(AnalysisContext)
-	const [itemsPerPage, setItemsPerPage] = useState(5)
-	const [currentPage, setCurrentPage] = useState(1)
 	const [checkedItems, setCheckedItems] = useState({})
-	const totalPages = Math.ceil(data.length / itemsPerPage)
 
 	useEffect(() => {
 		// Initialize or reset checkedItems state when data changes
@@ -308,12 +350,6 @@ const DynamicTable = ({ columns, data, loading = false }) => {
 		})
 		setCheckedItems(newCheckedItems)
 	}, [data])
-
-	const handlePageChange = (page) => {
-		if (page > 0 && page <= totalPages) {
-			setCurrentPage(page)
-		}
-	}
 
 	const handleSelectAll = (e) => {
 		const newCheckedItems = { ...checkedItems }
@@ -337,9 +373,6 @@ const DynamicTable = ({ columns, data, loading = false }) => {
 	}
 
 	const allChecked = Object.values(checkedItems).every(Boolean)
-	const startIndex = (currentPage - 1) * itemsPerPage
-	const endIndex = startIndex + itemsPerPage
-	const currentData = data.slice(startIndex, endIndex)
 
 	return (
 		<>
@@ -363,20 +396,18 @@ const DynamicTable = ({ columns, data, loading = false }) => {
 							</tr>
 						</thead>
 						<tbody>
-							{currentData.map((row, index) => (
+							{data.map((row, index) => (
 								<tr
 									key={index}
 									className={`${
 										index % 2 === 0 ? 'bg-darkblueMedium' : 'bg-transparent'
-									} cursor-pointer text-xs hover:bg-gray-50 dark:hover:bg-gray-600`}
+									} cursor-pointer text-xs hover:bg-green-900/40`}
 								>
 									<td className='px-6 py-3'>
 										<input
 											type='checkbox'
-											checked={checkedItems[startIndex + index] || false}
-											onChange={(e) =>
-												handleSelectItem(startIndex + index, e.target.checked)
-											}
+											checked={checkedItems[index] || false}
+											onChange={(e) => handleSelectItem(index, e.target.checked)}
 										/>
 									</td>
 									{columns.map((column) => (
@@ -390,94 +421,6 @@ const DynamicTable = ({ columns, data, loading = false }) => {
 							))}
 						</tbody>
 					</table>
-					<nav
-						className='flex  flex-col  md:flex-row justify-start md:justify-end pt-8 gap-x-16 gap-y-4 md:gap-y-0'
-						aria-label='Table navigation'
-					>
-						<div className='text-xs font-light text-gray-500  '>
-							Showing{' '}
-							<span className='font-light text-gray-900 dark:text-white'>
-								{startIndex + 1}-{Math.min(endIndex, data.length)}
-							</span>{' '}
-							of{' '}
-							<span className='font-light text-gray-900 dark:text-white'>
-								{data.length}
-							</span>
-						</div>
-						<div className='flex  flex-row '>
-							<label
-								htmlFor='itemsPerPage'
-								className='text-xs text-gray-500 flex items-center'
-							>
-								Records / page:
-							</label>
-							<select
-								id='itemsPerPage'
-								className='ml-2 px-2 text-white  border border-darkblueLight bg-darkblueMedium rounded-md text-xs focus:outline-none focus:ring-0  '
-								value={itemsPerPage}
-								onChange={(e) => {
-									const value = parseInt(e.target.value)
-									if (!isNaN(value)) {
-										handlePageChange(1)
-										setItemsPerPage(value)
-									} else {
-										setItemsPerPage(value)
-									}
-								}}
-							>
-								<option value='5'>5</option>
-								<option value='10'>10</option>
-								<option value='50'>50</option>
-								<option value='100'>100</option>
-							</select>
-						</div>
-						<div className='flex flex-row'>
-							<div className='flex items-center  md:mt-0 text-white space-x-8 cursor-pointer'>
-								<div
-									className='flex flex-row items-center text-white text-xs space-x-2'
-									onClick={() => handlePageChange(currentPage - 1)}
-								>
-									<p
-										className={`${
-											currentPage === 1 ? ' text-gray-500 cursor-not-allowed' : ''
-										}`}
-									>
-										{'<<'}
-									</p>
-									<button
-										disabled={currentPage === 1}
-										className={`${
-											currentPage === 1
-												? 'text-gray-500 cursor-not-allowed'
-												: ' text-white'
-										}`}
-									>
-										Previous
-									</button>
-								</div>
-								<div
-									className='flex flex-row items-center text-white text-xs space-x-2 cursor-pointer'
-									onClick={() => handlePageChange(currentPage + 1)}
-								>
-									<button
-										disabled={currentPage === totalPages}
-										className={`${
-											currentPage === totalPages ? ' text-gray-500 cursor-not-allowed' : ''
-										} ml-2`}
-									>
-										Next
-									</button>
-									<p
-										className={`${
-											currentPage === totalPages ? ' text-gray-500 cursor-not-allowed' : ''
-										}`}
-									>
-										{'>>'}
-									</p>
-								</div>
-							</div>
-						</div>
-					</nav>
 				</div>
 			) : (
 				<div className='text-gray-400 text-center flex justify-center items-center h-28 text-md mt-10'>

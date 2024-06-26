@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
+
 import { createContext, useState } from 'react'
 
 const AnalysisContext = createContext()
@@ -11,6 +11,11 @@ export const AnalysisProvider = ({ children }) => {
 	const [currentReportID, setCurrentReportID] = useState(null)
 	const [rowsPerPage, setRowsPerPage] = useState(5)
 	const [continuationToken, setContinuationToken] = useState('')
+
+	const [startDate, setStartDate] = useState(
+		new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) // 7 days ago from the current date
+	)
+	const [endDate, setEndDate] = useState(new Date())
 
 	const [summary, setSummary] = useState({})
 	const [status, setStatus] = useState('processing...')
@@ -34,6 +39,10 @@ export const AnalysisProvider = ({ children }) => {
 				setSummary,
 				status,
 				setStatus,
+				startDate,
+				setStartDate,
+				endDate,
+				setEndDate,
 			}}
 		>
 			{children}

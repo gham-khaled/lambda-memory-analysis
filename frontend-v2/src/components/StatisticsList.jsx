@@ -1,21 +1,14 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-import {
-	BiMemoryCard,
-	BiSolidCategoryAlt,
-	BiSolidMemoryCard,
-	BiSolidMessageMinus,
-} from 'react-icons/bi'
+
+import { BiMemoryCard, BiSolidMemoryCard } from 'react-icons/bi'
 import Statistics from './Statistics'
-import { IoIosCube } from 'react-icons/io'
+
 import {
 	AiFillCloseCircle,
 	AiFillInfoCircle,
 	AiFillSave,
 	AiOutlineCustomerService,
 	AiOutlineFieldTime,
-	AiOutlineShop,
-	AiOutlineUser,
 	AiTwotoneAlert,
 } from 'react-icons/ai'
 import { Tooltip } from 'react-tooltip'
@@ -30,11 +23,8 @@ const StatisticsList = ({ summary = {} }) => {
 		InvocationCost = 0.0,
 		totalCost = 0.0,
 		avgMaxMemoryUsedMB = 0.0,
-		avgOverProvisionedMB = 0.0,
-		optimalTotalCost = 0.0,
 		potentialSavings = 0.0,
 		avgDurationPerInvocation = 0.0,
-		reportID = '',
 	} = summary
 
 	return (

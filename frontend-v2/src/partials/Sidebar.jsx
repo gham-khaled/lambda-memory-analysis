@@ -1,27 +1,17 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react'
-import { BsFillPinAngleFill, BsPersonCircle } from 'react-icons/bs'
-import { TbRulerMeasure } from 'react-icons/tb'
 import { HiHome } from 'react-icons/hi2'
-
-import { IoIosCube } from 'react-icons/io'
 import lambdaLogo from '../assets/lambda-logo.svg'
 import { DiGoogleAnalytics } from 'react-icons/di'
 
-import {
-	BiLogOut,
-	BiSolidCategoryAlt,
-	BiMenu,
-	BiGitBranch,
-} from 'react-icons/bi'
+import { BiMenu } from 'react-icons/bi'
 import { LiaWindowClose } from 'react-icons/lia'
-import { AiOutlineMenuFold, AiFillShop } from 'react-icons/ai'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { AiOutlineMenuFold } from 'react-icons/ai'
+import { NavLink } from 'react-router-dom'
 
 const Sidebar = () => {
 	const [sidebarOpen, setSidebarOpen] = useState(false)
 	const [menuClicked, setMenuClicked] = useState(false)
-	const [activePage, setActivePage] = useState('Home')
+	const [activePage] = useState('')
 
 	return (
 		<>
@@ -34,7 +24,9 @@ const Sidebar = () => {
 			></BiMenu>
 			<div
 				className={`bg-darkblueMedium  h-screen hidden lg:block ${
-					sidebarOpen ? 'w-[6vw] px-2 py-10' : 'w-[20vw] py-10 px-5'
+					sidebarOpen
+						? 'w-[6vw] px-2 py-10'
+						: 'w-[20vw] lg:w-[14vw] 2xl:[w-10vw] py-10 px-5'
 				} ${
 					menuClicked ? 'w-[70vw] absolute z-50 !block ' : ''
 				}transition-all duration-300 ease-in-out`}
@@ -82,13 +74,16 @@ const Sidebar = () => {
 						<NavLink
 							to='/'
 							className={({ isActive }) =>
-								`link ${isActive ? 'bg-[#00A9817D] border-l-8  rounded-tr-sm rounded-br-sm border-greenLime py-2  ' : ''}${sidebarOpen ? '   flex justify-center' : ''} w-full flex gap-4 pl-0 items-center  cursor-pointer transition-all duration-300 ease-in-out `
+								`link ${isActive ? 'bg-[#00A9817D] border-l-8  rounded-tr-sm rounded-br-sm border-greenLime  ' : ''}${sidebarOpen ? '   flex justify-center' : ''} w-full flex pl-0 items-center  cursor-pointer transition-all duration-300 ease-in-out ${sidebarOpen ? 'flex-col  py-1 gap-2 ' : 'flex-row py-2 gap-4 '}`
 							}
 						>
-							<HiHome size={23} className={` ml-3`}></HiHome>
+							<HiHome
+								size={23}
+								className={` ${sidebarOpen ? 'ml-0' : 'ml-3'} text-lambdaPrimary-light `}
+							></HiHome>
 
 							<div
-								className={`text-xs text-white ${sidebarOpen ? 'hidden' : activePage === 'Home' ? '' : 'hover:text-green-700'}`}
+								className={`text-xs text-white ${sidebarOpen ? '' : activePage === 'Home' ? '' : 'hover:text-green-700'}`}
 							>
 								Home
 							</div>
@@ -103,15 +98,18 @@ const Sidebar = () => {
 						<NavLink
 							to='/analytics'
 							className={({ isActive }) =>
-								`link ${isActive ? 'bg-[#00A9817D] border-l-8  rounded-tr-sm rounded-br-sm border-greenLime py-2  ' : ''}${sidebarOpen ? '   flex justify-center' : ''} w-full flex gap-4 pl-0 items-center  cursor-pointer transition-all duration-300 ease-in-out `
+								`link ${isActive ? 'bg-[#00A9817D] border-l-8  rounded-tr-sm rounded-br-sm border-greenLime  ' : ''}${sidebarOpen ? '   flex justify-center' : ''} w-full flex pl-0 items-center  cursor-pointer transition-all duration-300 ease-in-out ${sidebarOpen ? 'flex-col  py-1 gap-2 ' : 'flex-row py-2 gap-4 '}`
 							}
 						>
-							<DiGoogleAnalytics size={25} className={` ml-3`}></DiGoogleAnalytics>
+							<DiGoogleAnalytics
+								size={25}
+								className={` ${sidebarOpen ? 'ml-0' : 'ml-3'} text-lambdaPrimary-light `}
+							></DiGoogleAnalytics>
 
 							<div
-								className={`text-xs text-white ${sidebarOpen ? 'hidden' : activePage === 'Analytics' ? '' : 'sidebar'}`}
+								className={`text-xs text-white ${sidebarOpen ? '' : activePage === 'Analytics' ? '' : 'hover:text-green-700'}`}
 							>
-								New Analytics
+								{sidebarOpen ? 'New' : 'New Analytics'}
 							</div>
 						</NavLink>
 						{/* <NavLink

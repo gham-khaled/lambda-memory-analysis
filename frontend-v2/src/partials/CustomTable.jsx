@@ -1,9 +1,9 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+
 import { useState } from 'react'
 import sampleTableData from '../data/sampleTableData'
 
-const CustomTable = ({ title = 'Summary' }) => {
+const CustomTable = () => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const itemsPerPage = 6
 	const totalPages = Math.ceil(sampleTableData.length / itemsPerPage)
@@ -18,7 +18,6 @@ const CustomTable = ({ title = 'Summary' }) => {
 
 	return (
 		<div className='relative overflow-x-auto shadow-md sm:rounded-md'>
-			{/* <h2 className='text-sm font-light text-white my-4'>{title}</h2> */}
 			<table className='w-full text-sm text-left rtl:text-right text-white  border border-darkblueLight rounded-md'>
 				<thead className='text-xs uppercase text-white bg-darkblueLight   '>
 					<tr className=''>
@@ -144,22 +143,6 @@ const CustomTable = ({ title = 'Summary' }) => {
 						</div>
 					</div>
 				</div>
-				{/* <ul className='inline-flex -space-x-px rtl:space-x-reverse text-sm h-8'>
-					{Array.from({ length: totalPages }).map((_, index) => (
-						<li key={index}>
-							<button
-								onClick={() => handlePageChange(index + 1)}
-								className={`${
-									currentPage === index + 1
-										? 'bg-gray-900 text-white dark:bg-gray-700 dark:text-gray-400'
-										: 'text-gray-500 dark:text-gray-400'
-								} px-3 py-1 rounded-md`}
-							>
-								{index + 1}
-							</button>
-						</li>
-					))}
-				</ul> */}
 			</nav>
 		</div>
 	)
