@@ -10,7 +10,7 @@ import {
 const AnalysisContext = createContext()
 
 export const AnalysisProvider = ({ children }) => {
-	const [selectedFunctions, setSelectedFunctions] = useState([])
+	const [selectedFunctions, setSelectedFunctions] = useState(['all']) // default value is ['all']
 	const [analysis, setAnalysis] = useState([])
 	const [analysisDetail, setAnalysisDetail] = useState([])
 	const [currentReportID, setCurrentReportID] = useState(null)
