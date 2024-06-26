@@ -127,7 +127,8 @@ const DynamicTable = ({
 		setRowsPerPage(Number(event.target.value))
 		setItemsPerPage(Number(event.target.value))
 		fetchData() // Fetch data with the new items per page
-		setCurrentPage(1) // Reset to first page to avoid empty data view
+
+		// setCurrentPage((current) => Math.min(current, maxPages)) // update the current page if the new items per page is less than the current page
 	}
 	return (
 		<>
@@ -205,10 +206,10 @@ const DynamicTable = ({
 							<span className='font-light text-gray-900 dark:text-white px-2'>
 								{indexOfLastItem > data.length ? data.length : indexOfLastItem}
 							</span>{' '}
-							of{' '}
+							{/* of{' '}
 							<span className='font-light text-gray-900 dark:text-white px-2'>
 								{data.length}
-							</span>
+							</span> */}
 						</div>
 						<div className='flex flex-row'>
 							<label
@@ -225,7 +226,7 @@ const DynamicTable = ({
 							>
 								<option value='5'>5</option>
 								<option value='10'>10</option>
-								<option value='20'>20</option> {/* New option */}
+								<option value='20'>20</option>
 								<option value='50'>50</option>
 								<option value='100'>100</option>
 							</select>
