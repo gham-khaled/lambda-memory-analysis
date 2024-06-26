@@ -10,14 +10,12 @@ import { FloatLabel } from 'primereact/floatlabel'
 import MultiSelect from '../components/MultiSelect'
 import { RotatingLines } from 'react-loader-spinner'
 
+// import Multiselect from 'multiselect-react-dropdown'
+
+
 import axios from 'axios'
 
-import {
-	runtime,
-	packageOptions,
-	architectureOptions,
-	successMsgStyle,
-} from '../data/optionsData'
+import { architectureOptions, successMsgStyle } from '../data/optionsData'
 import { InputText } from 'primereact/inputtext'
 import AnalysisContext from '../contexts/AnalysisContext'
 import { customToast } from '../utils/utils'
@@ -27,12 +25,23 @@ import { Toaster } from 'react-hot-toast'
 const Analysis = () => {
 	const {
 		selectedFunctions,
-		setSelectedFunctions,
 		startDate,
 		setStartDate,
 		endDate,
 		setEndDate,
 		setCurrentReportID,
+		selectedRuntime,
+		setSelectedRuntime,
+		initialRuntime,
+		setInitialRuntime,
+		initialPackageOptions,
+		setInitialPackageOptions,
+		selectedPackageOptions,
+		setSelectedPackageOptions,
+		initialArchitectureOptions,
+		setInitialArchitectureOptions,
+		selectedArchitectureOptions,
+		setSelectedArchitectureOptions,
 	} = useContext(AnalysisContext)
 
 	const columns = [
@@ -43,13 +52,6 @@ const Analysis = () => {
 		{ Header: 'LastModified', accessor: 'LastModified' },
 	]
 
-	const [selectedRuntime, setSelectedRuntime] = useState(runtime)
-	const [selectedPackageOptions, setSelectedPackageOptions] =
-		useState(packageOptions)
-
-	const [selectedArchitectureOptions, setSelectedArchitectureOptions] =
-		useState(architectureOptions)
-
 	const [analysisID, setAnalysisID] = useState('')
 	const { setAnalysisDetail } = useContext(AnalysisContext)
 
@@ -57,6 +59,8 @@ const Analysis = () => {
 	const [isFetching, setIsFetching] = useState(false)
 	const [maxAttemptsReached, setMaxAttemptsReached] = useState(false)
 	const [lambdaFunctions, setLambdaFunctions] = useState([])
+
+	const [isFiltered, setIsFiltered] = useState(false)
 
 	const navigate = useNavigate()
 
@@ -67,17 +71,20 @@ const Analysis = () => {
 				'https://h4x9eobxve.execute-api.eu-west-1.amazonaws.com/prod/lambdaFunctions?selectedRuntime=$[selectedRuntime]',
 				{
 					params: new URLSearchParams({
-						selectedRuntime: selectedRuntime,
-						selectedPackageType: selectedPackageOptions,
-						selectedArchitecture: selectedArchitectureOptions,
+						selectedRuntime: isFiltered ? selectedRuntime : initialRuntime,
+						selectedPackageType: isFiltered
+							? selectedPackageOptions
+							: initialPackageOptions,
+						selectedArchitecture: isFiltered
+							? selectedArchitectureOptions
+							: initialArchitectureOptions,
 					}),
 				}
 			)
 			const functions = response.data
 
-			setLambdaFunctions(functions)
-			setSelectedFunctions(functions.map((func) => func.FunctionName))
 			handleFilters(functions)
+			setLambdaFunctions(functions)
 
 			setLoading(false)
 		} catch (error) {
@@ -88,32 +95,39 @@ const Analysis = () => {
 
 	// Client side filter functions based on fetched data
 	const handleFilters = (functions) => {
-		const fetchedRuntime = functions.map((func) =>
-			func.Runtime.trim().toLowerCase()
-		)
-		const fetchedPackageTypes = functions.map((func) =>
-			func.PackageType.trim().toLowerCase()
-		)
-		const fetchedArchitectureOptions = functions.map((func) =>
-			func.Architectures[0].trim().toLowerCase()
-		)
+		if (!isFiltered) {
+			const fetchedRuntime = functions.map((func) =>
+				func.Runtime.trim().toLowerCase()
+			)
+			const fetchedPackageTypes = functions.map((func) =>
+				func.PackageType.trim().toLowerCase()
+			)
 
-		const filteredRuntime = runtime.filter((rt) =>
-			fetchedRuntime.includes(rt.trim().toLowerCase())
-		)
+			const filteredRuntime = initialRuntime.filter((rt) =>
+				fetchedRuntime.includes(rt.trim().toLowerCase())
+			)
 
-		const filteredPackageTypes = packageOptions.filter((packageOption) =>
-			fetchedPackageTypes.includes(packageOption.trim().toLowerCase())
-		)
+			const filteredPackageTypes = initialPackageOptions.filter((packageOption) =>
+				fetchedPackageTypes.includes(packageOption.trim().toLowerCase())
+			)
 
-		const filteredArchitectureOptions = architectureOptions.filter(
-			(architectureOption) =>
-				fetchedArchitectureOptions.includes(architectureOption.trim().toLowerCase())
-		)
+			const filteredArchitectureOptions = [
+				...new Set(
+					functions.map((func) => func.Architectures[0].trim().toLowerCase())
+				),
+			]
 
-		setSelectedRuntime(filteredRuntime)
-		setSelectedPackageOptions(filteredPackageTypes)
-		setSelectedArchitectureOptions(filteredArchitectureOptions)
+			setInitialRuntime(filteredRuntime)
+			setSelectedRuntime(filteredRuntime)
+
+			setInitialPackageOptions(filteredPackageTypes)
+			setSelectedPackageOptions(filteredPackageTypes)
+
+			setInitialArchitectureOptions(filteredArchitectureOptions)
+			setSelectedArchitectureOptions(filteredArchitectureOptions)
+
+			setIsFiltered(true) // Set the flag to true after the first filtering
+		}
 	}
 
 	useEffect(() => {
@@ -216,29 +230,30 @@ const Analysis = () => {
 					<div className='grid grid-cols-2 md:grid-cols-6  gap-x-6 gap-y-10 text-xs'>
 						<FloatLabel>
 							<MultiSelect
-								options={selectedRuntime}
+								options={initialRuntime}
 								selectedValues={selectedRuntime}
 								setSelectedValues={setSelectedRuntime}
 								placeholder='Runtime'
 								maxSelectedLabels={1}
-								selectedItemsLabel={runtime[0] + ' ...'}
+								selectedItemsLabel={selectedRuntime[0] + ' ...'}
 							/>
 							<label htmlFor='runtime'>Runtime</label>
 						</FloatLabel>
+
 						<FloatLabel>
 							<MultiSelect
-								options={selectedPackageOptions}
+								options={initialPackageOptions}
 								selectedValues={selectedPackageOptions}
 								setSelectedValues={setSelectedPackageOptions}
 								placeholder='Package'
 								maxSelectedLabels={1}
-								selectedItemsLabel={packageOptions[0] + ' ...'}
+								selectedItemsLabel={selectedPackageOptions[0] + ' ...'}
 							/>
 							<label htmlFor='package_option'>Package</label>
 						</FloatLabel>
 						<FloatLabel>
 							<MultiSelect
-								options={selectedArchitectureOptions}
+								options={initialArchitectureOptions}
 								selectedValues={selectedArchitectureOptions}
 								setSelectedValues={setSelectedArchitectureOptions}
 								placeholder='Architecture'
@@ -296,7 +311,7 @@ const Analysis = () => {
 								</FloatLabel>
 
 								<button
-									className={`${!isFetching ? 'bg-lambdaPrimary' : 'bg-gray-500'} text-white text-xs py-1 rounded-md min-w-[100px] max-w-[180px] `}
+									className={`${!isFetching ? 'bg-lambdaPrimary' : 'bg-gray-500'} text-white text-xs py-1 rounded-md  `}
 									onClick={() => {
 										if (selectedFunctions.length === 0) {
 											customToast(

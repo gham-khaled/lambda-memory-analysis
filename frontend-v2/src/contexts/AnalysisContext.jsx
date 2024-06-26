@@ -1,6 +1,11 @@
 /* eslint-disable react/prop-types */
 
 import { createContext, useState } from 'react'
+import {
+	architectureOptions,
+	packageOptions,
+	runtime,
+} from '../data/optionsData'
 
 const AnalysisContext = createContext()
 
@@ -19,6 +24,19 @@ export const AnalysisProvider = ({ children }) => {
 
 	const [summary, setSummary] = useState({})
 	const [status, setStatus] = useState('processing...')
+
+	const [initialRuntime, setInitialRuntime] = useState(runtime)
+	const [selectedRuntime, setSelectedRuntime] = useState([])
+
+	const [initialPackageOptions, setInitialPackageOptions] =
+		useState(packageOptions)
+	const [selectedPackageOptions, setSelectedPackageOptions] = useState([])
+
+	const [initialArchitectureOptions, setInitialArchitectureOptions] =
+		useState(architectureOptions)
+	const [selectedArchitectureOptions, setSelectedArchitectureOptions] = useState(
+		[]
+	)
 
 	return (
 		<AnalysisContext.Provider
@@ -43,6 +61,18 @@ export const AnalysisProvider = ({ children }) => {
 				setStartDate,
 				endDate,
 				setEndDate,
+				selectedRuntime,
+				setSelectedRuntime,
+				initialRuntime,
+				setInitialRuntime,
+				selectedPackageOptions,
+				setSelectedPackageOptions,
+				initialPackageOptions,
+				setInitialPackageOptions,
+				initialArchitectureOptions,
+				setInitialArchitectureOptions,
+				selectedArchitectureOptions,
+				setSelectedArchitectureOptions,
 			}}
 		>
 			{children}
