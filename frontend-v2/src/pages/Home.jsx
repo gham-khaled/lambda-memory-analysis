@@ -29,7 +29,7 @@ const Home = () => {
 				'https://h4x9eobxve.execute-api.eu-west-1.amazonaws.com/prod/api/reportSummaries',
 				{
 					params: {
-						rowsPerPage: rowsPerPage,
+						rowsPerPage: rowsPerPage + 1,
 						// continuationToken: token, // Use the provided token or the existing continuation token for subsequent requests
 					},
 				}
