@@ -116,8 +116,9 @@ const DynamicTable = ({
 	const handlePrevious = () =>
 		setCurrentPage((current) => Math.max(current - 1, 1))
 	const handleNext = () => {
-		if (currentPage === maxPages && continuationToken) {
+		if (currentPage === maxPages) {
 			fetchData() // Fetch more data using the continuation token
+			setCurrentPage((current) => Math.min(current + 1))
 		} else {
 			setCurrentPage((current) => Math.min(current + 1, maxPages))
 		}
