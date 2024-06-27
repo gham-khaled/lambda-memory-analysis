@@ -200,11 +200,11 @@ const DynamicTable = ({
 					>
 						<div className='text-xs lg:text-sm font-light '>
 							Showing{' '}
-							<span className='font-light text-gray-900 dark:text-white px-2'>
+							<span className='font-light text-white px-2'>
 								{indexOfFirstItem + 1}
 							</span>{' '}
 							to{' '}
-							<span className='font-light text-gray-900 dark:text-white px-2'>
+							<span className='font-light  text-white px-2'>
 								{indexOfLastItem > data.length ? data.length : indexOfLastItem}
 							</span>{' '}
 							{/* of{' '}
