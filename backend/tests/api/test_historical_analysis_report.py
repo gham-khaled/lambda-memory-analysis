@@ -6,7 +6,6 @@ import moto
 from moto import mock_aws
 
 
-
 @mock_aws
 class TestListAnalysisReport(unittest.TestCase):
     bucket_name = "test-bucket"
@@ -76,12 +75,15 @@ class TestListAnalysisReport(unittest.TestCase):
         for i in range(12):
             upload_file_to_s3(json.dumps(json_load_1), f'json_load_{i}.json', self.bucket_name, self.prefix_name, )
         from api.historical_analysis_report import lambda_handler
-        response = lambda_handler({}, None)
+        response = lambda_handler({'queryStringParameters': {'rowsPerPage': "10"}}, None)
         response_body = json.loads(response['body'])
         file_content = response_body['jsonContents']
         self.assertEqual(len(file_content), 10)
         self.assertTrue('continuationToken' in response_body)
-        response = lambda_handler({'continuationToken': response_body['continuationToken']}, None)
+
+
+        parameters = {'continuationToken': response_body['continuationToken'], 'rowsPerPage': "10"}
+        response = lambda_handler({'queryStringParameters': parameters}, None)
         response_body = json.loads(response['body'])
         file_content = response_body['jsonContents']
         self.assertEqual(len(file_content), 2)

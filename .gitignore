@@ -1,1 +1,3 @@
 *.pyc
+/frontend-v2/node_modules/
+/frontend-v2/.vite/

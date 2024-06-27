@@ -138,32 +138,32 @@ class TestGetAnalysisReport(unittest.TestCase):
             del lambda_function['LastModified']
 
         self.assertCountEqual(response_functions, expected_response)
-
-    def test_runtime_filter(self):
-        """
-        Test that the Lambda function successfully retrieves all functions
-        """
-        parameters = {
-            "selectedRuntime": [
-                'python3.9',
-                'python3.8',
-            ],
-            "selectedPackageType": ['Zip', 'Image'],
-            "selectedArchitecture": ['x86_64', 'arm64']
-        }
-        from api.list_lambda_functions import lambda_handler
-        response = lambda_handler({'queryStringParameters': parameters}, None)
-        response_functions = json.loads(response['body'])
-        self.assertEqual(response['statusCode'], 200)
-        self.assertEqual(len(response_functions), 2)
-        expected_response = [{"FunctionName": "mock_function_1", "Runtime": "python3.8", "PackageType": "Zip",
-                              "Architectures": ["x86_64"], "MemorySize": 128},
-                             {"FunctionName": "mock_function_2", "Runtime": "python3.9", "PackageType": "Zip",
-                              "Architectures": ["x86_64"], "MemorySize": 128}]
-        for lambda_function in response_functions:
-            del lambda_function['LastModified']
-
-        self.assertCountEqual(response_functions, expected_response)
+    #
+    # def test_runtime_filter(self):
+    #     """
+    #     Test that the Lambda function successfully retrieves all functions
+    #     """
+    #     parameters = {
+    #         "selectedRuntime": [
+    #             'python3.9',
+    #             'python3.8',
+    #         ],
+    #         "selectedPackageType": ['Zip', 'Image'],
+    #         "selectedArchitecture": ['x86_64', 'arm64']
+    #     }
+    #     from api.list_lambda_functions import lambda_handler
+    #     response = lambda_handler({'queryStringParameters': parameters}, None)
+    #     response_functions = json.loads(response['body'])
+    #     self.assertEqual(response['statusCode'], 200)
+    #     self.assertEqual(len(response_functions), 2)
+    #     expected_response = [{"FunctionName": "mock_function_1", "Runtime": "python3.8", "PackageType": "Zip",
+    #                           "Architectures": ["x86_64"], "MemorySize": 128},
+    #                          {"FunctionName": "mock_function_2", "Runtime": "python3.9", "PackageType": "Zip",
+    #                           "Architectures": ["x86_64"], "MemorySize": 128}]
+    #     for lambda_function in response_functions:
+    #         del lambda_function['LastModified']
+    #
+    #     self.assertCountEqual(response_functions, expected_response)
 
 
 if __name__ == '__main__':

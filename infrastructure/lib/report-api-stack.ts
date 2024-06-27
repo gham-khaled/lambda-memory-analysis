@@ -57,13 +57,7 @@ export class ReportApiStack extends cdk.Stack {
         const api_resource_prefix = this.api.root.addResource('api')
         api_resource_prefix.addResource('reportSummaries').addMethod('GET', new apigateway.LambdaIntegration(historical_analysis_report))
 
-        this.api.root.addResource('lambdaFunctions').addMethod('GET', new apigateway.LambdaIntegration(list_lambda_functions), {
-            requestParameters: {
-                'method.request.querystring.selectedRuntime': true,
-                'method.request.querystring.selectedPackageType': true,
-                'method.request.querystring.selectedArchitecture': true
-            }
-        })
+        this.api.root.addResource('lambdaFunctions').addMethod('GET', new apigateway.LambdaIntegration(list_lambda_functions))
         this.api.root.addResource('report').addMethod('GET', new apigateway.LambdaIntegration(get_analysis_report), {
             requestParameters: {
                 'method.request.querystring.reportID': true,
