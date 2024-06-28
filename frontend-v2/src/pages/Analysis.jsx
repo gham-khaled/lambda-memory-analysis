@@ -10,9 +10,6 @@ import { FloatLabel } from 'primereact/floatlabel'
 import MultiSelect from '../components/MultiSelect'
 import { RotatingLines } from 'react-loader-spinner'
 
-// import Multiselect from 'multiselect-react-dropdown'
-
-
 import axios from 'axios'
 
 import { architectureOptions, successMsgStyle } from '../data/optionsData'
@@ -67,20 +64,28 @@ const Analysis = () => {
 	const handleFetchFunctions = async () => {
 		setLoading(true)
 		try {
+			// API call to fetch lambda functions with parameters
+
+			// const response = await axios.get(
+			// 	'https://h4x9eobxve.execute-api.eu-west-1.amazonaws.com/prod/lambdaFunctions?selectedRuntime=$[selectedRuntime]',
+			// 	{
+			// 		params: new URLSearchParams({
+			// 			selectedRuntime: isFiltered ? selectedRuntime : initialRuntime,
+			// 			selectedPackageType: isFiltered
+			// 				? selectedPackageOptions
+			// 				: initialPackageOptions,
+			// 			selectedArchitecture: isFiltered
+			// 				? selectedArchitectureOptions
+			// 				: initialArchitectureOptions,
+			// 		}),
+			// 	}
+			// )
+
+			// API call to fetch lambda functions without any parameters
 			const response = await axios.get(
-				'https://h4x9eobxve.execute-api.eu-west-1.amazonaws.com/prod/lambdaFunctions?selectedRuntime=$[selectedRuntime]',
-				{
-					params: new URLSearchParams({
-						selectedRuntime: isFiltered ? selectedRuntime : initialRuntime,
-						selectedPackageType: isFiltered
-							? selectedPackageOptions
-							: initialPackageOptions,
-						selectedArchitecture: isFiltered
-							? selectedArchitectureOptions
-							: initialArchitectureOptions,
-					}),
-				}
+				'https://h4x9eobxve.execute-api.eu-west-1.amazonaws.com/prod/lambdaFunctions'
 			)
+
 			const functions = response.data
 
 			handleFilters(functions)
@@ -96,35 +101,27 @@ const Analysis = () => {
 	// Client side filter functions based on fetched data
 	const handleFilters = (functions) => {
 		if (!isFiltered) {
-			const fetchedRuntime = functions.map((func) =>
-				func.Runtime.trim().toLowerCase()
-			)
-			const fetchedPackageTypes = functions.map((func) =>
-				func.PackageType.trim().toLowerCase()
-			)
-
-			const filteredRuntime = initialRuntime.filter((rt) =>
-				fetchedRuntime.includes(rt.trim().toLowerCase())
-			)
-
-			const filteredPackageTypes = initialPackageOptions.filter((packageOption) =>
-				fetchedPackageTypes.includes(packageOption.trim().toLowerCase())
-			)
-
-			const filteredArchitectureOptions = [
-				...new Set(
-					functions.map((func) => func.Architectures[0].trim().toLowerCase())
-				),
+			// Only set the initial filters from the fetched data once
+			const fetchedFilteredRuntime = [
+				...new Set(functions.map((func) => func.Runtime)),
 			]
 
-			setInitialRuntime(filteredRuntime)
-			setSelectedRuntime(filteredRuntime)
+			const fetchedFilteredPackageTypes = [
+				...new Set(functions.map((func) => func.PackageType)),
+			]
 
-			setInitialPackageOptions(filteredPackageTypes)
-			setSelectedPackageOptions(filteredPackageTypes)
+			const fetchedFilteredArchitectureOptions = [
+				...new Set(functions.flatMap((func) => func.Architectures)),
+			]
 
-			setInitialArchitectureOptions(filteredArchitectureOptions)
-			setSelectedArchitectureOptions(filteredArchitectureOptions)
+			setInitialRuntime(fetchedFilteredRuntime)
+			setSelectedRuntime(fetchedFilteredRuntime)
+
+			setInitialPackageOptions(fetchedFilteredPackageTypes)
+			setSelectedPackageOptions(fetchedFilteredPackageTypes)
+
+			setInitialArchitectureOptions(fetchedFilteredArchitectureOptions)
+			setSelectedArchitectureOptions(fetchedFilteredArchitectureOptions)
 
 			setIsFiltered(true) // Set the flag to true after the first filtering
 		}
@@ -196,6 +193,7 @@ const Analysis = () => {
 		let attempts = 0
 
 		while (attempts < maxAttempts) {
+			// Retry fetching data 5 times b/c the API may not return the data immediately
 			try {
 				const response = await axios.get(
 					`https://h4x9eobxve.execute-api.eu-west-1.amazonaws.com/prod/report?reportID=${reportID}`
@@ -227,118 +225,122 @@ const Analysis = () => {
 			<div className='bg-darkblue w-full h-screen overflow-y-scroll p-10 pt-0 space-y-6 '>
 				<Header title='Analysis | New'></Header>
 				<div className='col-span-12 lg:col-span-12 space-y-4 pt-8'>
-					<div className='grid grid-cols-2 md:grid-cols-6  gap-x-6 gap-y-10 text-xs'>
-						<FloatLabel>
-							<MultiSelect
-								options={initialRuntime}
-								selectedValues={selectedRuntime}
-								setSelectedValues={setSelectedRuntime}
-								placeholder='Runtime'
-								maxSelectedLabels={1}
-								selectedItemsLabel={selectedRuntime[0] + ' ...'}
-							/>
-							<label htmlFor='runtime'>Runtime</label>
-						</FloatLabel>
+					{lambdaFunctions.length !== 0 && (
+						<>
+							<div className='grid grid-cols-2 md:grid-cols-6  gap-x-6 gap-y-10 text-xs'>
+								<FloatLabel>
+									<MultiSelect
+										options={initialRuntime}
+										selectedValues={selectedRuntime}
+										setSelectedValues={setSelectedRuntime}
+										placeholder='Runtime'
+										maxSelectedLabels={1}
+										selectedItemsLabel={selectedRuntime[0] + ' ...'}
+									/>
+									<label htmlFor='runtime'>Runtime</label>
+								</FloatLabel>
 
-						<FloatLabel>
-							<MultiSelect
-								options={initialPackageOptions}
-								selectedValues={selectedPackageOptions}
-								setSelectedValues={setSelectedPackageOptions}
-								placeholder='Package'
-								maxSelectedLabels={1}
-								selectedItemsLabel={selectedPackageOptions[0] + ' ...'}
-							/>
-							<label htmlFor='package_option'>Package</label>
-						</FloatLabel>
-						<FloatLabel>
-							<MultiSelect
-								options={initialArchitectureOptions}
-								selectedValues={selectedArchitectureOptions}
-								setSelectedValues={setSelectedArchitectureOptions}
-								placeholder='Architecture'
-								maxSelectedLabels={1}
-								selectedItemsLabel={architectureOptions[0] + ' ...'}
-							/>
-							<label htmlFor='architecture_option'>Architecture</label>
-						</FloatLabel>
-						<button
+								<FloatLabel>
+									<MultiSelect
+										options={initialPackageOptions}
+										selectedValues={selectedPackageOptions}
+										setSelectedValues={setSelectedPackageOptions}
+										placeholder='Package'
+										maxSelectedLabels={1}
+										selectedItemsLabel={selectedPackageOptions[0] + ' ...'}
+									/>
+									<label htmlFor='package_option'>Package</label>
+								</FloatLabel>
+								<FloatLabel>
+									<MultiSelect
+										options={initialArchitectureOptions}
+										selectedValues={selectedArchitectureOptions}
+										setSelectedValues={setSelectedArchitectureOptions}
+										placeholder='Architecture'
+										maxSelectedLabels={1}
+										selectedItemsLabel={architectureOptions[0] + ' ...'}
+									/>
+									<label htmlFor='architecture_option'>Architecture</label>
+								</FloatLabel>
+
+								{/* Fetch Lambda function */}
+								{/* <button
 							className={`${!loading || (!loading && isFetching) ? 'bg-[#00A9817D] opacity-90 ' : 'bg-gray-500'} text-white text-xs p-2 rounded-md text-wrap`}
 							onClick={handleFetchFunctions}
 							disabled={loading || isFetching}
 						>
 							{loading ? 'Fetching Fns...' : 'Fetch Lambda Fns'}
-						</button>
-					</div>
+						</button> */}
+							</div>
 
-					{lambdaFunctions.length !== 0 && (
-						<div className='col-span-12 lg:col-span-12 space-y-4 pt-8'>
-							<div className='grid grid-cols-2 md:grid-cols-6 text-[10px]  gap-x-6 gap-y-10'>
-								<FloatLabel>
-									<InputText
-										id='analysis_id'
-										value={analysisID}
-										onChange={(e) => setAnalysisID(e.target.value)}
-										className='bg-darkblueLight border-none text-white text-xs  py-2 px-6  rounded-md w-full'
-									/>
-									<label htmlFor='analysis_id'>Analysis ID (Optional)</label>
-								</FloatLabel>
-								<FloatLabel>
-									<Calendar
-										value={startDate}
-										onChange={(e) => setStartDate(e.value)}
-										showIcon
-										showButtonBar
-										className='bg-darkblueLight border-none text-white text-xs   rounded-md w-full'
-										inputClassName='bg-darkblueLight text-white text-xs border-none px-2 py-2 rounded-md  '
-									/>
-									<label htmlFor='start_date'>Start Date</label>
-								</FloatLabel>
-								<FloatLabel>
-									<Calendar
-										value={endDate}
-										onChange={(e) => {
-											if (e.value > startDate) {
-												setEndDate(e.value)
+							<div className='col-span-12 lg:col-span-12 space-y-4 pt-8'>
+								<div className='grid grid-cols-2 md:grid-cols-6 text-[10px]  gap-x-6 gap-y-10'>
+									<FloatLabel>
+										<InputText
+											id='analysis_id'
+											value={analysisID}
+											onChange={(e) => setAnalysisID(e.target.value)}
+											className='bg-darkblueLight border-none text-white text-xs  py-2 px-6  rounded-md w-full'
+										/>
+										<label htmlFor='analysis_id'>Analysis ID (Optional)</label>
+									</FloatLabel>
+									<FloatLabel>
+										<Calendar
+											value={startDate}
+											onChange={(e) => setStartDate(e.value)}
+											showIcon
+											showButtonBar
+											className='bg-darkblueLight border-none text-white text-xs   rounded-md w-full'
+											inputClassName='bg-darkblueLight text-white text-xs border-none px-2 py-2 rounded-md  '
+										/>
+										<label htmlFor='start_date'>Start Date</label>
+									</FloatLabel>
+									<FloatLabel>
+										<Calendar
+											value={endDate}
+											onChange={(e) => {
+												if (e.value > startDate) {
+													setEndDate(e.value)
+												}
+											}}
+											showIcon
+											showButtonBar
+											className='bg-darkblueLight border-none text-white text-xs   rounded-md w-full'
+											inputClassName='bg-darkblueLight text-white text-xs border-none px-2 py-2  rounded-md'
+										/>
+										<label htmlFor='end_date'>End Date</label>
+									</FloatLabel>
+
+									<button
+										className={`${!isFetching ? 'bg-lambdaPrimary' : 'bg-gray-500'} text-white text-xs py-1 rounded-md  `}
+										onClick={() => {
+											if (selectedFunctions.length === 0) {
+												customToast(
+													'Please Fetch lambda fns and select at least one  before launching the analysis.',
+													'❌',
+													errorMsgStyle
+												)
+											} else {
+												handleLaunchAnalysis()
 											}
 										}}
-										showIcon
-										showButtonBar
-										className='bg-darkblueLight border-none text-white text-xs   rounded-md w-full'
-										inputClassName='bg-darkblueLight text-white text-xs border-none px-2 py-2  rounded-md'
-									/>
-									<label htmlFor='end_date'>End Date</label>
-								</FloatLabel>
-
-								<button
-									className={`${!isFetching ? 'bg-lambdaPrimary' : 'bg-gray-500'} text-white text-xs py-1 rounded-md  `}
-									onClick={() => {
-										if (selectedFunctions.length === 0) {
-											customToast(
-												'Please Fetch lambda fns and select at least one  before launching the analysis.',
-												'❌',
-												errorMsgStyle
-											)
-										} else {
-											handleLaunchAnalysis()
-										}
-									}}
-									disabled={isFetching}
-								>
-									{isFetching ? 'Fetching...' : 'New Analysis'}
-								</button>
+										disabled={isFetching}
+									>
+										{isFetching ? 'Fetching...' : 'New Analysis'}
+									</button>
+								</div>
+								{isFetching && (
+									<div className='text-xs text-yellow-600 pt-4'>
+										Please wait while we fetch the analysis details...
+									</div>
+								)}
+								{maxAttemptsReached && (
+									<div className='text-xs text-red-600 pt-4'>
+										Oops! Maximum attempts reached. Please try again later.
+									</div>
+								)}
 							</div>
-							{isFetching && (
-								<div className='text-xs text-yellow-600 pt-4'>
-									Please wait while we fetch the analysis details...
-								</div>
-							)}
-							{maxAttemptsReached && (
-								<div className='text-xs text-red-600 pt-4'>
-									Oops! Maximum attempts reached. Please try again later.
-								</div>
-							)}
-						</div>
+						</>
 					)}
 					<div className='pt-8'>
 						<DynamicTable
@@ -354,7 +356,12 @@ const Analysis = () => {
 }
 
 const DynamicTable = ({ columns, data, loading = false }) => {
-	const { setSelectedFunctions } = useContext(AnalysisContext)
+	const {
+		setSelectedFunctions,
+		selectedRuntime,
+		selectedArchitectureOptions,
+		selectedPackageOptions,
+	} = useContext(AnalysisContext)
 	const [checkedItems, setCheckedItems] = useState({})
 
 	useEffect(() => {
@@ -411,29 +418,43 @@ const DynamicTable = ({ columns, data, loading = false }) => {
 							</tr>
 						</thead>
 						<tbody>
-							{data.map((row, index) => (
-								<tr
-									key={index}
-									className={`${
-										index % 2 === 0 ? 'bg-darkblueMedium' : 'bg-transparent'
-									} cursor-pointer text-xs hover:bg-green-900/40`}
-								>
-									<td className='px-6 py-3'>
-										<input
-											type='checkbox'
-											checked={checkedItems[index] || false}
-											onChange={(e) => handleSelectItem(index, e.target.checked)}
-										/>
-									</td>
-									{columns.map((column) => (
-										<td key={column.accessor} className='px-6 py-3'>
-											{column.Cell
-												? column.Cell(row[column.accessor])
-												: row[column.accessor]}
-										</td>
-									))}
-								</tr>
-							))}
+							{data
+								.filter(
+									(row) =>
+										selectedRuntime.includes(row.Runtime) &&
+										selectedPackageOptions.includes(row.PackageType) &&
+										selectedArchitectureOptions.some(
+											(architecture) => row.Architectures.includes(architecture)
+											// .some method returns true if at least one element in the array satisfies the condition where Architectures is an array of strings
+										)
+								)
+
+								.map((row, index) => {
+									// Log the current row to the console
+									// console.log(row.row)
+
+									return (
+										<tr
+											key={index}
+											className={`${index % 2 === 0 ? 'bg-darkblueMedium' : 'bg-transparent'} cursor-pointer text-xs hover:bg-green-900/40`}
+										>
+											<td className='px-6 py-3'>
+												<input
+													type='checkbox'
+													checked={checkedItems[index] || false}
+													onChange={(e) => handleSelectItem(index, e.target.checked)}
+												/>
+											</td>
+											{columns.map((column) => (
+												<td key={column.accessor} className='px-6 py-3'>
+													{column.Cell
+														? column.Cell(row[column.accessor])
+														: row[column.accessor]}
+												</td>
+											))}
+										</tr>
+									)
+								})}
 						</tbody>
 					</table>
 				</div>
