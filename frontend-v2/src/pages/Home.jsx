@@ -124,10 +124,14 @@ const DynamicTable = ({
 		}
 	}
 
+	useEffect(() => {
+		fetchData() // Call fetchData whenever rowsPerPage changes
+	}, [rowsPerPage]) // Add rowsPerPage as a dependency
+
 	const handleItemsPerPageChange = (event) => {
 		setRowsPerPage(Number(event.target.value))
 		setItemsPerPage(Number(event.target.value))
-		fetchData() // Fetch data with the new items per page
+		// fetchData() // Fetch data with the new items per page
 
 		// setCurrentPage((current) => Math.min(current, maxPages)) // update the current page if the new items per page is less than the current page
 	}
